@@ -1,7 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv'
-import admin from './routes/admin.js'
+import jpic from './routes/jpic.js'
 import user from './routes/user.js'
 import product from './routes/product.js'
 import category from './routes/category.js'
@@ -39,7 +39,7 @@ app.use('/api/webhook', express.raw({
 
 // app.use(cors(corsOptions))
 // app.use(bodyParser.json());
-// app.use('/spiritual', express.static(path.join(__dirname + '/admin')));
+// app.use('/spiritual', express.static(path.join(__dirname + '/jpic')));
 
 app.use(express.json({
     extended: true, //convert to true later
@@ -54,7 +54,7 @@ app.use(express.urlencoded({
 
 app.use(cookieParser())
 
-// app.use('/api/admin', admin)
+app.use('/api/jpic', jpic)
 // app.use('/api/users', user)
 // app.use('/api/products', product)
 // app.use('/api/brand', brand)
@@ -77,9 +77,9 @@ const __dirname = path.dirname(__filename); // Extract directory name
 // Serve static files from 'client' directory
 app.use('/ministry', express.static(path.join(__dirname, '/client')));
 
-// Serve static files from 'admin' directory
-app.use('/spiritual', express.static(path.join(__dirname, '/admin')));
-// app.use('/spiritual/pages/apostolate', express.static(path.join(__dirname, '/admin/pages/structure-organisation/table')));
+// Serve static files from 'jpic' directory
+app.use('/spiritual', express.static(path.join(__dirname, '/jpic')));
+// app.use('/spiritual/pages/apostolate', express.static(path.join(__dirname, '/jpic/pages/structure-organisation/table')));
 
 
 connectDB()

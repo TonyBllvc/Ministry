@@ -1,11 +1,9 @@
 import asyncHandler from "express-async-handler"
 import mongoose from "mongoose"
-import multer from "multer";
-import path from "path"; import Jpic from "../model/jpicModel.js";
-;
+import Jpic from "../model/jpicModel.js";
 
 // @desc    Fetch Contents
-// route    GET /api/content/
+// route    GET /api
 //@access   Public
 const getContents = asyncHandler(async (req, res) => {
 
@@ -47,6 +45,7 @@ const getContent = asyncHandler(async (req, res) => {
     }
 })
 
+// Not acive
 // @desc    Sort Contents by id
 // route    GETT/api/content/sort
 //@access   Public
@@ -67,7 +66,7 @@ const sortContent = asyncHandler(async (req, res) => {
 })
 
 // @desc    Create content
-// route    POST /api/content/
+// route    POST /api
 //@access   Public
 const createContent = asyncHandler(async (req, res) => {
     const { title, content } = req.body
@@ -87,6 +86,10 @@ const createContent = asyncHandler(async (req, res) => {
     }
 
 });
+
+// @desc    Create content
+// route    PATCH /api/content/:id
+//@access   Public
 const updateContent = asyncHandler(async (req, res) => {
     var content = await Jpic.findById(req.params.id)
 
@@ -109,7 +112,9 @@ const updateContent = asyncHandler(async (req, res) => {
     }
 })
 
-
+// @desc    Create content
+// route    DELETE /api/content/:id
+//@access   Public
 const deleteContent = asyncHandler(async (req, res) => {
 
     const { id } = req.params
@@ -119,23 +124,13 @@ const deleteContent = asyncHandler(async (req, res) => {
     }
 
     try {
-        const content = await Content.findById(id);
+        const content = await Jpic.findById(id);
 
         if (!content) {
             return res.status(404).json({ error: "Content not found" });
         }
 
-        // Delete the associated image files from the server
-        if (content.images) {
-            const imagePaths = content.images.split(",");
-            // Loop through the image paths and delete the corresponding files
-            imagePaths.forEach((imagePath) => {
-                const imagePathOnServer = `backend/assets/${path.basename(imagePath)}`;
-                fs.unlinkSync(imagePathOnServer); // Delete the image file from the server
-            })
-        }
-
-        const result = await Content.findByIdAndDelete({ _id: id })
+        const result = await Jpic.findByIdAndDelete({ _id: id })
 
         if (!result) {
             return res.status(404).json({ error: "No such content" })
@@ -148,73 +143,13 @@ const deleteContent = asyncHandler(async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 })
-
-const getContentsByCategory = async (req, res) => {
-    try {
-        const content = await Content.aggregate([
-            {
-                $lookup: {
-                    from: Brand, // Update with the actual name of your table collection
-                    localField: 'brand_category',
-                    foreignField: '_id',
-                    as: 'table',
-                },
-            },
-            {
-                $unwind: '$table',
-            },
-            {
-                $lookup: {
-                    from: Category, // Update with the actual name of your category collection
-                    localField: 'table.category',
-                    foreignField: '_id',
-                    as: 'category',
-                },
-            },
-            {
-                $unwind: '$category',
-            },
-            {
-                $sort: {
-                    'category.cat': 1, // Sorting by category name in ascending order
-                },
-            },
-            {
-                $project: {
-                    _id: 1,
-                    title: 1,
-                    content: 1,
-                    price: 1,
-                    images: 1,
-                    brand_category: 1,
-                    category: '$category.cat',
-                    properties: 1,
-                    createdAt: 1,
-                    updatedAt: 1,
-                },
-            },
-        ]);
-
-        res.status(200).json(content);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
-    }
-};
-
 export {
     getContents,
     getContent,
-    getContentForCategories,
-    getContentForCategoryBrand,
-    getContentForBrands,
-    getContentForCart,
-    getContentForWishlist,
     sortContent,
     createContent,
     updateContent,
     deleteContent,
-    getContentsByCategory
 }
 
 
