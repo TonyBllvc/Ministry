@@ -3,18 +3,18 @@ import cookieParser from "cookie-parser";
 import dotenv from 'dotenv'
 import jpic from './routes/jpic.js'
 import user from './routes/user.js'
-import product from './routes/product.js'
-import category from './routes/category.js'
-import brand from './routes/brand.js'
-import cart from './routes/cart.js'
-import order from './routes/order.js'
-import featured from './routes/featureProduct.js'
-import webhook from './routes/webhook.route.js'
-import wishlist from './routes/wishlist.js'
+import apostolate from './routes/apostolate.js'
+// import category from './routes/category.js'
+// import brand from './routes/brand.js'
+// import cart from './routes/cart.js'
+// import order from './routes/order.js'
+// import featured from './routes/featureProduct.js'
+// import webhook from './routes/webhook.route.js'
+// import wishlist from './routes/wishlist.js'
 import { notFound, errorHandler } from "./middleware/errorMiddelware.js";
 import connectDB from "./config/db.js";
-import cors from 'cors'
-import methodOverride from 'method-override';
+// import cors from 'cors'
+// import methodOverride from 'method-override';
 import path from "path";
 import { fileURLToPath } from 'url'; // Import fileURLToPath function
 
@@ -24,9 +24,9 @@ const port = process.env.PORT || 4242
 
 const app = express()
 
-app.use('/api/webhook', express.raw({
-    type: 'application/json'
-}), webhook)
+// app.use('/api/webhook', express.raw({
+//     type: 'application/json'
+// }), webhook)
 // const stripe = new Stripe(STRIPE_SK);
 
 // const corsOptions = {
@@ -56,7 +56,7 @@ app.use(cookieParser())
 
 app.use('/api/jpic', jpic)
 // app.use('/api/users', user)
-// app.use('/api/products', product)
+app.use('/api/apostolate', apostolate)
 // app.use('/api/brand', brand)
 // app.use('/api/category', category)
 // app.use('/api/cart', cart)
