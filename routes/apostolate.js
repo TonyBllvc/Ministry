@@ -3,7 +3,7 @@ import { createContent, deleteContent, getContent, getContents, updateContent } 
 
 const router = express.Router()
 
-router.route('/').get( getContents).post( createContent)
-router.route('/content').get( getContent)
-router.route('/content').put( updateContent).delete( deleteContent)
+router.route('/').get( getContents).post( createContent).put( updateContent).delete( deleteContent)
+router.route('/content').post( getContent)
+
 export default router

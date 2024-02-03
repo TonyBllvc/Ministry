@@ -5,7 +5,7 @@ import jpic from './routes/jpic.js'
 import user from './routes/user.js'
 import apostolate from './routes/apostolate.js'
 // import category from './routes/category.js'
-// import brand from './routes/brand.js'
+import information from './routes/information.js'
 // import cart from './routes/cart.js'
 // import order from './routes/order.js'
 // import featured from './routes/featureProduct.js'
@@ -57,7 +57,7 @@ app.use(cookieParser())
 app.use('/api/jpic', jpic)
 // app.use('/api/users', user)
 app.use('/api/apostolate', apostolate)
-// app.use('/api/brand', brand)
+app.use('/api/information', information)
 // app.use('/api/category', category)
 // app.use('/api/cart', cart)
 // app.use('/api/checkout', order)
@@ -78,7 +78,7 @@ const __dirname = path.dirname(__filename); // Extract directory name
 app.use('/ministry', express.static(path.join(__dirname, '/client')));
 
 // Serve static files from 'jpic' directory
-app.use('/spiritual', express.static(path.join(__dirname, '/jpic')));
+app.use('/spiritual', express.static(path.join(__dirname, '/admin')));
 // app.use('/spiritual/pages/apostolate', express.static(path.join(__dirname, '/jpic/pages/structure-organisation/table')));
 
 

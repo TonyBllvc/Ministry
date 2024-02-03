@@ -1,24 +1,71 @@
-// Example dataset with unique identifiers
-const dataSet = [
-  { _id: "10", title: "John Doe", content: "john@example.com", btn: "yes" },
-  { _id: "22", title: "Jane Smith", content: "jane@example.com", btn: "yes" },
-  { _id: "35", title: "Alice Johnson", content: "alice@example.com", btn: "yes" },
-  { _id: "35", title: "Alice Johnson", content: "alice@example.com", btn: "yes" },
-  { _id: "33", title: "Alice Johnson", content: "alice@example.com", btn: "yes" },
-  { _id: "31", title: "Alice Johnson", content: "alice@example.com", btn: "yes" }
-];
+// import { fetchDataset } from '../utility/api-calls.js';
 
-const dataSets = { _id: "10", title: "John Doe", content: "john@example.com", btn: "yes" }
+
+let data
+let pending = false
+
+function fetchDataset(url) {
+
+  async function dataSet() {
+
+    // data = null
+    // // const details = {
+    // //     access: access,
+    // // };
+    // console.log(data)
+    pending = true
+    try {
+      const response = await fetch(url)
+      //     {
+      //     method: 'PUT',
+      //     headers: {
+      //         'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify(details),
+      // });
+
+      const json = await response.json()
+      console.log(response.status)
+
+      if (response.status === 401) {
+
+        console.log(json?.message || json?.error)
+      }
+
+      if (response.status === 400 || response.status === 404) {
+        console.log(json?.message || json?.error)
+      } else if (response.status === 200) {
+        console.log(json?.content || 'nothing')
+        return data = json?.content
+      }
+      pending = false
+    } catch (error) {
+      console.log(error.message)
+    };
+    pending = false
+  }
+
+  return { dataSet, pending }
+
+}
+
 // Function to populate data into the table
-function populateTable() {
+async function populateTable() {
+  const { dataSet, } = fetchDataset('http://localhost:4242/api/jpic')
+
+  const data = await dataSet()
+
+  // console.log(data)
   const tableBody = document.querySelector('#dataTable tbody');
 
-  dataSet.forEach(data => {
-    // console.log(data._id)
-    const row = document.createElement('tr');
-    row.classList.add(data._id);
-    // const id =
-    row.innerHTML = `
+  // Check if data is not undefined before using it
+  if (data) {
+    data.forEach(data => {
+      // console.log(data._id)
+      const row = document.createElement('tr');
+      row.classList.add(data._id);
+      // const id =
+      row.innerHTML = `
       <td colspan="1"  style="width: 20%; word-break: break-all;"> 
        ${data.title}
       </td>
@@ -36,8 +83,9 @@ function populateTable() {
       </button></td>
     `;
 
-    tableBody.appendChild(row);
-  });
+      tableBody.appendChild(row);
+    });
+  }
 }
 
 // Call the function to populate the table
@@ -45,9 +93,12 @@ populateTable();
 
 
 // Function to confirm edit data into the table
-function editRow(id) {
+async function editRow(id) {
+  const { dataSet } = fetchDataset('http://localhost:4242/api/jpic')
+
+  const data = await dataSet()
   // Find the corresponding object in the dataSet array
-  const selectedData = dataSet.find(data => data._id === id);
+  const selectedData = data.find(data => data._id === id);
 
 
   // Access individual properties of the selected object
@@ -65,9 +116,12 @@ function editRow(id) {
 
 
 // Function to confirm delete data into the table
-function deleteRow(id) {
+async function deleteRow(id) {
+  const { dataSet } = fetchDataset('http://localhost:4242/api/jpic')
+
+  const data = await dataSet()
   // Find the corresponding object in the dataSet array
-  const selectedData = dataSet.find(data => data._id === id);
+  const selectedData = data.find(data => data._id === id);
 
 
   // Access individual properties of the selected object

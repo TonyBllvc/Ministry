@@ -22,11 +22,11 @@ const getContents = asyncHandler(async (req, res) => {
 
 
 // @desc    Fetch single Content
-// route    GET /api/content/
+// route    POST /api/content/
 //@access   Public
 const getContent = asyncHandler(async (req, res) => {
 
-    const { id } = req.params
+    const { id } = req.body
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: "No such document" })
@@ -91,7 +91,7 @@ const createContent = asyncHandler(async (req, res) => {
 // route    PATCH /api/content/:id
 //@access   Public
 const updateContent = asyncHandler(async (req, res) => {
-    var content = await Apostolate.findById(req.params.id)
+    var content = await Apostolate.findById(req.body.id)
 
     if (!content) {
         return res.status(404).json({ error: "Content not found" });
@@ -113,11 +113,11 @@ const updateContent = asyncHandler(async (req, res) => {
 })
 
 // @desc    Create content
-// route    DELETE /api/content/:id
+// route    DELETE /api/content/
 //@access   Public
 const deleteContent = asyncHandler(async (req, res) => {
 
-    const { id } = req.params
+    const { id } = req.body
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: "No such document" })
