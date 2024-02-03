@@ -1,0 +1,49 @@
+.classynav ul {
+    display: inline-block;
+    position: relative;
+}
+
+/* Styles for dropdown menus */
+.classynav ul ul {
+    min-width: 300px;
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* done */
+
+.classynav ul ul li {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    margin: 0;
+    color: #333;
+    background-color: #fff;
+    width: auto;
+    white-space: nowrap;
+}
+
+/* semi-done */
+
+
+.classynav ul ul li a {
+    color: #333;
+    display: block;
+    text-decoration: none;
+}
+
+/* Show dropdown menus on hover */
+.classynav ul li:hover>ul {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+}
+
+.classynav ul ul li:hover {
+    background-color: #f2f2f2;
+}

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Admin Control Panel</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
+    <!-- <div class=""
+        style="width: 100%; height: 100%; position: fixed; display: flex;justify-content: center; align-items: center;  background-color: black; z-index: 99; opacity: 0.4;">
+        <div class="text-white">
+            <div class="text-center d-flex justify-content-center " style="display: flex; justify-content: center; align-items: center; text-align: center;">
+                <h2> Are you sure you want to delete this? </h2>
+            </div>
+        </div>
+    </div> -->
+
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html">Admin Control Panel</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion" style="overflow:auto;">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="index.html">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Dashboard</span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti"
+            data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text"> Mission</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseMulti">
+            <li>
+              <a href="JPIC-index.html">JPIC/Development</a>
+            </li>
+            <li>
+              <a href="apostolate-index.html">Apostolate</a>
+            </li>
+            <li>
+              <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Personnel</a>
+              <ul class="sidenav-third-level collapse" id="collapseMulti2">
+                <li>
+                  <a href="personnel-content-index.html">Content</a>
+                </li>
+                <li>
+                  <a href="personnel-table-index.html">Table</a>
+                </li>
+                <li>
+                  <a href="personnel-extra-index.html">Extra</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="information-index.html">Infomartion</a>
+            </li>
+            <li>
+              <a href="support-groups-index.html">Support Groups/ Denoation</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMultis"
+            data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text"> About Us</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseMultis">
+            <li>
+              <a href="structure-organisation-index.html">Structure and Organization</a>
+            </li>
+            <li>
+              <a href="spiritual-mission-and-spirituality-index.html">Spiritual Mission and
+                Spirituality</a>
+            </li>
+
+            <li>
+              <a href="formation-index.html">Formation </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
+            data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-wrench"></i>
+            <span class="nav-link-text">Settings</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <li>
+              <a href="navbar.html">Accounts</a>
+            </li>
+            <li>
+              <a href="cards.html">Password</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb" style="text-align: center; display: flex; align-items: center;">
+                <li class="breadcrumb-item">
+                    <a href="index.html" class="link-offset-2 line-underline link-underline-opacity-0"
+                        style="text-decoration: none; font-size: large; font-weight: 600;">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active" style="font-size: medium; font-weight: 500;">
+                    Content Table
+                </li>
+            </ol>
+
+            <div class="my-4">
+                <a href="personnel-content-content.html" class="text-center text-white "
+                    style=" padding: 15px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: large; font-weight: 800; border-radius: .7rem; border: none;  background-color: #126912;  text-decoration: none;">
+                    Upload New Table</a>
+            </div>
+            <!-- Update Database-->
+            <form onsubmit="handleUpdate()" id="updateCouncil" style="display: none;">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <div class="d-flex rows justify-content-between">
+                            <div
+                                style="font-size: large; font-weight: 600; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                                <i class="fa fa-table"></i> Content Table
+                            </div>
+                            <div>
+                                Update your data
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone no.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" id="name" class="form-control px-2"
+                                                style="color: black; font-size: medium; font-weight: 600"
+                                                placeholder="Name.." required>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="email" class="form-control px-2"
+                                                style="color: black; font-size: medium; font-weight: 600"
+                                                placeholder="Email.." required>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="phone" class="form-control px-2"
+                                                style="color: black; font-size: medium; font-weight: 600"
+                                                placeholder="Phone no.." required>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer small text-muted">
+
+                        <div class="d-flex rows justify-content-end">
+                            <div>
+                                <button type="submit" class="text-center text-white "
+                                    style="width: 100px; padding: 6px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: large; font-weight: 800; border-radius: .7rem; border: none;  background-color: green;">
+                                    Upload
+                                </button>
+                                <button type="button" onclick="cancelBtn()" class="text-center text-white "
+                                    style="width: 100px; padding: 6px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: large; font-weight: 800; border-radius: .7rem; border: none;  background-color: red;">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Delete Database-->
+            <div class="card mb-3" id="deleteCouncil" style="display: none;">
+                <div class="card-header">
+                    <div class="d-flex rows justify-content-between">
+                        <div
+                            style="font-size: large; font-weight: 600; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                            <i class="fa fa-table"></i>Content Table
+                        </div>
+                        <div>
+                            Delete your data
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Content</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="nameD" class="form-control px-2"
+                                            style="color: black; font-size: medium; font-weight: 600"
+                                            placeholder="Name.." disabled>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="emailD" class="form-control px-2"
+                                            style="color: black; font-size: medium; font-weight: 600"
+                                            placeholder="Email.." disabled>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="phoneD" class="form-control px-2"
+                                            style="color: black; font-size: medium; font-weight: 600"
+                                            placeholder="Phone no.." disabled>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted">
+
+                    <div class="d-flex rows justify-content-end">
+                        <div>
+                            <button type="button" onclick="handleDelete()" class="text-center text-white "
+                                style="width: 100px; padding: 6px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: large; font-weight: 800; border-radius: .7rem; border: none;  background-color: red;">
+                                Delete
+                            </button>
+                            <button type="button" onclick="cancelBtn()" class="text-center text-white "
+                                style="width: 100px; padding: 6px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: large; font-weight: 800; border-radius: .7rem; border: none;  background-color: gray;">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- DataTables Card-->
+            <div class="card mb-3" id="fetchCouncil" style="display: flex;">
+                <div class="card-header"
+                    style="font-size: large; font-weight: 600; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                    <i class="fa fa-table"></i> Content Table
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Content</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="1" 
+                                    style="font-size: large; font-weight: 700; width: 20%; word-break: break-all;"">Title</th>
+                                    <th colspan="1"
+                                    style="font-size: large; font-weight: 700; width: 20%; ">Content</th>
+                                    <th colspan="1"
+                                    style="font-size: large; font-weight: 700; width: 20%; "> Update</th>
+                                    <th colspan="1"
+                                    style="font-size: large; font-weight: 700; width: 20%; ">Delete</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <!-- Data goes here -->
+
+                                <!-- <tr class="table-danger">
+                                    <td colspan="1" class="text-center text-danger"
+                                        style="font-size: large; font-weight: 700; width: 20%; word-break: break-all;">
+                                        Are you sure you want to delete gdfgggggggggggggggggggggggggfgggfgfgfgfgddddddddddd
+                                        this?</td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            </div>
+
+
+            <div class="my-4">
+                <a href="personnel-content-content.html" class="text-center text-white "
+                    style=" padding: 15px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: large; font-weight: 800; border-radius: .7rem; border: none;  background-color:  #126912; text-decoration: none;">
+                    Upload New Table</a>
+            </div>
+        </div>
+        <!-- /.content-wrapper-->
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © Eventniche.com 2018</small>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Import external JavaScript file -->
+
+        <!-- <script src="api/council.js"></script> -->
+        <script src="api/content.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Page level plugin JavaScript-->
+        <script src="vendor/datatables/jquery.dataTables.js"></script>
+        <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin.min.js"></script>
+        <!-- Custom scripts for this page-->
+        <script src="js/sb-admin-datatables.min.js"></script>
+    </div>
+</body>
+
+</html>
