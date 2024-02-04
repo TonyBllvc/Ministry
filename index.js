@@ -10,6 +10,7 @@ import personnelExtra from './routes/personnelExtra.js'
 import personnelTable from './routes/personnelTable.js'
 import structureOrg from './routes/structureOrg.js'
 import spiritualM from './routes/spiritualM.js'
+import support from './routes/support.js'
 import formation from './routes/formation.js'
 import { notFound, errorHandler } from "./middleware/errorMiddelware.js";
 import connectDB from "./config/db.js";
@@ -64,6 +65,7 @@ app.use('/api/personnel_table', personnelTable)
 app.use('/api/formation', formation)
 app.use('/api/structure_organisation', structureOrg)
 app.use('/api/spiritual_ms', spiritualM)
+app.use('/api/support', support)
 app.get('/', (req, res) => {
     res.status(200)
     res.send('Server started')

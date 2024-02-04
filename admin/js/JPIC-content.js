@@ -6,7 +6,7 @@ function createDataset(url) {
 
     async function createData(title, content) {
         // console.log('27')
-   
+
         // data = null
         const details = {
             title: title,
@@ -37,6 +37,7 @@ function createDataset(url) {
                 // console.log(json?.content || 'nothing')
                 // console.log(json?.message)
                 // return data = json?.content
+                window.location.href = "/spiritual/JPIC-index.html"
             }
             // pending = false
         } catch (error) {
@@ -45,20 +46,23 @@ function createDataset(url) {
         // pending = false
     }
 
-    return { createData}
+    return { createData }
 
 }
 
-async function handleSubmit() {
+async function handleSubmit(event) {
+    event.preventDefault(); // Prevent default form submission behavior
     const { createData } = createDataset(api)
     // console.log('2')
     var title = document.getElementById('title').value
     var content = document.getElementById('content').value
     // console.log('3')
-   
-    await createData(title, content)
-    // console.log('6')
-   
-    window.location.href = "/spiritual/JPIC-index.html"
-    // alert('Working:' + " " + title + " " + content )
+
+    try {
+        await createData(title, content);
+        window.location.href = "/spiritual/JPIC-index.html";
+    } catch (error) {
+        console.error('Error submitting data:', error);
+        // Handle error, display message to the user, etc.
+    }
 }

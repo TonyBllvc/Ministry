@@ -8,6 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Admin Control Panel</title>
+
+    
+    <script src="api/information-content.js"></script>
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -27,104 +30,105 @@
         </div>
     </div> -->
 
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Admin Control Panel</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-      aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion" style="overflow:auto;">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Dashboard</span>
-          </a>
-        </li>
-
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti"
-            data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text"> Mission</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseMulti">
-            <li>
-              <a href="JPIC-index.html">JPIC/Development</a>
-            </li>
-            <li>
-              <a href="apostolate-index.html">Apostolate</a>
-            </li>
-            <li>
-              <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Personnel</a>
-              <ul class="sidenav-third-level collapse" id="collapseMulti2">
-                <li>
-                  <a href="personnel-content-index.html">Content</a>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href="index.html">Admin Control Panel</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion" style="overflow:auto;">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="index.html">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
                 </li>
-                <li>
-                  <a href="personnel-table-index.html">Table</a>
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti"
+                        data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-file"></i>
+                        <span class="nav-link-text"> Mission</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseMulti">
+                        <li>
+                            <a href="JPIC-index.html">JPIC/Development</a>
+                        </li>
+                        <li>
+                            <a href="apostolate-index.html">Apostolate</a>
+                        </li>
+                        <li>
+                            <a class="nav-link-collapse collapsed" data-toggle="collapse"
+                                href="#collapseMulti2">Personnel</a>
+                            <ul class="sidenav-third-level collapse" id="collapseMulti2">
+                                <li>
+                                    <a href="personnel-content-index.html">Content</a>
+                                </li>
+                                <li>
+                                    <a href="personnel-table-index.html">Table</a>
+                                </li>
+                                <li>
+                                    <a href="personnel-extra-index.html">Extra</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="information-index.html">Infomartion</a>
+                        </li>
+                        <li>
+                            <a href="support-groups-index.html">Support Groups/ Denoation</a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                  <a href="personnel-extra-index.html">Extra</a>
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMultis"
+                        data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-file"></i>
+                        <span class="nav-link-text"> About Us</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseMultis">
+                        <li>
+                            <a href="structure-organisation-index.html">Structure and Organization</a>
+                        </li>
+                        <li>
+                            <a href="spiritual-mission-and-spirituality-index.html">Spiritual Mission and
+                                Spirituality</a>
+                        </li>
+
+                        <li>
+                            <a href="formation-index.html">Formation </a>
+                        </li>
+                    </ul>
                 </li>
-              </ul>
-            </li>
-            <li>
-              <a href="information-index.html">Infomartion</a>
-            </li>
-            <li>
-              <a href="support-groups-index.html">Support Groups/ Denoation</a>
-            </li>
-          </ul>
-        </li>
 
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMultis"
-            data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text"> About Us</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseMultis">
-            <li>
-              <a href="structure-organisation-index.html">Structure and Organization</a>
-            </li>
-            <li>
-              <a href="spiritual-mission-and-spirituality-index.html">Spiritual Mission and
-                Spirituality</a>
-            </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
+                        data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-wrench"></i>
+                        <span class="nav-link-text">Settings</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseComponents">
+                        <li>
+                            <a href="navbar.html">Accounts</a>
+                        </li>
+                        <li>
+                            <a href="cards.html">Password</a>
+                        </li>
+                    </ul>
+                </li>
 
-            <li>
-              <a href="formation-index.html">Formation </a>
-            </li>
-          </ul>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+                </li>
 
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
-            data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Settings</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="navbar.html">Accounts</a>
-            </li>
-            <li>
-              <a href="cards.html">Password</a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-        </li>
-
-      </ul>
-    </div>
-  </nav>
+            </ul>
+        </div>
+    </nav>
 
 
     <div class="content-wrapper">
@@ -136,7 +140,7 @@
                         style="text-decoration: none; font-size: large; font-weight: 600;">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active" style="font-size: medium; font-weight: 500;">
-                  Information
+                    Information
                 </li>
             </ol>
 
@@ -179,6 +183,11 @@
                                             <input type="text" id="content" class="form-control px-2"
                                                 style="color: black; font-size: medium; font-weight: 600"
                                                 placeholder="Email.." required>
+                                        </td>
+                                        <td>
+                                            <input type="hidden" id="id" class="form-control px-2"
+                                                style="color: black; font-size: medium; font-weight: 600"
+                                                placeholder="Id grab" required>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -236,6 +245,11 @@
                                         <input type="text" id="contentD" class="form-control px-2"
                                             style="color: black; font-size: medium; font-weight: 600"
                                             placeholder="Email.." disabled>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" id="idD" class="form-control px-2"
+                                            style="color: black; font-size: medium; font-weight: 600"
+                                            placeholder="Id grab" required>
                                     </td>
                                 </tr>
                             </tbody>
@@ -296,7 +310,9 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                <div id="latestTime" class="card-footer small text-muted">
+
+                </div>
             </div>
 
 
@@ -340,7 +356,6 @@
         <!-- Import external JavaScript file -->
 
         <!-- <script src="api/council.js"></script> -->
-        <script src="api/content.js"></script>
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

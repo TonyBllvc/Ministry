@@ -5,6 +5,12 @@ const api = 'http://localhost:4242/api/jpic'
 let data
 let pending = false
 
+// ensures the javascript runs before the dom is served
+document.addEventListener('DOMContentLoaded', async function () {
+  // Fetch dataset and populate table
+  await fetchDataAndPopulateTable();
+});
+
 function fetchDataset(url) {
 
   async function dataSet() {
@@ -36,8 +42,8 @@ function fetchDataset(url) {
       if (response.status === 400 || response.status === 404) {
         console.log(json?.message || json?.error)
       } else if (response.status === 200) {
-        console.log(json?.content || 'nothing')
-        return data = json?.content
+        console.log(json?.latestUpdateTime || 'nothing')
+        return data = json
       }
       pending = false
     } catch (error) {
@@ -145,18 +151,45 @@ function deleteDataset(url) {
 
 }
 
+// 
+async function fetchDataAndPopulateTable() {
+  try {
+    const latestTimeElement = document.getElementById('latestTime');
+
+    if (latestTimeElement) {
+      const { dataSet } = fetchDataset(api);
+      const { data, latestUpdateTime } = await dataSet();
+
+      // console.log(data)
+      // console.log(latestTimeElement)
+      if (data) {
+        populateTable(data);
+      } else {
+        console.log('No data available.');
+      }
+
+      // Update the latestTime div element with the latest update time
+      latestTimeElement.textContent = "last updated " + latestUpdateTime;
+    } else {
+      console.error('Element with ID "latestTime" not found');
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+
+}
+
 // Function to populate data into the table
-async function populateTable() {
-  const { dataSet, } = fetchDataset(api)
-
-  const data = await dataSet()
-
-  // console.log(data)
-  const tableBody = document.querySelector('#dataTable tbody');
-
-  // Check if data is not undefined before using it
+async function populateTable(data) {
   if (data) {
-    data.forEach(data => {
+    // console.log(data)
+    const tableBody = document.querySelector('#dataTable tbody');
+    tableBody.innerHTML = ''; // Clear existing table rows
+
+
+    // Check if data is not undefined before using it
+    // if (data) {
+    data.map(data => {
       // console.log(data._id)
       const row = document.createElement('tr');
       row.classList.add(data._id);
@@ -181,7 +214,10 @@ async function populateTable() {
 
       tableBody.appendChild(row);
     });
+  } else {
+    console.log('Content is undefined.');
   }
+  // }
 }
 
 // Call the function to populate the table
@@ -192,7 +228,7 @@ populateTable();
 async function editRow(id) {
   const { dataSet } = fetchDataset(api)
 
-  const data = await dataSet()
+  const { data } = await dataSet();
   // Find the corresponding object in the dataSet array
   const selectedData = data.find(data => data._id === id);
 
@@ -216,7 +252,7 @@ async function editRow(id) {
 async function deleteRow(id) {
   const { dataSet } = fetchDataset(api)
 
-  const data = await dataSet()
+  const { data } = await dataSet()
   // Find the corresponding object in the dataSet array
   const selectedData = data.find(data => data._id === id);
 
@@ -267,7 +303,7 @@ async function handleDelete() {
 
   await deleteData(id)
   // alert('Working:' + title + " " + content + " ")
-  
+
   // After the asynchronous operation is complete, reload the page
   window.location.reload();
 

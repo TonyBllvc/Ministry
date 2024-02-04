@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler"
 import mongoose from "mongoose"
 import Structure from "../model/structureModel.js";
+import moment from "moment";
 
 // @desc    Fetch Contents
 // route    GET /api
@@ -13,7 +14,17 @@ const getContents = asyncHandler(async (req, res) => {
             return res.status(404).json({ error: "No content found" });
         }
 
-        res.status(200).json({ content });
+        // Find the latest update time by comparing createdAt and updatedAt
+        let latestUpdateTime = content.reduce((latest, item) => {
+            const itemUpdateTime = item.updatedAt > item.createdAt ? item.updatedAt : item.createdAt;
+            return itemUpdateTime > latest ? itemUpdateTime : latest;
+        }, content[0].createdAt); // Initialize with the first item's createdAt timestamp
+
+        // Format the latest update time as desired (e.g., using Moment.js)    
+        // Format the latest update time as how long ago it was edited using Moment.js
+        latestUpdateTime = moment(latestUpdateTime).fromNow(); // Example format: "a few seconds ago", "2 days ago", etc.
+
+        res.status(200).json({ data: content, latestUpdateTime });
     } catch (error) {
         res.status(400).json({ error: error.message })
     }

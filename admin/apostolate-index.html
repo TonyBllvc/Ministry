@@ -8,6 +8,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Admin Control Panel</title>
+
+    <script src="api/apostolate-content.js"></script>
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -180,6 +182,11 @@
                                                 style="color: black; font-size: medium; font-weight: 600"
                                                 placeholder="Email.." required>
                                         </td>
+                                        <td>
+                                            <input type="hidden" id="id" class="form-control px-2"
+                                                style="color: black; font-size: medium; font-weight: 600"
+                                                placeholder="Id grab" required>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -236,6 +243,11 @@
                                         <input type="text" id="contentD" class="form-control px-2"
                                             style="color: black; font-size: medium; font-weight: 600"
                                             placeholder="Email.." disabled>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" id="idD" class="form-control px-2"
+                                            style="color: black; font-size: medium; font-weight: 600"
+                                            placeholder="Id grab" required>
                                     </td>
                                 </tr>
                             </tbody>
@@ -296,7 +308,9 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                <div id="latestTime" class="card-footer small text-muted"> 
+                    
+                </div>
             </div>
 
 
@@ -340,7 +354,6 @@
         <!-- Import external JavaScript file -->
 
         <!-- <script src="api/council.js"></script> -->
-        <script src="api/apostolate-content.js"></script>
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

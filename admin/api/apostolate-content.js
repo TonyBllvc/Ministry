@@ -1,24 +1,201 @@
-// Example dataset with unique identifiers
-const dataSet = [
-  { _id: "10", title: "John Doe", content: "john@example.com", btn: "yes" },
-  { _id: "22", title: "Jane Smith", content: "jane@example.com", btn: "yes" },
-  { _id: "35", title: "Alice Johnson", content: "alice@example.com", btn: "yes" },
-  { _id: "35", title: "Alice Johnson", content: "alice@example.com", btn: "yes" },
-  { _id: "33", title: "Alice Johnson", content: "alice@example.com", btn: "yes" },
-  { _id: "31", title: "Alice Johnson", content: "alice@example.com", btn: "yes" }
-];
+// import { fetchDataset } from '../utility/api-calls.js';
 
-const dataSets = { _id: "10", title: "John Doe", content: "john@example.com", btn: "yes" }
+const api = 'http://localhost:4242/api/apostolate'
+// const updateApi = 'http://localhost:4242/api/jpic'
+let data
+let pending = false
+
+// ensures the javascript runs before the dom is served
+document.addEventListener('DOMContentLoaded', async function () {
+  // Fetch dataset and populate table
+  await fetchDataAndPopulateTable();
+});
+
+function fetchDataset(url) {
+
+  async function dataSet() {
+
+    // data = null
+    // // const details = {
+    // //     access: access,
+    // // };
+    // console.log(data)
+    pending = true
+    try {
+      const response = await fetch(url)
+      //     {
+      //     method: 'PUT',
+      //     headers: {
+      //         'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify(details),
+      // });
+
+      const json = await response.json()
+      console.log(response.status)
+
+      if (response.status === 401) {
+
+        console.log(json?.message || json?.error)
+      }
+
+      if (response.status === 400 || response.status === 404) {
+        console.log(json?.message || json?.error)
+      } else if (response.status === 200) {
+        console.log(json?.latestUpdateTime || 'nothing')
+        return data = json
+      }
+      pending = false
+    } catch (error) {
+      console.log(error.message)
+    };
+    pending = false
+  }
+
+  return { dataSet, pending }
+
+}
+
+function updateDataset(url) {
+
+  async function updateData(id, title, content) {
+
+    // data = null
+    const details = {
+      id: id,
+      title: title,
+      content: content
+    };
+    // console.log(data)
+    pending = true
+    try {
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(details),
+      });
+
+      const json = await response.json()
+      console.log(response.status)
+
+      if (response.status === 401) {
+
+        console.log(json?.message || json?.error)
+      }
+
+      if (response.status === 400 || response.status === 404) {
+        console.log(json?.message || json?.error)
+      } else if (response.status === 201) {
+        console.log(json?.content || 'nothing')
+        console.log(json?.message)
+        // return data = json?.content
+      }
+      pending = false
+    } catch (error) {
+      console.log(error.message)
+    };
+    pending = false
+  }
+
+  return { updateData, pending }
+
+}
+
+
+function deleteDataset(url) {
+
+  async function deleteData(id, title, content) {
+
+    // data = null
+    const details = {
+      id: id,
+      // title: title,
+      // content: content
+    };
+    // console.log(data)
+    pending = true
+    try {
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(details),
+      });
+
+      const json = await response.json()
+      console.log(response.status)
+
+      if (response.status === 401) {
+
+        console.log(json?.message || json?.error)
+      }
+
+      if (response.status === 400 || response.status === 404) {
+        console.log(json?.message || json?.error)
+      } else if (response.status === 200) {
+        // console.log(json?.content || 'nothing')
+        console.log(json?.message)
+        // return data = json?.content
+      }
+      pending = false
+    } catch (error) {
+      console.log(error.message)
+    };
+    pending = false
+  }
+
+  return { deleteData, pending }
+
+}
+
+// 
+async function fetchDataAndPopulateTable() {
+  try {
+    const latestTimeElement = document.getElementById('latestTime');
+
+    if (latestTimeElement) {
+      const { dataSet } = fetchDataset(api);
+      const { data, latestUpdateTime } = await dataSet();
+
+      // console.log(data)
+      // console.log(latestTimeElement)
+      if (data) {
+        populateTable(data);
+      } else {
+        console.log('No data available.');
+      }
+
+      // Update the latestTime div element with the latest update time
+      latestTimeElement.textContent = "last updated " + latestUpdateTime;
+    } else {
+      console.error('Element with ID "latestTime" not found');
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+
+}
+
 // Function to populate data into the table
-function populateTable() {
-  const tableBody = document.querySelector('#dataTable tbody');
+async function populateTable(data) {
+  
+  if (data) {
+    // console.log(data)
+    const tableBody = document.querySelector('#dataTable tbody');
+    tableBody.innerHTML = ''; // Clear existing table rows
 
-  dataSet.forEach(data => {
-    // console.log(data._id)
-    const row = document.createElement('tr');
-    row.classList.add(data._id);
-    // const id =
-    row.innerHTML = `
+
+    // Check if data is not undefined before using it
+    // if (data) {
+    data.map(data => {
+      // console.log(data._id)
+      const row = document.createElement('tr');
+      row.classList.add(data._id);
+      // const id =
+      row.innerHTML = `
       <td colspan="1"  style="width: 20%; word-break: break-all;"> 
        ${data.title}
       </td>
@@ -36,8 +213,12 @@ function populateTable() {
       </button></td>
     `;
 
-    tableBody.appendChild(row);
-  });
+      tableBody.appendChild(row);
+    });
+  } else {
+    console.log('Content is undefined.');
+  }
+  // }
 }
 
 // Call the function to populate the table
@@ -45,13 +226,16 @@ populateTable();
 
 
 // Function to confirm edit data into the table
-function editRow(id) {
+async function editRow(id) {
+  const { dataSet } = fetchDataset(api)
+
+  const { data } = await dataSet();
   // Find the corresponding object in the dataSet array
-  const selectedData = dataSet.find(data => data._id === id);
+  const selectedData = data.find(data => data._id === id);
 
 
   // Access individual properties of the selected object
-  const { title, content } = selectedData;
+  const { title, content, _id } = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
   document.getElementById("updateCouncil").style.display = 'flex'
@@ -60,18 +244,22 @@ function editRow(id) {
   // pass values from api to each element
   document.getElementById('title').value = title
   document.getElementById('content').value = content
+  document.getElementById('id').value = id || _id
 
 }
 
 
 // Function to confirm delete data into the table
-function deleteRow(id) {
+async function deleteRow(id) {
+  const { dataSet } = fetchDataset(api)
+
+  const { data } = await dataSet()
   // Find the corresponding object in the dataSet array
-  const selectedData = dataSet.find(data => data._id === id);
+  const selectedData = data.find(data => data._id === id);
 
 
   // Access individual properties of the selected object
-  const { title, content } = selectedData;
+  const { title, content, _id } = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'flex'
@@ -80,6 +268,7 @@ function deleteRow(id) {
   // pass values from api to each element
   document.getElementById('titleD').value = title
   document.getElementById('contentD').value = content
+  document.getElementById('idD').value = id || _id
 }
 
 // Function to cancel any update/delete to the data into the table
@@ -91,26 +280,35 @@ function cancelBtn() {
 }
 
 // Function to update a dataset on the table
-function handleUpdate() {
+async function handleUpdate() {
+  const { updateData } = updateDataset(api)
+
   var title = document.getElementById('title').value
   var content = document.getElementById('content').value
-  alert('Working:' + title + " " + content + " ")
+  var id = document.getElementById('id').value
 
+  await updateData(id, title, content)
+  // alert('Working:' + title + " " + content + " ")
+  // localStorage.setItem('jwt', JSON.stringify({ title: title }))
 
   document.getElementById("updateCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'none'
   document.getElementById("fetchCouncil").style.display = 'flex'
 }
 
+async function handleDelete() {
+  const { deleteData } = deleteDataset(api)
+  // const title = document.getElementById('titleD').value
+  // const content = document.getElementById('contentD').value
+  const id = document.getElementById('idD').value
 
+  await deleteData(id)
+  // alert('Working:' + title + " " + content + " ")
 
-function handleDelete() {
-  const title = document.getElementById('titleD').value
-  const content = document.getElementById('contentD').value
+  // After the asynchronous operation is complete, reload the page
+  window.location.reload();
 
-  alert('Working:' + title + " " + content + " ")
-
-
+  // Optionally, you can also hide/show elements as needed
   document.getElementById("updateCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'none'
   document.getElementById("fetchCouncil").style.display = 'flex'

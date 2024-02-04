@@ -8,6 +8,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Admin Control Panel</title>
+  
+  <script src="js/personnel-content-content.js"></script>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -137,7 +139,7 @@
         <li class="breadcrumb-item active" style="font-size: medium; font-weight: 500;">Upload</li>
       </ol>
       <!-- Example DataTables Card-->
-      <form onsubmit="handleSubmit()">
+      <form onsubmit="handleSubmit(event)">
         <div class="card mb-3">
           <div class="card-header">
             <div class="d-flex rows justify-content-between">
@@ -217,7 +219,6 @@
     <!-- Import external JavaScript file -->
 
     <!-- <script src=".api/council.js"></script> -->
-    <script src="js/personnel--content-content.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

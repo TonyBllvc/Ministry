@@ -1,6 +1,6 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
-const api = 'http://localhost:4242/api/information'
+const api = 'http://localhost:4242/api/personnel'
 // const updateApi = 'http://localhost:4242/api/jpic'
 let data
 let pending = false
@@ -181,6 +181,7 @@ async function fetchDataAndPopulateTable() {
 
 // Function to populate data into the table
 async function populateTable(data) {
+  
   if (data) {
     // console.log(data)
     const tableBody = document.querySelector('#dataTable tbody');

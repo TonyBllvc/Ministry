@@ -1,4 +1,4 @@
-const api = 'http://localhost:4242/api/support'
+const api = 'http://localhost:4242/api/personnel'
 let data
 let pending = false
 
@@ -37,7 +37,7 @@ function createDataset(url) {
                 // console.log(json?.content || 'nothing')
                 // console.log(json?.message)
                 // return data = json?.content
-                window.location.href = "/spiritual/support-groups-index.html"
+                window.location.href = "/spiritual/personnel-content-index.html"
             }
             // pending = false
         } catch (error) {
@@ -60,7 +60,7 @@ async function handleSubmit(event) {
 
     try {
         await createData(title, content);
-        window.location.href = "/spiritual/support-groups-index.html";
+        window.location.href = "/spiritual/personnel-content-index.html";
     } catch (error) {
         console.error('Error submitting data:', error);
         // Handle error, display message to the user, etc.
