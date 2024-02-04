@@ -1,5 +1,5 @@
 import express from "express";
-import { createContent, deleteContent, getContent, getContents, updateContent } from "../controller/informationController.js";
+import { createContent, deleteContent, getContent, getContents, updateContent } from "../controller/personnelExtraAController.js";
 
 const router = express.Router()
 

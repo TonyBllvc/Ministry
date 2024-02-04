@@ -1,6 +1,6 @@
 import mongoose, { } from "mongoose";
 
-const apostolatechema = mongoose.Schema({
+const apostolateSchema = mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -16,6 +16,6 @@ const apostolatechema = mongoose.Schema({
     timestamps: true,
 });
 
-const Apostolate = mongoose.model.apostolates || mongoose.model('apostolate', apostolatechema);
+const Apostolate = mongoose.model.apostolates || mongoose.model('apostolate', apostolateSchema);
 
 export default Apostolate

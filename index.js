@@ -4,13 +4,13 @@ import dotenv from 'dotenv'
 import jpic from './routes/jpic.js'
 import user from './routes/user.js'
 import apostolate from './routes/apostolate.js'
-// import category from './routes/category.js'
+import personnel from './routes/personnel.js'
 import information from './routes/information.js'
-// import cart from './routes/cart.js'
-// import order from './routes/order.js'
-// import featured from './routes/featureProduct.js'
-// import webhook from './routes/webhook.route.js'
-// import wishlist from './routes/wishlist.js'
+import personnelExtra from './routes/personnelExtra.js'
+import personnelTable from './routes/personnelTable.js'
+import structureOrg from './routes/structureOrg.js'
+import spiritualM from './routes/spiritualM.js'
+import formation from './routes/formation.js'
 import { notFound, errorHandler } from "./middleware/errorMiddelware.js";
 import connectDB from "./config/db.js";
 // import cors from 'cors'
@@ -58,18 +58,19 @@ app.use('/api/jpic', jpic)
 // app.use('/api/users', user)
 app.use('/api/apostolate', apostolate)
 app.use('/api/information', information)
-// app.use('/api/category', category)
-// app.use('/api/cart', cart)
-// app.use('/api/checkout', order)
-// app.use('/api/featured', featured)
-// app.use('/api/wishlist', wishlist)
+app.use('/api/personnel', personnel)
+app.use('/api/personnel_extra', personnelExtra)
+app.use('/api/personnel_table', personnelTable)
+app.use('/api/formation', formation)
+app.use('/api/structure_organisation', structureOrg)
+app.use('/api/spiritual_ms', spiritualM)
 app.get('/', (req, res) => {
     res.status(200)
     res.send('Server started')
 })
 
 // app.use(notFound)
-// app.use(errorHandler)
+app.use(errorHandler)
 
 const __filename = fileURLToPath(import.meta.url); // Convert import.meta.url to file path
 const __dirname = path.dirname(__filename); // Extract directory name

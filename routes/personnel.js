@@ -8,7 +8,7 @@ import { createContent, deleteContent, getContent, getContents, updateContent } 
 
 const router = express.Router()
 
-router.route('/').get(getContents).post(createContent).put(updateContent).delete(deleteContent)
-router.route('/content').get(getContent)
+router.route('/').get( getContents).post( createContent).put( updateContent).delete( deleteContent)
+router.route('/content').get( getContent)
 
 export default router

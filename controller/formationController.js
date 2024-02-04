@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler"
 import mongoose from "mongoose"
-import Jpic from "../model/jpicModel.js";
+import Formation from "../model/formationModel.js";
 
 // @desc    Fetch Contents
 // route    GET /api
@@ -8,7 +8,7 @@ import Jpic from "../model/jpicModel.js";
 const getContents = asyncHandler(async (req, res) => {
 
     try {
-        let content = await Jpic.find()
+        let content = await Formation.find()
         if (content.length === 0) {
             return res.status(404).json({ error: "No content found" });
         }
@@ -22,7 +22,7 @@ const getContents = asyncHandler(async (req, res) => {
 
 
 // @desc    Fetch single Content
-// route    GET /api/content/
+// route    POST /api/content/
 //@access   Public
 const getContent = asyncHandler(async (req, res) => {
 
@@ -33,7 +33,7 @@ const getContent = asyncHandler(async (req, res) => {
     }
 
     try {
-        var content = await Jpic.findById({ _id: id })
+        var content = await Formation.findById({ _id: id })
 
         if (!content) {
             return res.status(400).json({ error: "No such content" })
@@ -52,7 +52,7 @@ const getContent = asyncHandler(async (req, res) => {
 const sortContent = asyncHandler(async (req, res) => {
 
     try {
-        var content = await Jpic.find().sort(-1)
+        var content = await Formation.find().sort(-1)
 
         if (!content) {
             return res.status(404).json({ error: "No content found" });
@@ -72,7 +72,7 @@ const createContent = asyncHandler(async (req, res) => {
     const { title, content } = req.body
 
     try {
-        var createContent = new Jpic({
+        var createContent = new Formation({
             title,
             content
         })
@@ -91,7 +91,7 @@ const createContent = asyncHandler(async (req, res) => {
 // route    PATCH /api/content/:id
 //@access   Public
 const updateContent = asyncHandler(async (req, res) => {
-    var content = await Jpic.findById(req.body.id)
+    var content = await Formation.findById(req.body.id)
 
     if (!content) {
         return res.status(404).json({ error: "Content not found" });
@@ -113,7 +113,7 @@ const updateContent = asyncHandler(async (req, res) => {
 })
 
 // @desc    Create content
-// route    DELETE /api/content/:id
+// route    DELETE /api/content/
 //@access   Public
 const deleteContent = asyncHandler(async (req, res) => {
 
@@ -124,13 +124,13 @@ const deleteContent = asyncHandler(async (req, res) => {
     }
 
     try {
-        const content = await Jpic.findById(id);
+        const content = await Formation.findById(id);
 
         if (!content) {
             return res.status(404).json({ error: "Content not found" });
         }
 
-        const result = await Jpic.findByIdAndDelete({ _id: id })
+        const result = await Formation.findByIdAndDelete({ _id: id })
 
         if (!result) {
             return res.status(404).json({ error: "No such content" })
