@@ -66,3 +66,11 @@ async function handleSubmit(event) {
         // Handle error, display message to the user, etc.
     }
 }
+
+window.onload = function () {
+    var textOne = document.getElementById('title')
+    var textTwo = document.getElementById('content')
+  
+    textOne.value = ''
+    textTwo.value = ''
+  }

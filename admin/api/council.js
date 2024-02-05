@@ -379,3 +379,4 @@ async function handleDelete() {
   document.getElementById("fetchCouncil").style.display = 'flex'
 }
 
+

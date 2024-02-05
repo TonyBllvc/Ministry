@@ -313,3 +313,12 @@ async function handleDelete() {
   document.getElementById("fetchCouncil").style.display = 'flex'
 }
 
+
+
+window.onload = function () {
+  var textOne = document.getElementById('titleH')
+  var textTwo = document.getElementById('contentH')
+
+  textOne.value = ''
+  textTwo.value = ''
+}

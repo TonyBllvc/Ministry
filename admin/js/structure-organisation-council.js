@@ -139,14 +139,10 @@ async function handleContentSubmit(event) {
     }
 }
 
-function removeSpaceOne() {
+window.onload = function () {
     var textOne = document.getElementById('titleH')
-
-    textOne.value = ''
-}
-
-function removeSpaceTwo() {
     var textTwo = document.getElementById('contentH')
-
+  
+    textOne.value = ''
     textTwo.value = ''
-}
+  }
