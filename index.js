@@ -12,6 +12,7 @@ import structureOrg from './routes/structureOrg.js'
 import spiritualM from './routes/spiritualM.js'
 import support from './routes/support.js'
 import formation from './routes/formation.js'
+import structureContent from './routes/structureContent.js'
 import { notFound, errorHandler } from "./middleware/errorMiddelware.js";
 import connectDB from "./config/db.js";
 // import cors from 'cors'
@@ -66,6 +67,9 @@ app.use('/api/formation', formation)
 app.use('/api/structure_organisation', structureOrg)
 app.use('/api/spiritual_ms', spiritualM)
 app.use('/api/support', support)
+app.use('/api/structure_content', structureContent)
+
+
 app.get('/', (req, res) => {
     res.status(200)
     res.send('Server started')

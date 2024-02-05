@@ -131,7 +131,7 @@
           </a>
         </li>
         <li class="breadcrumb-item active" style="font-size: medium; font-weight: 600;">
-          <a href="table/index.html" class="link-offset-2 line-underline link-underline-opacity-0"
+          <a href="structure-organisation-index.html" class="link-offset-2 line-underline link-underline-opacity-0"
             style="text-decoration: none; font-size: large; color: gray; font-weight: 600;">
             Structure Organisation
           </a>
@@ -145,7 +145,7 @@
             <div class="d-flex rows justify-content-between">
               <div
                 style="font-size: large; font-weight: 600; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
-                <i class="fa fa-table"></i> General Council
+                <i class="fa fa-table"></i> General Council Table
               </div>
               <div>
                 Upload your data
@@ -169,6 +169,57 @@
                     <td><input type="text" id="name" class="form-control px-2" placeholder="Name.." required></td>
                     <td><input type="text" id="email" class="form-control px-2" placeholder="Email.." required></td>
                     <td><input type="text" id="phone" class="form-control px-2" placeholder="Phone no.." required></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer small text-muted">
+
+            <div class="d-flex rows justify-content-end">
+              <div>
+                <button type="submit" class="text-center text-white "
+                  style="width: 100px; padding: 6px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: large; font-weight: 800; border-radius: .7rem; border: none;  background-color: green;">
+                  Upload </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+      <form onsubmit="handleContentSubmit(event)">
+        <div class="card mt-5 mb-3">
+          <div class="card-header">
+            <div class="d-flex rows justify-content-between">
+              <div
+                style="font-size: large; font-weight: 600; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                <i class="fa fa-table"></i> General Council Header
+              </div>
+              <div>
+                Upload your data
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <textarea id="titleH" onclick="removeSpaceOne()" class="form-control px-2 py-3" rows="3" cols="25" placeholder="Content.." required>
+                      </textarea>
+                    </td>
+                    <td>
+                      <textarea id="contentH" onclick="removeSpaceTwo()" class="form-control px-2 py-3" rows="4" cols="25" placeholder="Content.." required>
+                      </textarea>
+                    </td>
+                    <!-- <td><input type="text" id="contentH" class="form-control px-2" placeholder="Content.." required></td> -->
                   </tr>
                 </tbody>
               </table>
