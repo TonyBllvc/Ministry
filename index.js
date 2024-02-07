@@ -12,7 +12,7 @@ import structureOrg from './routes/structureOrg.js'
 import spiritualM from './routes/spiritualM.js'
 import support from './routes/support.js'
 import formation from './routes/formation.js'
-import image from './routes/imageUpload.js'
+import image from './routes/imageOne.js'
 import structureContent from './routes/structureContent.js'
 import { notFound, errorHandler } from "./middleware/errorMiddelware.js";
 import connectDB from "./config/db.js";

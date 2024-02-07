@@ -2,7 +2,7 @@ import express from "express";
 // import multer from 'multer';
 import { protect } from "../middleware/authentication.js";
 import mongoose from 'mongoose';
-import { GridFsStorage } from "multer-gridfs-storage";
+// import { GridFsStorage } from "multer-gridfs-storage";
 import multer from "multer";
 import crypto from 'crypto'
 import path from "path";
