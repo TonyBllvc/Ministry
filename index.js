@@ -12,6 +12,7 @@ import structureOrg from './routes/structureOrg.js'
 import spiritualM from './routes/spiritualM.js'
 import support from './routes/support.js'
 import formation from './routes/formation.js'
+import image from './routes/imageUpload.js'
 import structureContent from './routes/structureContent.js'
 import { notFound, errorHandler } from "./middleware/errorMiddelware.js";
 import connectDB from "./config/db.js";
@@ -56,6 +57,7 @@ app.use(express.urlencoded({
 
 app.use(cookieParser())
 
+app.use('/api/image', image)
 app.use('/api/jpic', jpic)
 // app.use('/api/users', user)
 app.use('/api/apostolate', apostolate)
