@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
+// Working but currently not in use
 const imageSchema = mongoose.Schema({
     _id: {
         type: Schema.Types.ObjectId,

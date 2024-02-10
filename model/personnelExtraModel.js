@@ -1,4 +1,4 @@
-import mongoose, { } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const personnelExtraSchema = mongoose.Schema({
     name: {
@@ -15,6 +15,14 @@ const personnelExtraSchema = mongoose.Schema({
         type: Number,
         required: true,
         trim: true
+    },
+    id: {
+        type: Schema.Types.ObjectId,
+        require: true
+    },
+    images:
+    {
+        type: String
     },
 }, {
     timestamps: true,

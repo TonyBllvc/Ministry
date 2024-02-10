@@ -55,10 +55,10 @@ const storage = new GridFsStorage({
     }
 })
 
-const store = multer({
+ const store = multer({
     storage: storage,
     limits: {
-        fileSize: 20000000
+        fileSize: 200000000
     },
     fileFilter: function (req, file, cb) {
         checkFileTypes(file, cb)
@@ -75,19 +75,20 @@ function checkFileTypes(file, cb) {
     cb('filetype')
 }
 
-const uploadMiddleware = (req, res, next) => {
-    const upload = store.single('image')
-    upload(req, res, function (err) {
-        if (err instanceof multer.MulterError) {
-            return res.status(400).send('file too large')
-        } else if (err) {
-            if (err === 'filetype') {
-                return res.status(400).send('Image files only')
-            }
-            return res.sendStatus(500)
-        }
-        next()
-    })
-}
+export default store
+// const uploadMiddleware = (req, res, next) => {
+//     const upload = store.single('image')
+//     upload(req, res, function (err) {
+//         if (err instanceof multer.MulterError) {
+//             return res.status(400).send('file too large')
+//         } else if (err) {
+//             if (err === 'filetype') {
+//                 return res.status(400).send('Image files only')
+//             }
+//             return res.sendStatus(500)
+//         }
+//         next()
+//     })
+// }
 
-export default uploadMiddleware 
+// export default uploadMiddleware 

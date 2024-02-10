@@ -1,4 +1,4 @@
-import mongoose, { } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const informationchema = mongoose.Schema({
     title: {
@@ -12,11 +12,13 @@ const informationchema = mongoose.Schema({
         trim: true
 
     },
-    images: [
-        {
-            type: String
-        }
-    ],
+    id: {
+        type: Schema.Types.ObjectId,
+        require: true
+    },
+    images: {
+        type: String
+    }
 }, {
     timestamps: true,
 });

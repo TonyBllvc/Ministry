@@ -1,4 +1,5 @@
 import mongoose, { } from "mongoose";
+import { Schema } from "mongoose";
 
 const formationSchema = mongoose.Schema({
     title: {
@@ -12,11 +13,13 @@ const formationSchema = mongoose.Schema({
         trim: true
 
     },
-    images: [
-        {
-            type: String
-        }
-    ],
+    id: {
+        type: Schema.Types.ObjectId,
+        require: true
+    },
+    images: {
+        type: String
+    }
 }, {
     timestamps: true,
 });

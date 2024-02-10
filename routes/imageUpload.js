@@ -9,6 +9,7 @@ import gridfs from "gridfs-stream";
 import methodOverride from "method-override";
 import Grid from "gridfs-stream";
 
+// Not in use
 let gfs;
 
 const conn = mongoose.createConnection("mongodb://127.0.0.1:27017/");

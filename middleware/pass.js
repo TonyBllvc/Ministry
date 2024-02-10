@@ -10,6 +10,7 @@ import Grid from "gridfs-stream";
 
 // const router = express.Router()
 
+// Not in use
 // const conn = mongoose.createConnection('mongodb://127.0.0.1:27017/')
 const conn = mongoose.createConnection('mongodb://127.0.0.1:27017/', {
     useNewUrlParser: true,

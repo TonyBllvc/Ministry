@@ -10,10 +10,11 @@ import path from "path";
 import { MongoClient } from "mongodb";
 import Grid from 'gridfs-stream';
 
+// Not in use
 let gfs
 const conn = mongoose.createConnection('mongodb://127.0.0.1:27017/', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
     // useCreateIndex: true
 })
 
@@ -22,7 +23,13 @@ conn.once('open', () => {
     gfs = Grid(conn.db, mongo); // Provide mongo as the second argument
     gfs.collection('images')
     console.log('connection')
+    // gfs = new mongoose.mongo.GridFSBucket(conn.db), {
+    //     bucketName: 'images'
+    // }
 })
+// const promise = MongoClient.connect('mongodb://127.0.0.1:27017/').then((client) =>
+//   client.db(process.env.DATABASE)
+// );
 
 // export function grid() {
 const storage = new GridFsStorage({
@@ -41,6 +48,7 @@ const storage = new GridFsStorage({
                 const id = primaryKey();
                 const filename = buf.toString('hex') + path.extname(file.originalname);
                 const fileInfo = {
+                    _id: file._id,
                     filename: filename,
                     bucketName: 'images',
                     // metadata: {
@@ -55,39 +63,51 @@ const storage = new GridFsStorage({
     }
 })
 
-const store = multer({
+export const updateStore = multer({
     storage: storage,
-    limits: {
-        fileSize: 20000000
-    },
-    fileFilter: function (req, file, cb) {
-        checkFileTypes(file, cb)
-    }
+    // limits: {
+    //     fileSize: 20000000
+    // },
+    // fileFilter: function (req, file, cb) {
+    //     checkFileTypes(file, cb)
+    // }
 })
 
-function checkFileTypes(file, cb) {
-    const filetypes = /jpeg|jpg|png|gif/
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
-    const mimetype = filetypes.test(file.mimetype)
-    if (mimetype && extname) {
-        return cb(null, true)
-    }
-    cb('filetype')
-}
 
-const uploadMiddleware = (req, res, next) => {
-    const upload = store.single('image')
-    upload(req, res, function (err) {
-        if (err instanceof multer.MulterError) {
-            return res.status(400).send('file too large')
-        } else if (err) {
-            if (err === 'filetype') {
-                return res.status(400).send('Image files only')
-            }
-            return res.sendStatus(500)
-        }
-        next()
-    })
-}
+// export gfs
+// return store;
+// }
+// const store = multer({
+//     storage,
+//     limits: {
+//         fileSize: 20000000
+//     },
+//     fileFilter: function (req, file, cb) {
+//         checkFileTypes(file, cb)
+//     }
+// })
 
-export default uploadMiddleware 
+// function checkFileTypes(file, cb) {
+//     const filetypes = /jpeg|jpg|png|gif/
+//     const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
+//     const mimetype = filetypes.test(file.mimetype)
+//     if (mimetype && extname) {
+//         return cb(null, true)
+//     }
+//     cb('filetype')
+// }
+
+// const uploadMiddleware = (req, res, next) => {
+//     const upload = store.single('image')
+//     upload(req, res, function (err) {
+//         if (err instanceof multer.MulterError) {
+//             return res.status(400).send('file too large')
+//         } else if (err) {
+//             if (err === 'filetype') {
+//                 return res.status(400).send('Image files only')
+//             }
+//             return res.sendStatus(500)
+//         }
+//         next()
+//     })
+// }

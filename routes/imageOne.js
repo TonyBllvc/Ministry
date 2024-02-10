@@ -6,90 +6,17 @@ import multer from "multer";
 import crypto from 'crypto'
 import path from "path";
 import Grid from 'gridfs-stream';
-import { gfs, store } from "../middleware/imageOne.js";
+import uploadMiddleware from "../middleware/imageOne.js";
 import Image from "../model/image.js";
 import { GridFSBucket, MongoClient, ObjectId } from "mongodb";
+// import { updateStore } from "../middleware/imageTwo.js";
 
 const router = express.Router()
-
+const url = 'mongodb://127.0.0.1:27017/'
 const baseUrl = ' http://localhost:4242/api/image/upload/'
-// let gfs
-// const conn = mongoose.createConnection('mongodb://127.0.0.1:27017/', {
-//     // useNewUrlParser: true,
-//     // useUnifiedTopology: true,
-//     // useCreateIndex: true
-// })
 
-// conn.once('open', () => {
-//     const mongo = mongoose.mongo; // Retrieve the mongo property from mongoose
-//     gfs = Grid(conn.db, mongo); // Provide mongo as the second argument
-//     gfs.collection('images')
-//     console.log('connection')
-//     // gfs = new mongoose.mongo.GridFSBucket(conn.db), {
-//     //     bucketName: 'images'
-//     // }
-// })
-// const conn = mongoose.createConnection('mongodb://127.0.0.1:27017/', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     // useCreateIndex: true
-// })
-
-// let gfs
-// conn.once('open', () => {
-//     gfs = new mongoose.mongo.GridFSBucket(conn.db), {
-//         bucketName: 'images'
-//     }
-// })
-
-// const storage = new GridFsStorage({
-//     url: 'mongodb://127.0.0.1:27017/',
-//     options: {
-//         // useUnifiedTopology: true
-//     },
-//     file: (req, file) => {
-//                 return {
-//                     filename: file.originalname,
-//                     bucketName: 'images',
-//                 }
-//         }
-// })
-
-// const store = multer({
-//     storage,
-//     limits: {
-//         fileSize: 20000000
-//     },
-//     fileFilter: function (req, file, cb) {
-//         checkFileTypes(file, cb)
-//     }
-// })
-
-// function checkFileTypes(file, cb) {
-//     const filetypes = /jpeg|jpg|png|gif/
-//     const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
-//     const mimetype = filetypes.test(file.mimetype)
-//     if (mimetype && extname) {
-//         return cb(null, true)
-//     }
-//     cb('filetype')
-// }
-
-// const uploadMiddleware = (req, res, next) => {
-//     const upload = store.single('image')
-//     upload(req, res, function (err) {
-//         if (err instanceof multer.MulterError) {
-//             return res.status(400).send('file too large')
-//         } else if (err) {
-//             if (err === 'filetype') {
-//                 return res.status(400).send('Image files only')
-//             }
-//             return res.sendStatus(500)
-//         }
-//         next()
-//     })
-// }
-router.route('/upload').post(store.single('image'), async (req, res) => {
+// router.route('/upload').post(store.single('image'), async (req, res) => {
+router.route('/upload').post(uploadMiddleware, async (req, res) => {
     try {
         const { file } = req
 
@@ -119,7 +46,7 @@ router.route('/upload').post(store.single('image'), async (req, res) => {
 }).get(async (req, res) => {
     console.log('call')
     try {
-        const mongoClient = new MongoClient('mongodb://127.0.0.1:27017/', { useNewUrlParser: true, useUnifiedTopology: true });
+        const mongoClient = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
         await mongoClient.connect();
         console.log('1')
 
@@ -177,7 +104,7 @@ router.route('/upload').post(store.single('image'), async (req, res) => {
 router.route('/upload/:name').get(async (req, res) => {
     console.log('call')
     try {
-        const mongoClient = new MongoClient('mongodb://127.0.0.1:27017/', { useNewUrlParser: true, useUnifiedTopology: true });
+        const mongoClient = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
         await mongoClient.connect();
 
         const database = mongoClient.db('test');
@@ -226,9 +153,117 @@ router.route('/upload/:name').get(async (req, res) => {
     // })
 })
 
+// router.route('/upload/:id').put(store.single('image'), async (req, res) => {
+router.route('/upload/:id').put(uploadMiddleware, async (req, res) => {
+    try {
+        const mongoClient = new MongoClient(url);
+        await mongoClient.connect();
+        console.log('step 1')
+        const database = mongoClient.db('test'); // Adjust database name if needed
+        const bucket = new GridFSBucket(database, { bucketName: 'images' });
+        console.log('step 2')
+
+
+        // Upload new file (handling errors and asynchronous actions)
+        try {
+            // Find the existing file document
+            const existingFile = await bucket.find({ _id: new ObjectId(req.params.id) }).toArray();
+            const imageDir = await Image.findById(req.params.id)
+
+
+            const { file } = req
+
+            console.log(existingFile)
+            console.log(imageDir)
+            
+            // console.log(file.filename)
+            // console.log(file)
+            // if (imageDir && existingFile.length) {
+            //     console.log('exists')
+            //     await bucket.delete(new ObjectId(req.params.id));
+
+            //     await Image.findByIdAndDelete(req.params.id)
+            //     // const { file } = req
+
+            //     imageDir._id = new Object(file.id) || imageDir._id
+            //     imageDir.images = file.filename || imageDir.image
+
+            //     await imageDir.save()
+
+            //     console.log('success')
+            //     return res.status(200).json({ message: "File updated successfully" });
+            // }
+
+            // if (!imageDir && existingFile.length) {
+            //     console.log('step p')
+            //     await bucket.delete(new ObjectId(req.params.id));
+
+            //     var cet = new Image({
+            //         _id: file.id,
+            //         images: file.filename
+            //     })
+
+            //     await cet.save()
+
+            //     console.log('push')
+            //     return res.status(200).json({ message: "File updated successfully" });
+            // }
+
+            // console.log('step 3')
+            // var cet = new Image({
+            //     _id: file.id,
+            //     images: file.filename
+            // })
+
+            // await cet.save()
+
+            return res.status(200).json({ message: "File updated successfully" });
+            // console.log('step 3')
+            // console.log(existingFile.length)
+            // console.log(existingFile)
+
+            // console.log('step x')
+
+
+            // var cet = new Image({
+            //     _id: file.id,
+            //     images: file.filename
+            // })
+
+
+            // if (existingFile.length > 0) {
+            //     const writeStream = bucket.openUploadStream(existingFile[0].filename);
+            //     newFile.stream.pipe(writeStream);
+
+            //     console.log('step 4')
+            //     await newFile.stream.on('end', async () => {
+            //         try {
+            //             await bucket.delete(existingFile[0]._id); // Delete old file with error handling
+
+            //             console.log('Step 5: Deleted old file');
+            //             res.status(200).json({ message: "File updated successfully" });
+
+            //         } catch (deleteError) {
+            //             console.error('Error deleting old file:', deleteError);
+            //             res.status(500).json({ message: "Error updating file" });
+            //         }
+            //     });
+            // } else {
+            //     console.error('No new file uploaded');
+            //     res.status(400).json({ message: "No new file received" });
+            // }
+        } catch (uploadError) {
+            console.error('Error uploading new file:', uploadError);
+            res.status(500).json({ message: "Error updating file" });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.route('/upload/:id').delete(async (req, res) => {
     try {
-        const mongoClient = new MongoClient('mongodb://127.0.0.1:27017/');
+        const mongoClient = new MongoClient(url);
         await mongoClient.connect();
 
         const database = mongoClient.db('test'); // Adjust database name if needed
@@ -241,11 +276,11 @@ router.route('/upload/:id').delete(async (req, res) => {
         if (!imageCheck) {
             return res.status(404).json({ error: "Content not found" });
         }
-        
+
         await bucket.delete(new ObjectId(req.params.id));
 
         await Image.findByIdAndDelete({ _id: req.params.id })
-        
+
         res.status(200).json({ message: "File deleted successfully" });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -254,3 +289,66 @@ router.route('/upload/:id').delete(async (req, res) => {
 
 
 export default router
+
+
+// Look at this code later --  it is for update
+
+// ***************************** starts ********************************************
+// router.route('/upload/:id').put(async (req, res) => {
+//     try {
+//         const mongoClient = new MongoClient(url);
+//         await mongoClient.connect();
+//         console.log('step 1')
+//         const database = mongoClient.db('test'); // Adjust database name if needed
+//         const bucket = new GridFSBucket(database, { bucketName: 'images' });
+//         console.log('step 2')
+
+//         // Find the existing file document
+//         const existingFile = await bucket.find({ _id: new ObjectId(req.params.id) }).toArray();
+//         if (!existingFile.length) {
+//             return res.status(404).json({ message: "File not found" });
+//         }
+//         console.log('step 3')
+//         console.log(existingFile.length)
+//         console.log(existingFile)
+
+//         // Upload new file (handling errors and asynchronous actions)
+//         try {
+//             // Overwrite the existing file with the new one
+//             const newFile = updateStore.single('image')(req, res);
+//             console.log('step x')
+//             console.log(newFile)
+
+//             if (existingFile.length > 0) {
+//                 const writeStream = bucket.openUploadStream(existingFile[0].filename);
+//                 newFile.stream.pipe(writeStream);
+
+//                 console.log('step 4')
+//                 await newFile.stream.on('end', async () => {
+//                     try {
+//                         await bucket.delete(existingFile[0]._id); // Delete old file with error handling
+
+//                         console.log('Step 5: Deleted old file');
+//                         res.status(200).json({ message: "File updated successfully" });
+
+//                     } catch (deleteError) {
+//                         console.error('Error deleting old file:', deleteError);
+//                         res.status(500).json({ message: "Error updating file" });
+//                     }
+//                 });
+//             } else {
+//                 console.error('No new file uploaded');
+//                 res.status(400).json({ message: "No new file received" });
+//             }
+//         } catch (uploadError) {
+//             console.error('Error uploading new file:', uploadError);
+//             res.status(500).json({ message: "Error updating file" });
+//         }
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// });
+
+// ***************************** ends ********************************************
+
+
