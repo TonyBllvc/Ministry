@@ -13,6 +13,7 @@ const baseUrl = ' http://localhost:4242/api/image/upload/'
 //@access   Public
 const getContents = asyncHandler(async (req, res) => {
 
+
     try {
         let content = await Information.find()
         if (content.length === 0) {
@@ -114,21 +115,36 @@ const createContent = asyncHandler(async (req, res) => {
 // route    PATCH /api/content/:id
 //@access   Public
 const updateContent = asyncHandler(async (req, res) => {
-    var content = await Information.findById(req.body.id)
 
-    if (!content) {
+    const { title, id, content } = req.body
+
+    // console.log(req.params.os)
+    var contents = await Information.findById(id)
+    console.log(req.body.title)
+    if (!contents) {
         return res.status(404).json({ error: "Content not found" });
     }
 
     try {
-        content.title = req.body.title || content.title
-        content.content = req.body.content || content.content
+        // if (!req.file) {
+        //     return res.status(404).json({ message: "File not found" });
+        // }
+        // Find the existing file document
+        const exist = Information.find({ images: req.body._images })
+        // const existingFile = await bucket.find({ _id: new ObjectId(req.params.id) }).toArray();
+        if (!exist) {
+            // if we changed image, work with this logic instead
+            return res.status(404).json({ message: "File not found" });
+        }
 
-        await content.save();
+        // content.title = req.body.title || content.title
+        // content.content = req.body.content || content.content
+
+        // await content.save();
 
 
 
-        res.status(201).json({ content: content, message: "Content updated successfully" })
+        res.status(201).json({ content: contents, message: "Content updated successfully" })
 
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -148,11 +164,15 @@ const deleteContent = asyncHandler(async (req, res) => {
     const database = mongoClient.db('test'); // Adjust database name if needed
     const bucket = new GridFSBucket(database, { bucketName: 'images' });
 
+    console.log(id + " " + Id)
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: "No such document" })
     }
 
     try {
+
+        console.log(id + " " + Id)
+
         const content = await Information.findById(id);
 
         if (!content) {

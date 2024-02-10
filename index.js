@@ -44,10 +44,7 @@ const app = express()
 // app.use(bodyParser.json());
 // app.use('/spiritual', express.static(path.join(__dirname + '/jpic')));
 
-app.use(express.json({
-    extended: true, //convert to true later
-    limit: '10mb'
-}))
+app.use(express.json())
 app.use(express.urlencoded({
     extended: true, //convert to true later
     limit: '10mb'
@@ -78,7 +75,7 @@ app.get('/', (req, res) => {
 })
 
 // app.use(notFound)
-app.use(errorHandler)
+// app.use(errorHandler)
 
 const __filename = fileURLToPath(import.meta.url); // Convert import.meta.url to file path
 const __dirname = path.dirname(__filename); // Extract directory name

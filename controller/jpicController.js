@@ -89,9 +89,9 @@ const createContent = asyncHandler(async (req, res) => {
 
     try {
 
-        if (!file) {
-            throw new Error('Field name "image" missing in form data');
-        }
+        // if (!file) {
+        //     throw new Error('Field name "image" missing in form data');
+        // }
 
         var createContent = new Jpic({
             title,
@@ -116,15 +116,18 @@ const createContent = asyncHandler(async (req, res) => {
 const updateContent = asyncHandler(async (req, res) => {
     var content = await Jpic.findById(req.body.id)
 
+    console.log(req.body.id)
+    
     if (!content) {
         return res.status(404).json({ error: "Content not found" });
     }
+    console.log(req.body.content)
 
     try {
-        content.title = req.body.title || content.title
-        content.content = req.body.content || content.content
+        // content.title = req.body.title || content.title
+        // content.content = req.body.content || content.content
 
-        await content.save();
+        // await content.save();
 
 
 
