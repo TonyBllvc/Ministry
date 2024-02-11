@@ -204,7 +204,7 @@ async function fetchDataAndPopulateTable() {
     const latestTimeElement = document.getElementById('latestTime');
     const latestTime = document.getElementById('lateTime');
 
-    if (latestTimeElement) {
+    if (latestTimeElement || latestTime) {
       const { contentDataSet } = fetchContentDataset(contentApi);
       const { dataSet } = fetchDataset(api);
 
@@ -218,7 +218,7 @@ async function fetchDataAndPopulateTable() {
       // } else {
       //   console.log('No dataContent available.');
       // }
-      console.log(data + " " + dataContent)
+      // console.log(data + " " + dataContent)
 
       if (data || dataContent) {
         populateTable(data, dataContent);

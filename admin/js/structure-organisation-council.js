@@ -4,24 +4,105 @@ const redirectUrl = "/spiritual/structure-organisation-index.html"
 let data
 let pending = false
 
+// Still under work
+
+
+// We been needed to fetch need Id value
+// ensures the javascript runs before the dom is served
+document.addEventListener('DOMContentLoaded', async function () {
+    // Fetch dataset and populate table
+    await fetchDataAndPopulateTable();
+});
+function fetchContentDataset(url) {
+
+    async function contentDataSet() {
+
+        // dataContent = null
+        // // const details = {
+        // //     access: access,
+        // // };
+        // console.log(dataContent)
+        pending = true
+        try {
+            const response = await fetch(url)
+            //     {
+            //     method: 'PUT',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(details),
+            // });
+
+            const json = await response.json()
+            console.log(response.status)
+
+            if (response.status === 401) {
+
+                console.log(json?.message || json?.error)
+            }
+
+            if (response.status === 400 || response.status === 404) {
+                console.log(json?.message || json?.error)
+            } else if (response.status === 200) {
+                console.log(json?.latest || 'nothing')
+                return dataContent = json
+            }
+            pending = false
+        } catch (error) {
+            console.log(error.message)
+        };
+        pending = false
+    }
+
+    return { contentDataSet, pending }
+
+}
+
+async function fetchDataAndPopulateTable() {
+    try {
+        const { contentDataSet } = fetchContentDataset(secondApi);
+
+        const { dataContent, latest } = await contentDataSet();
+
+        console.log(dataContent)
+        // console.log(latestTimeElement)
+        if (dataContent) {
+            dataContent.map(content => {
+                console.log(content?.title)
+            })
+            console.log(dataContent)
+        } else {
+            console.log('No dataContent available.');
+        }
+        // console.log(data + " " + dataContent)
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+
+}
+
+
 function createDataset(url) {
 
-    async function createData(formData) {
+    async function createData(office, name, email, phone) {
         // console.log('27')
 
         // data = null
-        // const details = {
-        //     office: office,
-        //     name: name,
-        //     email: email,
-        //     phone: phone
-        // };
+        const details = {
+            office: office,
+            name: name,
+            email: email,
+            phone: phone
+        };
         // console.log(data)
         // pending = true
         try {
             const response = await fetch(url, {
                 method: 'POST',
-                body: formData,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(details),
             });
 
             const json = await response.json()
@@ -63,7 +144,7 @@ async function handleSubmit(event) {
 
     try {
         await createData(office, name, email, phone);
-        window.location.href = redirectUrl;
+        // window.location.href = redirectUrl;
     } catch (error) {
         console.error('Error submitting data:', error);
         // Handle error, display message to the user, etc.
@@ -170,7 +251,7 @@ async function handleContentSubmit(event) {
 window.onload = function () {
     var textOne = document.getElementById('titleH')
     var textTwo = document.getElementById('contentH')
-  
+
     textOne.value = ''
     textTwo.value = ''
-  }
+}

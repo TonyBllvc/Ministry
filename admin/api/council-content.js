@@ -19,7 +19,7 @@ function fetchContentDataset(url) {
         // // const details = {
         // //     access: access,
         // // };
-        // console.log(dataContent)
+        console.log('d')
         pending = true
         try {
             const response = await fetch(url)
@@ -60,7 +60,7 @@ function fetchContentDataset(url) {
 async function fetchContentDataAndPopulateTable() {
     try {
         const latestTime = document.getElementById('lateTime');
-
+        console.log('jbd')
         if (latestTime) {
             const { contentDataSet } = fetchContentDataset(contentApi);
             const { dataContent, latest } = await contentDataSet();
@@ -93,6 +93,15 @@ function populateTable(dataContent) {
             pageContentElement.querySelector('h1').textContent = dataContent.title;
             pageContentElement.querySelector('p').textContent = dataContent.content;
             // }
+            // Set the src attribute of the image
+            const imageUrl = `http://localhost:4242/api/image/upload/${dataContent.images}`;
+            // imagePreview.setAttribute('src', imageUrl);
+            document.getElementById('imageC').src = imageUrl;
+
+            // Hide the image if no image is available
+            if (!dataContent.images) {
+                document.getElementById('imageC').style.display = 'none';
+            }
         });
     } else {
         console.log('Content is undefined.');

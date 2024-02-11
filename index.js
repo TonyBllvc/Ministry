@@ -17,7 +17,7 @@ import structureContent from './routes/structureContent.js'
 import { notFound, errorHandler } from "./middleware/errorMiddelware.js";
 import connectDB from "./config/db.js";
 // import cors from 'cors'
-// import methodOverride from 'method-override';
+import methodOverride from 'method-override';
 import path from "path";
 import { fileURLToPath } from 'url'; // Import fileURLToPath function
 
@@ -44,13 +44,16 @@ const app = express()
 // app.use(bodyParser.json());
 // app.use('/spiritual', express.static(path.join(__dirname + '/jpic')));
 
-app.use(express.json())
+app.use(express.json({
+    extended: true, //convert to true later
+    limit: '10mb'
+}))
 app.use(express.urlencoded({
     extended: true, //convert to true later
     limit: '10mb'
 }))
 // app.use('/backend/assets/', express.static('backend/assets/'))
-// app.use(methodOverride('_method'));
+app.use(methodOverride('_method'));
 
 app.use(cookieParser())
 

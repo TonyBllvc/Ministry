@@ -29,6 +29,7 @@ const getContents = asyncHandler(async (req, res) => {
         // Format the latest update time as how long ago it was edited using Moment.js
         latestUpdateTime = moment(latestUpdateTime).fromNow(); // Example format: "a few seconds ago", "2 days ago", etc.
 
+        console.log('work')
         res.status(200).json({ dataContent: content, latest: latestUpdateTime });
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -95,16 +96,19 @@ const createContent = asyncHandler(async (req, res) => {
     const bucket = new GridFSBucket(database, { bucketName: 'images' });
 
     try {
-        const existingFile = await bucket.find({ _id: new ObjectId(Id) }).toArray();
+        // if (Id) {
+        //     const existingFile = await bucket.find({ _id: new ObjectId(Id) }).toArray();
+        // }
 
-        if (!file) {
-            return res.status(404).json({ message: 'Field name "image" missing in form data' });
-        }
+        // if (!file) {
+        //     return res.status(404).json({ message: 'Field name "image" missing in form data' });
+        // }
 
+        // console.log(existingFile.length)
         // Clear the database first
-        if (existingFile.length > 0) {
-            await bucket.delete(new ObjectId(Id));
-        }
+        // if (existingFile.length > 0) {
+        //     await bucket.delete(new ObjectId(Id));
+        // }
 
         await StructureContent.deleteMany();
 

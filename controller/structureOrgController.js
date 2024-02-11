@@ -86,20 +86,20 @@ const sortContent = asyncHandler(async (req, res) => {
 //@access   Public
 const createContent = asyncHandler(async (req, res) => {
     const { office, name, email, phone } = req.body
-    const { file } = req
+    // const { file } = req
 
     try {
-        if (!file) {
-            throw new Error('Field name "image" missing in form data');
-        }
+        // if (!file) {
+        //     throw new Error('Field name "image" missing in form data');
+        // }
 
         var createContent = new Structure({
             office,
             name,
             email,
             phone,
-            id: file.id,
-            images: file.filename
+            // id: file.id,
+            // images: file.filename
         })
 
         var singleContent = await createContent.save()
@@ -143,17 +143,17 @@ const updateContent = asyncHandler(async (req, res) => {
 // route    DELETE /api/content/:id
 //@access   Public
 const deleteContent = asyncHandler(async (req, res) => {
-    const { id, Id } = req.body
+    const { id } = req.body
 
-    const mongoClient = new MongoClient(url);
-    await mongoClient.connect();
+    // const mongoClient = new MongoClient(url);
+    // await mongoClient.connect();
 
-    const database = mongoClient.db('test'); // Adjust database name if needed
-    const bucket = new GridFSBucket(database, { bucketName: 'images' });
+    // const database = mongoClient.db('test'); // Adjust database name if needed
+    // const bucket = new GridFSBucket(database, { bucketName: 'images' });
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: "No such document" })
-    }
+    // if (!mongoose.Types.ObjectId.isValid(id)) {
+    //     return res.status(404).json({ error: "No such document" })
+    // }
 
     try {
         const content = await Structure.findById(id);
@@ -162,7 +162,7 @@ const deleteContent = asyncHandler(async (req, res) => {
             return res.status(404).json({ error: "Content not found" });
         }
 
-        await bucket.delete(new ObjectId(Id));
+        // await bucket.delete(new ObjectId(Id));
 
         const result = await Structure.findByIdAndDelete({ _id: id })
 
