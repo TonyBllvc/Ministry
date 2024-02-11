@@ -207,20 +207,43 @@
                   <tr>
                     <th>Title</th>
                     <th>Content</th>
+                    <th>Image</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>
-                      <textarea id="titleH" class="form-control px-2 py-3" rows="4" cols="25" placeholder="Title.."
+                      <textarea id="titleH" class="form-control px-2 py-3" rows="10" cols="25" placeholder="Title.."
                         required>
 
                       </textarea>
                     </td>
                     <td>
-                      <textarea id="contentH" class="form-control px-2 py-3" rows="4" cols="25" placeholder="Content.."
+                      <textarea id="contentH" class="form-control px-2 py-3"rows="10" cols="25" placeholder="Content.."
                         required>
+
                       </textarea>
+                    </td>
+                    <td>
+                      <div id="imageContainerH" style="width: 200px; height: 170px; text-align: center;">
+                        <p style="color: black; font-size: larger; text-align: center;"> Nothing to display </p>
+                        <!-- Image preview will be displayed here -->
+                      </div>
+                      <!-- Hidden file input -->
+                      <input type="file" id="imageH" name="imageH" accept="image/*" style="display: none;"
+                        onchange="handleImageChange(event)" required>
+                      <!-- Download icon -->
+                      <a href="#" style="display: flex; align-items: center; justify-content: center;"
+                        onclick="document.getElementById('imageH').click(); return false;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                          stroke="currentColor" style="width: 150px; height: 80px;">
+                          <path strokeLinecap="round" strokeLinejoin="round"
+                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                        </svg>
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg> -->
+                      </a>
                     </td>
                   </tr>
                 </tbody>

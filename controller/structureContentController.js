@@ -85,15 +85,27 @@ const sortContent = asyncHandler(async (req, res) => {
 // route    POST /api
 //@access   Public
 const createContent = asyncHandler(async (req, res) => {
-    const { title, content } = req.body
+    const { title, content, Id } = req.body
     const { file } = req
 
+    const mongoClient = new MongoClient(url);
+    await mongoClient.connect();
+
+    const database = mongoClient.db('test'); // Adjust database name if needed
+    const bucket = new GridFSBucket(database, { bucketName: 'images' });
+
     try {
+        const existingFile = await bucket.find({ _id: new ObjectId(Id) }).toArray();
+
         if (!file) {
-            throw new Error('Field name "image" missing in form data');
+            return res.status(404).json({ message: 'Field name "image" missing in form data' });
         }
 
         // Clear the database first
+        if (existingFile.length > 0) {
+            await bucket.delete(new ObjectId(Id));
+        }
+
         await StructureContent.deleteMany();
 
         var createContent = new StructureContent({
@@ -149,6 +161,7 @@ const deleteContent = asyncHandler(async (req, res) => {
 
     const database = mongoClient.db('test'); // Adjust database name if needed
     const bucket = new GridFSBucket(database, { bucketName: 'images' });
+
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: "No such document" })

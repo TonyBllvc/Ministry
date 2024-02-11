@@ -101,6 +101,7 @@ router.route('/upload').post(uploadMiddleware, async (req, res) => {
     // })
 })
 
+// Very active for fetching images
 router.route('/upload/:name').get(async (req, res) => {
     console.log('call')
     try {
