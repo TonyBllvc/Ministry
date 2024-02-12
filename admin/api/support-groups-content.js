@@ -103,7 +103,6 @@ function updateDataset(url) {
 
 }
 
-
 function deleteDataset(url) {
 
   async function deleteData(id, title, content) {
@@ -195,11 +194,10 @@ async function populateTable(data) {
       row.classList.add(data._id);
       // const id =
       row.innerHTML = `
-      <td colspan="1"  style="width: 20%; word-break: break-all;"> 
+      <td colspan="1" style="width: 35%; word-break: break-all;"> 
        ${data.title}
       </td>
-      <td colspan="1" 
-      style="width: 20%; word-break: break-all;">
+      <td colspan="1" style="width: 45%; word-break: break-all;">
         ${data.content}
       </td>
       <td class="text-center"><button type="button" onclick="editRow('${data._id}')" class="text-center text-white"

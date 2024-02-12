@@ -10,11 +10,12 @@
 
     <title>Events</title>
 
+    <script src="api/apostolate-content.js"> </script>
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <link rel="stylesheet" href="style.css">
     <script
-        nonce="7fb61b06-e4ca-49e5-9881-352090c3f85b">(function (w, d) { !function (e, f, g, h) { e.zarazData = e.zarazData || {}; e.zarazData.executed = []; e.zaraz = { deferred: [], listeners: [] }; e.zaraz.q = []; e.zaraz._f = function (i) { return function () { var j = Array.prototype.slice.call(arguments); e.zaraz.q.push({ m: i, a: j }) } }; for (const k of ["track", "set", "debug"]) e.zaraz[k] = e.zaraz._f(k); e.zaraz.init = () => { var l = f.getElementsByTagName(h)[0], m = f.createElement(h), n = f.getElementsByTagName("title")[0]; n && (e.zarazData.t = f.getElementsByTagName("title")[0].text); e.zarazData.x = Math.random(); e.zarazData.w = e.screen.width; e.zarazData.h = e.screen.height; e.zarazData.j = e.innerHeight; e.zarazData.e = e.innerWidth; e.zarazData.l = e.location.href; e.zarazData.r = f.referrer; e.zarazData.k = e.screen.colorDepth; e.zarazData.n = f.characterSet; e.zarazData.o = (new Date).getTimezoneOffset(); if (e.dataLayer) for (const r of Object.entries(Object.entries(dataLayer).reduce(((s, t) => ({ ...s[1], ...t[1] }))))) zaraz.set(r[0], r[1], { scope: "page" }); e.zarazData.q = []; for (; e.zaraz.q.length;) { const u = e.zaraz.q.shift(); e.zarazData.q.push(u) } m.defer = !0; for (const v of [localStorage, sessionStorage]) Object.keys(v || {}).filter((x => x.startsWith("_zaraz_"))).forEach((w => { try { e.zarazData["z_" + w.slice(7)] = JSON.parse(v.getItem(w)) } catch { e.zarazData["z_" + w.slice(7)] = v.getItem(w) } })); m.referrerPolicy = "origin"; m.src = "../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(e.zarazData))); l.parentNode.insertBefore(m, l) };["complete", "interactive"].includes(f.readyState) ? zaraz.init() : e.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, 0, "script"); })(window, document);</script>
+        nonce="7fb61b06-e4ca-49e5-9881-352090c3f85b">(function (w, d) { !function (e, f, g, h) { e.zarazData = e.zarazData || {}; e.zarazData.executed = []; e.zaraz = { deferred: [], listeners: [] }; e.zaraz.q = []; e.zaraz._f = function (i) { return function () { var j = Array.prototype.slice.call(arguments); e.zaraz.q.push({ m: i, a: j }) } }; for (const k of ["track", "set", "debug"]) e.zaraz[k] = e.zaraz._f(k); e.zaraz.init = () => { var l = f.getElementsByTagName(h)[0], m = f.createElement(h), n = f.getElementsByTagName("title")[0]; n && (e.zarazData.t = f.getElementsByTagName("title")[0].text); e.zarazData.x = Math.random(); e.zarazData.w = e.screen.width; e.zarazData.h = e.screen.height; e.zarazData.j = e.innerHeight; e.zarazData.e = e.innerWidth; e.zarazData.l = e.location.href; e.zarazData.r = f.referrer; e.zarazData.k = e.screen.colorDepth; e.zarazData.n = f.characterSet; e.zarazData.o = (new Date).getTimezoneOffset(); if (e.dataLayer) for (const r of Object.entries(Object.entries(dataLayer).reduce(((s, t) => ({ ...s[1], ...t[1] }))))) zaraz.set(r[0], r[1], { scope: "page" }); e.zarazData.q = []; for (; e.zaraz.q.length;) { const u = e.zaraz.q.shift(); e.zarazData.q.push(u) } m.defer = !0; for (const v of [localStorage, sessionStorage]) Object.keys(v || {}).filter((x => x.startsWith("_zaraz_"))).forEach((w => { try { e.zarazData["z_" + w.slice(7)] = JSON.parse(v.getItem(w)) } catch { e.zarazData["z_" + w.slice(7)] = v.getItem(w) } })); m.referrerPolicy = "origin"; m.src = "../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(e.zarazData))); l.parentNode.insertBefore(m, l) };["complete", "interactive"].includes(f.readyState) ? zaraz.init() : e.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, 0, "script"); })(window, document); </script>
 </head>
 
 <body>
@@ -159,9 +160,9 @@
                         <img src="img/bg-img/31.jpg" alt="">
                     </div>
 
-                    <div class="sermons-text text-center">
-                        <h2> Schools</h2>
-                        <!-- <div class="sermons-meta-data d-flex flex-wrap justify-content-center">
+                    <!-- <div class="sermons-text text-center">
+                        <h2> Schools</h2> -->
+                    <!-- <div class="sermons-meta-data d-flex flex-wrap justify-content-center">
                             <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
                             <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
                             <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00
@@ -177,12 +178,12 @@
                             <a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i
                                     class="fa fa-cloud-download" aria-hidden="true"></i></a>
                         </div> -->
-                        <p>Understanding the place of education in the holistic formation of an individual, we the
+                    <!-- <p>Understanding the place of education in the holistic formation of an individual, we the
                             Spiritans are relentless in our efforts to provide quality education for our children where
                             they will acquire moral, intellectual, spiritual and human formation. Currently we have 2
                             secondary Schools and one Nursery and Primary school in the Province. Many are yet to come.
-                        </p>
-                        <!-- <div class="read-more-share d-flex flex-wrap justify-content-between">
+                        </p> -->
+                    <!-- <div class="read-more-share d-flex flex-wrap justify-content-between">
                             <div class="read-more-btn">
                                 <a href="#">Read More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                             </div>
@@ -196,16 +197,22 @@
                                 <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
                             </div>
                         </div> -->
-                    </div>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
     </div>
 
 
-    <section class="latest-sermons-area  ">
+    <section class="latest-sermons-area  mt-100">
         <div class="container">
-            <div class="row py-5 w-100">
+
+            <div id='pageContent' class="row py-5 w-100">
+
+            </div>
+        </div>
+        <!-- To be used after integrating backend -->
+        <!-- <div class="row bg-gray py-5 w-100">
 
                 <div class="col-12">
                     <div class="section-heading text-center">
@@ -218,24 +225,9 @@
                             Spiritan Arts, Spiritan Home for Divine Appreciation</p>
                     </div>
                 </div>
-            </div>
-            <!-- To be used after integrating backend -->
-            <div class="row bg-gray py-5 w-100">
+            </div> -->
 
-                <div class="col-12">
-                    <div class="section-heading text-center">
-                        <h2>Youth Ministries</h2>
-                        <p>Our Founder,<b> Claude Poullart Des Places </b> was drawn by compassion to minister to the
-                            youths
-                            especially the poor, in helping them realize that they too can become whatever they desire.
-                            In our various missions we give special attention to the youths since the future of the
-                            society lies in their hands. The Youth ministries of our province include: Spiritan Sounds,
-                            Spiritan Arts, Spiritan Home for Divine Appreciation</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- <div class="row">
+        <!-- <div class="row">
 
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-latest-sermons mb-100">
@@ -456,60 +448,60 @@
     </section>
 
 
-<footer class="footer-area">
+    <footer class="footer-area">
 
-    <div class="main-footer-area">
-        <div class="container">
-            <div class="row">
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
 
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-footer-widget mb-70">
-                        <a href="#" class="footer-logo"><img src="img/core-img/logo2.png" alt=""></a>
-                        <p>It’s very important to believe that you’re the one. We aim to take a different approach
-                            in reaching out and helping people along the journey.</p>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="single-footer-widget mb-70">
+                            <a href="#" class="footer-logo"><img src="img/core-img/logo2.png" alt=""></a>
+                            <p>It’s very important to believe that you’re the one. We aim to take a different approach
+                                in reaching out and helping people along the journey.</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-12 col-sm-6 col-lg-6">
-                    <div class="single-footer-widget mb-70">
-                        <h5 class="widget-title">Quick Link</h5>
-                        <nav class="footer-menu">
-                            <ul>
-                                <li><a href="index.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                                        Home</a></li>
-                                <li><a href="formation.html"><i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>Formation</a></li>
-                                <li><a href="contact.html"><i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>
-                                        Contact Us </a></li>
-                                <li><a href="development.html"><i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i> JPIC/Development </a></li>
-                                <li><a href="apostolate.html"><i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>
-                                        Apostolate </a></li>
-                                <li><a href="spiritual-mission-and-spirituality.html"><i
-                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Spiritual
-                                        Mission and Spirituality</a></li>
-                                <li><a href="personnel.html"><i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i> Personnel </a></li>
-                                <li><a href="structure-and-organisation.html"><i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>
-                                        Structure and Organization </a></li>
-                                <li><a href="information.html"><i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>
-                                        Infomartion</a></li>
-                                <li><a href="support-groups-donations.html"><i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>
-                                        Support Us</a></li>
-                                <li><a href="support-groups-donations.html"><i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>
-                                        Support Groups/ Denoation</a></li>
-                            </ul>
-                        </nav>
+                    <div class="col-12 col-sm-6 col-lg-6">
+                        <div class="single-footer-widget mb-70">
+                            <h5 class="widget-title">Quick Link</h5>
+                            <nav class="footer-menu">
+                                <ul>
+                                    <li><a href="index.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                            Home</a></li>
+                                    <li><a href="formation.html"><i class="fa fa-angle-double-right"
+                                                aria-hidden="true"></i>Formation</a></li>
+                                    <li><a href="contact.html"><i class="fa fa-angle-double-right"
+                                                aria-hidden="true"></i>
+                                            Contact Us </a></li>
+                                    <li><a href="development.html"><i class="fa fa-angle-double-right"
+                                                aria-hidden="true"></i> JPIC/Development </a></li>
+                                    <li><a href="apostolate.html"><i class="fa fa-angle-double-right"
+                                                aria-hidden="true"></i>
+                                            Apostolate </a></li>
+                                    <li><a href="spiritual-mission-and-spirituality.html"><i
+                                                class="fa fa-angle-double-right" aria-hidden="true"></i> Spiritual
+                                            Mission and Spirituality</a></li>
+                                    <li><a href="personnel.html"><i class="fa fa-angle-double-right"
+                                                aria-hidden="true"></i> Personnel </a></li>
+                                    <li><a href="structure-and-organisation.html"><i class="fa fa-angle-double-right"
+                                                aria-hidden="true"></i>
+                                            Structure and Organization </a></li>
+                                    <li><a href="information.html"><i class="fa fa-angle-double-right"
+                                                aria-hidden="true"></i>
+                                            Infomartion</a></li>
+                                    <li><a href="support-groups-donations.html"><i class="fa fa-angle-double-right"
+                                                aria-hidden="true"></i>
+                                            Support Us</a></li>
+                                    <li><a href="support-groups-donations.html"><i class="fa fa-angle-double-right"
+                                                aria-hidden="true"></i>
+                                            Support Groups/ Denoation</a></li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
-                </div>
 
-                <!---
+                    <!---
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-footer-widget mb-70">
                         <h5 class="widget-title">News Latest</h5>
@@ -527,55 +519,55 @@
                 </div>
             -->
 
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-footer-widget mb-70">
-                        <h5 class="widget-title">Contact Us</h5>
-                        <div class="contact-information">
-                            <p><i class="fa fa-map-marker" aria-hidden="true"></i>
-                                111 Ago palace way Ago, Okota Lagos state</p>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="single-footer-widget mb-70">
+                            <h5 class="widget-title">Contact Us</h5>
+                            <div class="contact-information">
+                                <p><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    111 Ago palace way Ago, Okota Lagos state</p>
 
-                            <a href="callto: +234 803 724 8978"><i class="fa fa-phone" aria-hidden="true"></i> +234
-                                803 724 8978</a>
-                            <a href=""><i class="fa fa-envelope" aria-hidden="true"></i>
-                                <span class="__cf_email__"
-                                    data-cfemail="11787f777e3f75747463726374706578677451767c70787d3f727e7c">[email&#160;protected]</span></a>
-                            <p><i class="fa fa-clock-o" aria-hidden="true"></i> Mon - Fri: 08.00am - 18.00pm</p>
+                                <a href="callto: +234 803 724 8978"><i class="fa fa-phone" aria-hidden="true"></i> +234
+                                    803 724 8978</a>
+                                <a href=""><i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <span class="__cf_email__"
+                                        data-cfemail="11787f777e3f75747463726374706578677451767c70787d3f727e7c">[email&#160;protected]</span></a>
+                                <p><i class="fa fa-clock-o" aria-hidden="true"></i> Mon - Fri: 08.00am - 18.00pm</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="copywrite-area">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center flex-wrap">
+        <div class="copywrite-area">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center flex-wrap">
 
-                <div class="col-12 col-md-6">
-                    <div class="copywrite-text">
-                        <p>
-                            Copyright &copy;
-                            <script data-cfasync="false"
-                                src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                    <div class="col-12 col-md-6">
+                        <div class="copywrite-text">
+                            <p>
+                                Copyright &copy;
+                                <script data-cfasync="false"
+                                    src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved
 
 
-                        </p>
+                            </p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-12 col-md-6">
-                    <div class="footer-social-icon">
-                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    <div class="col-12 col-md-6">
+                        <div class="footer-social-icon">
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
 
 

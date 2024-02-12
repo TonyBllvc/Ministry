@@ -54,120 +54,25 @@ function fetchDataset(url) {
 
 }
 
-function updateDataset(url) {
-
-  async function updateData(id, title, content) {
-
-    // data = null
-    const details = {
-      id: id,
-      title: title,
-      content: content
-    };
-    // console.log(data)
-    pending = true
-    try {
-      const response = await fetch(url, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(details),
-      });
-
-      const json = await response.json()
-      console.log(response.status)
-
-      if (response.status === 401) {
-
-        console.log(json?.message || json?.error)
-      }
-
-      if (response.status === 400 || response.status === 404) {
-        console.log(json?.message || json?.error)
-      } else if (response.status === 201) {
-        console.log(json?.content || 'nothing')
-        console.log(json?.message)
-        // return data = json?.content
-      }
-      pending = false
-    } catch (error) {
-      console.log(error.message)
-    };
-    pending = false
-  }
-
-  return { updateData, pending }
-
-}
-
-
-function deleteDataset(url) {
-
-  async function deleteData(id, title, content) {
-
-    // data = null
-    const details = {
-      id: id,
-      // title: title,
-      // content: content
-    };
-    // console.log(data)
-    pending = true
-    try {
-      const response = await fetch(url, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(details),
-      });
-
-      const json = await response.json()
-      console.log(response.status)
-
-      if (response.status === 401) {
-
-        console.log(json?.message || json?.error)
-      }
-
-      if (response.status === 400 || response.status === 404) {
-        console.log(json?.message || json?.error)
-      } else if (response.status === 200) {
-        // console.log(json?.content || 'nothing')
-        console.log(json?.message)
-        // return data = json?.content
-      }
-      pending = false
-    } catch (error) {
-      console.log(error.message)
-    };
-    pending = false
-  }
-
-  return { deleteData, pending }
-
-}
-
 // 
 async function fetchDataAndPopulateTable() {
   try {
     // const latestTimeElement = document.getElementById('latestTime');
 
     // if (latestTimeElement) {
-      const { dataSet } = fetchDataset(api);
-      const { data, latestUpdateTime } = await dataSet();
+    const { dataSet } = fetchDataset(api);
+    const { data, latestUpdateTime } = await dataSet();
 
-      // console.log(data)
-      // console.log(latestTimeElement)
-      if (data) {
-        populateTable(data);
-      } else {
-        console.log('No data available.');
-      }
+    // console.log(data)
+    // console.log(latestTimeElement)
+    if (data) {
+      populateTable(data);
+    } else {
+      console.log('No data available.');
+    }
 
-      // Update the latestTime div element with the latest update time
-      // latestTimeElement.textContent = "last updated " + latestUpdateTime;
+    // Update the latestTime div element with the latest update time
+    // latestTimeElement.textContent = "last updated " + latestUpdateTime;
     // } else {
     //   console.error('Element with ID "latestTime" not found');
     // }
@@ -176,27 +81,46 @@ async function fetchDataAndPopulateTable() {
   }
 
 }
+
 // Function to populate data into the table
+
 async function populateTable(data) {
-  if (data && data.length > 0) {
-    console.log(data)
+  if (data) {
     const pageContentElement = document.getElementById('pageContent');
 
-    data.forEach(dataContent => {
-      const h2 = document.createElement('h2');
-      h2.textContent = dataContent.title;
+    console.log(data)
+    data.forEach(item => {
+      pageContentElement.classList.add('container');
 
-      const p = document.createElement('p');
-      p.textContent = dataContent.content;
+      const grid = document.createElement('div');
+      grid.classList.add('d-flex', 'row', 'align-items-center', 'justify-content-between');
 
-      // Append elements to the container
-      pageContentElement.appendChild(h2);
-      pageContentElement.appendChild(p);
+      const contentWrapper = document.createElement('div');
+      contentWrapper.classList.add('w-100');
+
+      const aboutContent = document.createElement('div');
+      aboutContent.classList.add('about-content');
+
+      const sermonTitle = document.createElement('h2');
+      sermonTitle.textContent = item.title; // Replace 'title' with the actual property name from your data
+
+      const sermonContent = document.createElement('p');
+      sermonContent.textContent = item.content; // Replace 'content' with the actual property name from your data
+
+      aboutContent.appendChild(sermonTitle);
+      aboutContent.appendChild(sermonContent);
+
+      contentWrapper.appendChild(aboutContent);
+
+      grid.appendChild(contentWrapper);
+
+      pageContentElement.appendChild(grid);
     });
   } else {
     console.log('Content is undefined.');
   }
 }
+
 
 // Call the function to populate the table
 populateTable();

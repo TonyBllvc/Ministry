@@ -56,259 +56,80 @@ function fetchDataset(url) {
 
 }
 
-function updateDataset(url) {
-
-  async function updateData(id, title, content) {
-
-    // data = null
-    const details = {
-      id: id,
-      title: title,
-      content: content
-    };
-    // console.log(data)
-    pending = true
-    try {
-      const response = await fetch(url, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(details),
-      });
-
-      const json = await response.json()
-      console.log(response.status)
-
-      if (response.status === 401) {
-
-        console.log(json?.message || json?.error)
-      }
-
-      if (response.status === 400 || response.status === 404) {
-        console.log(json?.message || json?.error)
-      } else if (response.status === 201) {
-        console.log(json?.content || 'nothing')
-        console.log(json?.message)
-        // return data = json?.content
-      }
-      pending = false
-    } catch (error) {
-      console.log(error.message)
-    };
-    pending = false
-  }
-
-  return { updateData, pending }
-
-}
-
-
-function deleteDataset(url) {
-
-  async function deleteData(id, title, content) {
-
-    // data = null
-    const details = {
-      id: id,
-      // title: title,
-      // content: content
-    };
-    // console.log(data)
-    pending = true
-    try {
-      const response = await fetch(url, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(details),
-      });
-
-      const json = await response.json()
-      console.log(response.status)
-
-      if (response.status === 401) {
-
-        console.log(json?.message || json?.error)
-      }
-
-      if (response.status === 400 || response.status === 404) {
-        console.log(json?.message || json?.error)
-      } else if (response.status === 200) {
-        // console.log(json?.content || 'nothing')
-        console.log(json?.message)
-        // return data = json?.content
-      }
-      pending = false
-    } catch (error) {
-      console.log(error.message)
-    };
-    pending = false
-  }
-
-  return { deleteData, pending }
-
-}
-
 // 
 async function fetchDataAndPopulateTable() {
   try {
-    const latestTimeElement = document.getElementById('latestTime');
 
-    if (latestTimeElement) {
-      const { dataSet } = fetchDataset(api);
-      const { data, latestUpdateTime } = await dataSet();
+    const { dataSet } = fetchDataset(api);
+    const { data } = await dataSet();
 
-      // console.log(data)
-      // console.log(latestTimeElement)
-      if (data) {
-        populateTable(data);
-      } else {
-        console.log('No data available.');
-      }
-
-      // Update the latestTime div element with the latest update time
-      latestTimeElement.textContent = "last updated " + latestUpdateTime;
+    // console.log(data)
+    // console.log(contentPage)
+    if (data) {
+      populateTable(data);
     } else {
-      console.error('Element with ID "latestTime" not found');
+      console.log('No data available.');
     }
+
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-
 }
 
 // Function to populate data into the table
 async function populateTable(data) {
   if (data) {
-    // console.log(data)
-    const tableBody = document.querySelector('#dataTable tbody');
-    tableBody.innerHTML = ''; // Clear existing table rows
+    const pageContentElement = document.getElementById('pageContent');
+
+    data.forEach(item => {
+      const grid = document.createElement('div');
+      grid.classList.add('single-upcoming-events-area', 'd-flex', 'flex-wrap', 'align-items-center');
+      grid.style.marginTop = '5rem'
+      grid.style.marginBottom = '5rem'
+
+      const imageThumb = document.createElement('div');
+      imageThumb.classList.add('upcoming-events-thumbnail');
+      imageThumb.style.backgroundColor = 'blue';
+      imageThumb.style.backgroundPosition = 'cover'
+      imageThumb.style.width = '350px';
+      imageThumb.style.height = '150px';
+
+      const image = document.createElement('img');
+      image.src = `http://localhost:4242/api/image/upload/${item.images}`; // Replace 'imageSrc' with the actual property name from your data
+      image.alt = 'Sermon Image'; // Replace 'Sermon Image' with appropriate alt text
+      image.width = "100%";
+      image.height = "100%";
+
+      imageThumb.appendChild(image);
+
+      const flexwrap = document.createElement('div');
+      flexwrap.classList.add('upcoming-events-content', 'd-flex', 'flex-wrap', 'align-items-center');
 
 
-    // Check if data is not undefined before using it
-    // if (data) {
-    data.map(data => {
-      // console.log(data._id)
-      const row = document.createElement('tr');
-      row.classList.add(data._id);
-      // const id =
-      row.innerHTML = `
-      <td colspan="1" style="width: 20%; word-break: break-all;"> 
-       ${data.title}
-      </td>
-      <td colspan="1" style="width: 45%; word-break: break-all;">
-        ${data.content}
-      </td>
-      <td class="text-center"><button type="button" onclick="editRow('${data._id}')" class="text-center text-white"
-      style="width: 70px; padding: 3px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: medium; font-weight: 500; border-radius: .4rem; border: none;  background-color: green;"> 
-        Edit
-      </button></td>
-      <td class="text-center"><button type="button" onclick="deleteRow('${data._id}')" class="text-center  text-white "
-      style="width: 70px; padding: 3px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: medium; font-weight: 500; border-radius: .4rem; border: none;  background-color: red;"> 
-        Delete 
-      </button></td>
-    `;
+      const flexAorund = document.createElement('div');
+      flexAorund.classList.add('events-text', 'justify-content-around');
 
-      tableBody.appendChild(row);
+      const Title = document.createElement('h4');
+      Title.textContent = item.title; // Replace 'title' with the actual property name from your data
+
+      const Content = document.createElement('p');
+      Content.textContent = item.content; // Replace 'content' with the actual property name from your data
+
+      flexAorund.appendChild(Title);
+      flexAorund.appendChild(Content);
+
+      flexwrap.appendChild(flexAorund);
+
+      grid.appendChild(imageThumb);
+      grid.appendChild(flexwrap);
+
+      pageContentElement.appendChild(grid);
     });
   } else {
     console.log('Content is undefined.');
   }
-  // }
 }
+
 
 // Call the function to populate the table
 populateTable();
-
-
-// Function to confirm edit data into the table
-async function editRow(id) {
-  const { dataSet } = fetchDataset(api)
-
-  const { data } = await dataSet();
-  // Find the corresponding object in the dataSet array
-  const selectedData = data.find(data => data._id === id);
-
-
-  // Access individual properties of the selected object
-  const { title, content, _id } = selectedData;
-
-  document.getElementById("fetchCouncil").style.display = 'none'
-  document.getElementById("updateCouncil").style.display = 'flex'
-
-
-  // pass values from api to each element
-  document.getElementById('title').value = title
-  document.getElementById('content').value = content
-  document.getElementById('id').value = id || _id
-
-}
-
-
-// Function to confirm delete data into the table
-async function deleteRow(id) {
-  const { dataSet } = fetchDataset(api)
-
-  const { data } = await dataSet()
-  // Find the corresponding object in the dataSet array
-  const selectedData = data.find(data => data._id === id);
-
-
-  // Access individual properties of the selected object
-  const { title, content, _id } = selectedData;
-
-  document.getElementById("fetchCouncil").style.display = 'none'
-  document.getElementById("deleteCouncil").style.display = 'flex'
-
-
-  // pass values from api to each element
-  document.getElementById('titleD').value = title
-  document.getElementById('contentD').value = content
-  document.getElementById('idD').value = id || _id
-}
-
-// Function to cancel any update/delete to the data into the table
-function cancelBtn() {
-  document.getElementById("updateCouncil").style.display = 'none'
-  document.getElementById("deleteCouncil").style.display = 'none'
-  document.getElementById("fetchCouncil").style.display = 'flex'
-  // sessionStorage.setItem('id', JSON.stringify({ id }))
-}
-
-// Function to update a dataset on the table
-async function handleUpdate() {
-  const { updateData } = updateDataset(api)
-
-  var title = document.getElementById('title').value
-  var content = document.getElementById('content').value
-  var id = document.getElementById('id').value
-
-  await updateData(id, title, content)
-  // alert('Working:' + title + " " + content + " ")
-  // localStorage.setItem('jwt', JSON.stringify({ title: title }))
-
-  document.getElementById("updateCouncil").style.display = 'none'
-  document.getElementById("deleteCouncil").style.display = 'none'
-  document.getElementById("fetchCouncil").style.display = 'flex'
-}
-
-async function handleDelete() {
-  const { deleteData } = deleteDataset(api)
-  // const title = document.getElementById('titleD').value
-  // const content = document.getElementById('contentD').value
-  const id = document.getElementById('idD').value
-
-  await deleteData(id)
-  // alert('Working:' + title + " " + content + " ")
-
-  // After the asynchronous operation is complete, reload the page
-  window.location.reload();
-
-  // Optionally, you can also hide/show elements as needed
-  document.getElementById("updateCouncil").style.display = 'none'
-  document.getElementById("deleteCouncil").style.display = 'none'
-  document.getElementById("fetchCouncil").style.display = 'flex'
-}
-
