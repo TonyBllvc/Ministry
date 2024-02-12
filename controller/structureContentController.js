@@ -86,7 +86,7 @@ const sortContent = asyncHandler(async (req, res) => {
 // route    POST /api
 //@access   Public
 const createContent = asyncHandler(async (req, res) => {
-    const { title, content, Id } = req.body
+    const { title, content } = req.body
     const { file } = req
 
     const mongoClient = new MongoClient(url);
@@ -96,19 +96,20 @@ const createContent = asyncHandler(async (req, res) => {
     const bucket = new GridFSBucket(database, { bucketName: 'images' });
 
     try {
-        // if (Id) {
-        //     const existingFile = await bucket.find({ _id: new ObjectId(Id) }).toArray();
-        // }
+        const structure = await StructureContent.find()
 
-        // if (!file) {
-        //     return res.status(404).json({ message: 'Field name "image" missing in form data' });
-        // }
 
-        // console.log(existingFile.length)
-        // Clear the database first
-        // if (existingFile.length > 0) {
-        //     await bucket.delete(new ObjectId(Id));
-        // }
+        if (!file) {
+            return res.status(404).json({ message: 'Field name "image" missing in form data' });
+        }
+
+        // Loop through structure and delete files
+        if (structure.length > 0) {
+            for (const data of structure) {
+                await bucket.delete(data.id);
+            }
+        }
+
 
         await StructureContent.deleteMany();
 
@@ -121,7 +122,10 @@ const createContent = asyncHandler(async (req, res) => {
 
         var singleContent = await createContent.save()
 
-        res.status(201).json({ table: singleContent, message: "Content created Successfully" })
+        res.status(201).json({
+            table: singleContent,
+            message: "Content created Successfully"
+        })
     } catch {
         console.log("Not Done")
         res.status(400).json({ error: error.message })

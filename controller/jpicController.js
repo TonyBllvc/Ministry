@@ -27,7 +27,7 @@ const getContents = asyncHandler(async (req, res) => {
         // Format the latest update time as desired (e.g., using Moment.js)    
         // Format the latest update time as how long ago it was edited using Moment.js
         latestUpdateTime = moment(latestUpdateTime).fromNow(); // Example format: "a few seconds ago", "2 days ago", etc.
-
+        console.log('okay work')
         res.status(200).json({ data: content, latestUpdateTime });
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -117,7 +117,7 @@ const updateContent = asyncHandler(async (req, res) => {
     var content = await Jpic.findById(req.body.id)
 
     console.log(req.body.id)
-    
+
     if (!content) {
         return res.status(404).json({ error: "Content not found" });
     }
