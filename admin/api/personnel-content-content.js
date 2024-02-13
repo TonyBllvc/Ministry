@@ -106,7 +106,7 @@ function updateDataset(url) {
 
 function deleteDataset(url) {
 
-  async function deleteData(id, title, content) {
+  async function deleteData(id) {
 
     // data = null
     const details = {
@@ -268,6 +268,8 @@ async function deleteRow(id) {
   document.getElementById('titleD').value = title
   document.getElementById('contentD').value = content
   document.getElementById('idD').value = id || _id
+  console.log(id)
+  console.log(_id)
 }
 
 // Function to cancel any update/delete to the data into the table

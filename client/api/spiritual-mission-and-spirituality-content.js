@@ -56,260 +56,89 @@ function fetchDataset(url) {
 
 }
 
-function updateDataset(url) {
-
-  async function updateData(id, title, content) {
-
-    // data = null
-    const details = {
-      id: id,
-      title: title,
-      content: content
-    };
-    // console.log(data)
-    pending = true
-    try {
-      const response = await fetch(url, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(details),
-      });
-
-      const json = await response.json()
-      console.log(response.status)
-
-      if (response.status === 401) {
-
-        console.log(json?.message || json?.error)
-      }
-
-      if (response.status === 400 || response.status === 404) {
-        console.log(json?.message || json?.error)
-      } else if (response.status === 201) {
-        console.log(json?.content || 'nothing')
-        console.log(json?.message)
-        // return data = json?.content
-      }
-      pending = false
-    } catch (error) {
-      console.log(error.message)
-    };
-    pending = false
-  }
-
-  return { updateData, pending }
-
-}
-
-
-function deleteDataset(url) {
-
-  async function deleteData(id, title, content) {
-
-    // data = null
-    const details = {
-      id: id,
-      // title: title,
-      // content: content
-    };
-    // console.log(data)
-    pending = true
-    try {
-      const response = await fetch(url, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(details),
-      });
-
-      const json = await response.json()
-      console.log(response.status)
-
-      if (response.status === 401) {
-
-        console.log(json?.message || json?.error)
-      }
-
-      if (response.status === 400 || response.status === 404) {
-        console.log(json?.message || json?.error)
-      } else if (response.status === 200) {
-        // console.log(json?.content || 'nothing')
-        console.log(json?.message)
-        // return data = json?.content
-      }
-      pending = false
-    } catch (error) {
-      console.log(error.message)
-    };
-    pending = false
-  }
-
-  return { deleteData, pending }
-
-}
-
 // 
 async function fetchDataAndPopulateTable() {
   try {
-    const latestTimeElement = document.getElementById('latestTime');
 
-    if (latestTimeElement) {
-      const { dataSet } = fetchDataset(api);
-      const { data, latestUpdateTime } = await dataSet();
+    const { dataSet } = fetchDataset(api);
+    const { data } = await dataSet();
 
-      // console.log(data)
-      // console.log(latestTimeElement)
-      if (data) {
-        populateTable(data);
-      } else {
-        console.log('No data available.');
-      }
-
-      // Update the latestTime div element with the latest update time
-      latestTimeElement.textContent = "last updated " + latestUpdateTime;
+    // console.log(data)
+    // console.log(contentPage)
+    if (data) {
+      populateTable(data);
     } else {
-      console.error('Element with ID "latestTime" not found');
+      console.log('No data available.');
     }
+
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 
 }
 
+
 // Function to populate data into the table
 async function populateTable(data) {
-  
   if (data) {
-    // console.log(data)
-    const tableBody = document.querySelector('#dataTable tbody');
-    tableBody.innerHTML = ''; // Clear existing table rows
+    const pageContentElement = document.getElementById('pageContent');
 
+    data.forEach((item, index) => {
+      // Determine the class based on the index
+      const className = index % 2 === 0 ? 'py-5 mb-5 row align-items-center justify-content-between' : 'py-5 mb-5 bg-gray d-flex row flex-column flex-lg-row-reverse  align-items-center justify-content-between';
 
-    // Check if data is not undefined before using it
-    // if (data) {
-    data.map(data => {
-      // console.log(data._id)
-      const row = document.createElement('tr');
-      row.classList.add(data._id);
-      // const id =
-      row.innerHTML = `
-      <td colspan="1"  style="width: 20%; word-break: break-all;"> 
-       ${data.title}
-      </td>
-      <td colspan="1" style="width: 45%; word-break: break-all;">
-        ${data.content}
-      </td>
-      <td class="text-center"><button type="button" onclick="editRow('${data._id}')" class="text-center text-white"
-      style="width: 70px; padding: 3px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: medium; font-weight: 500; border-radius: .4rem; border: none;  background-color: green;"> 
-        Edit
-      </button></td>
-      <td class="text-center"><button type="button" onclick="deleteRow('${data._id}')" class="text-center  text-white "
-      style="width: 70px; padding: 3px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: medium; font-weight: 500; border-radius: .4rem; border: none;  background-color: red;"> 
-        Delete 
-      </button></td>
-    `;
+      // Create the outer div with the determined class
+      const outerDiv = document.createElement('div');
+      outerDiv.className = className;
 
-      tableBody.appendChild(row);
+      // One div within pageContent
+      const contentColumn = document.createElement('div');
+      contentColumn.classList.add('col-12', 'col-lg-5');
+
+      const aboutContent = document.createElement('div');
+      aboutContent.classList.add('about-content');
+
+      const sermonTitle = document.createElement('h2');
+      sermonTitle.textContent = item.title;
+
+      const sermonContent = document.createElement('p');
+      sermonContent.textContent = item.content;
+
+      aboutContent.appendChild(sermonTitle);
+      aboutContent.appendChild(sermonContent);
+
+      contentColumn.appendChild(aboutContent);
+
+      // Another div
+      const imageColumn = document.createElement('div');
+      imageColumn.classList.add('col-12', '-pt-5', 'col-lg-6', 'bg-danger', 'w-100');
+
+      const aboutThumbnail = document.createElement('div');
+      aboutThumbnail.classList.add('about-thumbnail', 'h-100', 'w-100', 'bg-info');
+
+      const image = document.createElement('img');
+      image.id = 'imagery';
+      image.alt = 'image_item';
+      image.width = '350px';
+      image.height = '150px';
+      image.style.width = '100%';
+      image.style.height = '250px';
+      image.style.objectFit = 'cover';
+      image.style.cursor = 'pointer';
+
+      // Set the src attribute of the img element to the URL of the image
+      const imageUrl = `http://localhost:4242/api/image/upload/${item.images}`;
+      image.src = imageUrl;
+
+      aboutThumbnail.appendChild(image);
+      imageColumn.appendChild(aboutThumbnail);
+
+      outerDiv.appendChild(contentColumn);
+      outerDiv.appendChild(imageColumn);
+
+      pageContentElement.appendChild(outerDiv);
     });
   } else {
     console.log('Content is undefined.');
   }
-  // }
 }
-
-// Call the function to populate the table
-populateTable();
-
-
-// Function to confirm edit data into the table
-async function editRow(id) {
-  const { dataSet } = fetchDataset(api)
-
-  const { data } = await dataSet();
-  // Find the corresponding object in the dataSet array
-  const selectedData = data.find(data => data._id === id);
-
-
-  // Access individual properties of the selected object
-  const { title, content, _id } = selectedData;
-
-  document.getElementById("fetchCouncil").style.display = 'none'
-  document.getElementById("updateCouncil").style.display = 'flex'
-
-
-  // pass values from api to each element
-  document.getElementById('title').value = title
-  document.getElementById('content').value = content
-  document.getElementById('id').value = id || _id
-
-}
-
-
-// Function to confirm delete data into the table
-async function deleteRow(id) {
-  const { dataSet } = fetchDataset(api)
-
-  const { data } = await dataSet()
-  // Find the corresponding object in the dataSet array
-  const selectedData = data.find(data => data._id === id);
-
-
-  // Access individual properties of the selected object
-  const { title, content, _id } = selectedData;
-
-  document.getElementById("fetchCouncil").style.display = 'none'
-  document.getElementById("deleteCouncil").style.display = 'flex'
-
-
-  // pass values from api to each element
-  document.getElementById('titleD').value = title
-  document.getElementById('contentD').value = content
-  document.getElementById('idD').value = id || _id
-}
-
-// Function to cancel any update/delete to the data into the table
-function cancelBtn() {
-  document.getElementById("updateCouncil").style.display = 'none'
-  document.getElementById("deleteCouncil").style.display = 'none'
-  document.getElementById("fetchCouncil").style.display = 'flex'
-  // sessionStorage.setItem('id', JSON.stringify({ id }))
-}
-
-// Function to update a dataset on the table
-async function handleUpdate() {
-  const { updateData } = updateDataset(api)
-
-  var title = document.getElementById('title').value
-  var content = document.getElementById('content').value
-  var id = document.getElementById('id').value
-
-  await updateData(id, title, content)
-  // alert('Working:' + title + " " + content + " ")
-  // localStorage.setItem('jwt', JSON.stringify({ title: title }))
-
-  document.getElementById("updateCouncil").style.display = 'none'
-  document.getElementById("deleteCouncil").style.display = 'none'
-  document.getElementById("fetchCouncil").style.display = 'flex'
-}
-
-async function handleDelete() {
-  const { deleteData } = deleteDataset(api)
-  // const title = document.getElementById('titleD').value
-  // const content = document.getElementById('contentD').value
-  const id = document.getElementById('idD').value
-
-  await deleteData(id)
-  // alert('Working:' + title + " " + content + " ")
-
-  // After the asynchronous operation is complete, reload the page
-  window.location.reload();
-
-  // Optionally, you can also hide/show elements as needed
-  document.getElementById("updateCouncil").style.display = 'none'
-  document.getElementById("deleteCouncil").style.display = 'none'
-  document.getElementById("fetchCouncil").style.display = 'flex'
-}
-

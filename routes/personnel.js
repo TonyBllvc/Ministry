@@ -4,7 +4,7 @@ import { protect } from "../middleware/authentication.js";
 import mongoose from 'mongoose';
 // import gridfs from 'gridfs-stream';
 import upload from "../middleware/upload.js";
-import { createContent, deleteContent, getContent, getContents, updateContent } from "../controller/jpicController.js";
+import { createContent, deleteContent, getContent, getContents, updateContent } from "../controller/personnelController.js";
 
 const router = express.Router()
 

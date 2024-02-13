@@ -89,9 +89,9 @@ const createContent = asyncHandler(async (req, res) => {
 
     try {
 
-        // if (!file) {
-        //     throw new Error('Field name "image" missing in form data');
-        // }
+        if (!file) {
+            throw new Error('Field name "image" missing in form data');
+        }
 
         var createContent = new Jpic({
             title,

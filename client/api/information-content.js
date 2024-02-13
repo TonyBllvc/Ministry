@@ -75,61 +75,128 @@ async function fetchDataAndPopulateTable() {
     console.error('Error fetching data:', error);
   }
 }
-
 // Function to populate data into the table
 async function populateTable(data) {
   if (data) {
     const pageContentElement = document.getElementById('pageContent');
 
-    data.forEach(item => {
-      const grid = document.createElement('div');
-      grid.classList.add('single-upcoming-events-area', 'd-flex', 'flex-wrap', 'align-items-center');
-      grid.style.marginTop = '10rem'
-      grid.style.marginBottom = '10rem'
+    data.forEach((item, index) => {
+      // Determine the class based on the index
+      const className = index % 2 === 0 ? 'py-5 mb-5 row align-items-center justify-content-between' : 'py-5 mb-5 bg-gray d-flex row flex-column flex-lg-row-reverse  align-items-center justify-content-between';
 
-      const imageThumb = document.createElement('div');
-      imageThumb.classList.add('upcoming-events-thumbnail');
-      imageThumb.style.backgroundColor = 'blue';
-      imageThumb.style.backgroundPosition = 'cover'
-      imageThumb.style.width = '350px';
-      imageThumb.style.height = '150px';
+      // Create the outer div with the determined class
+      const outerDiv = document.createElement('div');
+      outerDiv.className = className;
+
+      // One div within pageContent
+      const contentColumn = document.createElement('div');
+      contentColumn.classList.add('col-12', 'col-lg-5');
+
+      const aboutContent = document.createElement('div');
+      aboutContent.classList.add('about-content');
+
+      const sermonTitle = document.createElement('h2');
+      sermonTitle.textContent = item.title;
+
+      const sermonContent = document.createElement('p');
+      sermonContent.textContent = item.content;
+
+      aboutContent.appendChild(sermonTitle);
+      aboutContent.appendChild(sermonContent);
+
+      contentColumn.appendChild(aboutContent);
+
+      // Another div
+      const imageColumn = document.createElement('div');
+      imageColumn.classList.add('col-12', '-pt-5', 'col-lg-6', 'bg-danger', 'w-100');
+
+      const aboutThumbnail = document.createElement('div');
+      aboutThumbnail.classList.add('about-thumbnail', 'h-100', 'w-100', 'bg-info');
 
       const image = document.createElement('img');
-      image.src = `http://localhost:4242/api/image/upload/${item.images}`; // Replace 'imageSrc' with the actual property name from your data
-      image.alt = 'Sermon Image'; // Replace 'Sermon Image' with appropriate alt text
-      image.width = "100%";
-      image.height = "100%";
+      image.id = 'imagery';
+      image.alt = 'image_item';
+      image.width = '350px';
+      image.height = '150px';
+      image.style.width = '100%';
+      image.style.height = '250px';
+      image.style.objectFit = 'cover';
+      image.style.cursor = 'pointer';
 
-      imageThumb.appendChild(image);
+      // Set the src attribute of the img element to the URL of the image
+      const imageUrl = `http://localhost:4242/api/image/upload/${item.images}`;
+      image.src = imageUrl;
 
-      const flexwrap = document.createElement('div');
-      flexwrap.classList.add('upcoming-events-content', 'd-flex', 'flex-wrap', 'align-items-center');
+      aboutThumbnail.appendChild(image);
+      imageColumn.appendChild(aboutThumbnail);
 
+      outerDiv.appendChild(contentColumn);
+      outerDiv.appendChild(imageColumn);
 
-      const flexAorund = document.createElement('div');
-      flexAorund.classList.add('events-text', 'justify-content-around');
-
-      const Title = document.createElement('h4');
-      Title.textContent = item.title; // Replace 'title' with the actual property name from your data
-
-      const Content = document.createElement('p');
-      Content.textContent = item.content; // Replace 'content' with the actual property name from your data
-
-      flexAorund.appendChild(Title);
-      flexAorund.appendChild(Content);
-
-      flexwrap.appendChild(flexAorund);
-
-      grid.appendChild(imageThumb);
-      grid.appendChild(flexwrap);
-
-      pageContentElement.appendChild(grid);
+      pageContentElement.appendChild(outerDiv);
     });
   } else {
     console.log('Content is undefined.');
   }
 }
 
+// Function to populate data into the table
+// async function populateTable(data) {
+//   if (data) {
+//     const pageContentElement = document.getElementById('pageContent');
+
+//     data.forEach(item => {
+//       const grid = document.createElement('div');
+//       grid.classList.add('single-upcoming-events-area', 'd-flex', 'flex-wrap', 'align-items-center');
+//       grid.style.marginTop = '5rem'
+//       grid.style.marginBottom = '5rem'
+
+//       const imageThumb = document.createElement('div');
+//       imageThumb.classList.add('upcoming-events-thumbnail');
+//       // imageThumb.style.backgroundColor = 'blue';
+//       imageThumb.style.width = '100%';
+//       imageThumb.style.height = '250px';
+
+//       const image = document.createElement('img');
+//       image.src = `http://localhost:4242/api/image/upload/${item.images}`; // Replace 'imageSrc' with the actual property name from your data
+//       image.alt = 'Sermon Image'; // Replace 'Sermon Image' with appropriate alt text
+//       image.width = "100%";
+//       image.height = "100%";
+//       image.style.width = '100%';
+//       image.style.height = '250px';
+//       image.style.objectFit = 'cover';
+//       image.style.cursor = 'pointer';
+
+//       imageThumb.appendChild(image);
+
+//       const flexwrap = document.createElement('div');
+//       flexwrap.classList.add('upcoming-events-content', 'd-flex', 'flex-wrap', 'align-items-center');
+
+
+//       const flexAorund = document.createElement('div');
+//       flexAorund.classList.add('events-text', 'justify-content-around');
+
+//       const Title = document.createElement('h4');
+//       Title.textContent = item.title; // Replace 'title' with the actual property name from your data
+
+//       const Content = document.createElement('p');
+//       Content.textContent = item.content; // Replace 'content' with the actual property name from your data
+
+//       flexAorund.appendChild(Title);
+//       flexAorund.appendChild(Content);
+
+//       flexwrap.appendChild(flexAorund);
+
+//       grid.appendChild(imageThumb);
+//       grid.appendChild(flexwrap);
+
+//       pageContentElement.appendChild(grid);
+//     });
+//   } else {
+//     console.log('Content is undefined.');
+//   }
+// }
+
 
 // Call the function to populate the table
-populateTable();
+// populateTable();

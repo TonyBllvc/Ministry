@@ -75,6 +75,7 @@ async function fetchDataAndPopulateTable() {
   }
 
 }
+
 async function populateTable(data) {
   if (data) {
     const pageContentElement = document.getElementById('pageContent');

@@ -293,8 +293,9 @@ async function handleDelete() {
     // const  = document.getElementById('titleD').value
     // const name = document.getElementById('contentD').value
     const id = document.getElementById('idD').value
+    const Id = document.getElementById('imageD').value
 
-    await deleteData(id)
+    await deleteData(id, Id)
     // alert('Working:' +  + " " + name + " ")
 
     // After the asynchronous operation is complete, reload the page

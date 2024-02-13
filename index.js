@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import jpic from './routes/jpic.js'
 import user from './routes/user.js'
 import apostolate from './routes/apostolate.js'
+import personnelAll from './routes/personalAll.js'
 import personnel from './routes/personnel.js'
 import information from './routes/information.js'
 import personnelExtra from './routes/personnelExtra.js'
@@ -63,6 +64,7 @@ app.use('/api/jpic', jpic)
 app.use('/api/apostolate', apostolate)
 app.use('/api/information', information)
 app.use('/api/personnel', personnel)
+app.use('/api/personnel_all', personnelAll)
 app.use('/api/personnel_extra', personnelExtra)
 app.use('/api/personnel_table', personnelTable)
 app.use('/api/formation', formation)
