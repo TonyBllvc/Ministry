@@ -75,28 +75,92 @@ async function fetchDataAndPopulateTable() {
   }
 
 }
-
-// Function to populate data into the table
 async function populateTable(data) {
- 
   if (data) {
     const pageContentElement = document.getElementById('pageContent');
 
-    console.log(data)
-    data.map(data => {
-      pageContentElement.querySelector('h2').textContent = data.title;
-      pageContentElement.querySelector('p').textContent = data.content;
-      // }
-      
-  // Set the src attribute of the img element to the URL of the image
-  const imageUrl = `http://localhost:4242/api/image/upload/${data.images}`;
-  document.getElementById('imagary').src = imageUrl;
+    data.forEach((item, index) => {
+      // Determine the class based on the index
+      const className = index % 2 === 0 ? 'py-5 mb-5 row align-items-center justify-content-between' : 'py-5 mb-5 bg-gray d-flex row flex-column flex-lg-row-reverse  align-items-center justify-content-between';
+
+      // Create the outer div with the determined class
+      const outerDiv = document.createElement('div');
+      outerDiv.className = className;
+
+      // One div within pageContent
+      const contentColumn = document.createElement('div');
+      contentColumn.classList.add('col-12', 'col-lg-5');
+
+      const aboutContent = document.createElement('div');
+      aboutContent.classList.add('about-content');
+
+      const sermonTitle = document.createElement('h2');
+      sermonTitle.textContent = item.title;
+
+      const sermonContent = document.createElement('p');
+      sermonContent.textContent = item.content;
+
+      aboutContent.appendChild(sermonTitle);
+      aboutContent.appendChild(sermonContent);
+
+      contentColumn.appendChild(aboutContent);
+
+      // Another div
+      const imageColumn = document.createElement('div');
+      imageColumn.classList.add('col-12', '-pt-5', 'col-lg-6', 'bg-danger', 'w-100');
+
+      const aboutThumbnail = document.createElement('div');
+      aboutThumbnail.classList.add('about-thumbnail', 'h-100', 'w-100', 'bg-info');
+
+      const image = document.createElement('img');
+      image.id = 'imagery';
+      image.alt = 'image_item';
+      image.width = '350px';
+      image.height = '150px';
+      image.style.width = '100%';
+      image.style.height = '250px';
+      image.style.objectFit = 'cover';
+      image.style.cursor = 'pointer';
+
+      // Set the src attribute of the img element to the URL of the image
+      const imageUrl = `http://localhost:4242/api/image/upload/${item.images}`;
+      image.src = imageUrl;
+
+      aboutThumbnail.appendChild(image);
+      imageColumn.appendChild(aboutThumbnail);
+
+      outerDiv.appendChild(contentColumn);
+      outerDiv.appendChild(imageColumn);
+
+      pageContentElement.appendChild(outerDiv);
     });
   } else {
     console.log('Content is undefined.');
   }
 }
 
-// Call the function to populate the table
-populateTable();
 
+
+
+{/* <div class="about-us-area about-page section-padding-100">
+        <div class="container mb-5 ">
+            <div id="pageContent" class="row align-items-center justify-content-between">
+                
+                    <!-- Content -->
+                <!-- <div class="col-12 col-lg-5">
+                    <div class="about-content">
+                        <h2>
+                        </h2>
+                        <p>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 bg-danger w-75 w-25 ">
+                    <div class="about-thumbnail h-50 w-100 bg-info ">
+                        <img id="imagary" alt="image_item"  width="100%" height="2%">
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+/ */}

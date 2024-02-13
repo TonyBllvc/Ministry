@@ -155,11 +155,12 @@ function updateDataset(url) {
 
 function deleteDataset(url) {
 
-  async function deleteData(id) {
+  async function deleteData(id, Id) {
 
     // data = null
     const details = {
       id: id,
+      Id: Id,
     };
     // console.log(data)
     pending = true
@@ -272,10 +273,10 @@ function populateTable(data, dataContent) {
       row.classList.add(data._id);
       // const id =
       row.innerHTML = `
-      <td>${data.name}</td>
-      <td>${data.office}</td>
-      <td>${data.email}</td>
-      <td>+234-${data.phone}</td>
+      <td colspan="1" style="width: 30%; word-break: break-all;">${data.name}</td>
+      <td colspan="1" style="width: 25%; word-break: break-all;">${data.office}</td>
+      <td colspan="1" style="width: 30%; word-break: break-all;">${data.email}</td>
+      <td colspan="1" style="width: 30%; word-break: break-all;">+234-${data.phone}</td>
       <td><button type="button" onclick="editRow('${data._id}')" class="text-center text-white"
       style="width: 70px; padding: 3px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: medium; font-weight: 500; border-radius: .4rem; border: none;  background-color: green;"> Edit </button></td>
       <td><button type="button" onclick="deleteRow('${data._id}')" class="text-center text-white "
@@ -328,9 +329,10 @@ async function deleteRow(id) {
 
 
   // Access individual properties of the selected object
-  const { office, name, email, phone, _id } = selectedData;
+  const { office, name, email, phone, _id, id: Id, images  } = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
+  document.getElementById("contentCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'flex'
 
 
@@ -339,9 +341,12 @@ async function deleteRow(id) {
   document.getElementById('nameD').value = name
   document.getElementById('emailD').value = email
   document.getElementById('phoneD').value = phone
+  document.getElementById('imageD').value = Id
   document.getElementById('idD').value = id || _id
 
-  // sessionStorage.setItem('id', JSON.stringify({ id }))
+  // Set the src attribute of the img element to the URL of the image
+  const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
+  document.getElementById('imageD').src = imageUrl;
 }
 
 // Function to cancel any update/delete to the data into the table
@@ -349,6 +354,7 @@ function cancelBtn() {
   document.getElementById("updateCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'none'
   document.getElementById("fetchCouncil").style.display = 'flex'
+  document.getElementById("contentCouncil").style.display = 'flex'
   // sessionStorage.setItem('id', JSON.stringify({ id }))
 }
 
@@ -377,8 +383,9 @@ async function handleDelete() {
   // const office = document.getElementById('titleD').value
   // const name = document.getElementById('contentD').value
   const id = document.getElementById('idD').value
+  const Id = document.getElementById('imageD').value
 
-  await deleteData(id)
+  await deleteData(id, Id)
   // alert('Working:' + office + " " + name + " ")
 
   // After the asynchronous operation is complete, reload the page

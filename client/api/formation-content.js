@@ -89,16 +89,23 @@ async function populateTable(data) {
 
       const imageThumb = document.createElement('div');
       imageThumb.classList.add('upcoming-events-thumbnail');
-      imageThumb.style.backgroundColor = 'blue';
-      imageThumb.style.backgroundPosition = 'cover'
-      imageThumb.style.width = '350px';
-      imageThumb.style.height = '150px';
+      // imageThumb.style.backgroundColor = 'blue';
+      // imageThumb.style.backgroundPosition = 'cover'
+      imageThumb.style.display = 'flex'
+      imageThumb.style.justifyContent = 'center'
+      imageThumb.style.alignItems = 'center'
+      imageThumb.style.width = '400px';
+      imageThumb.style.height = '250px';
 
       const image = document.createElement('img');
       image.src = `http://localhost:4242/api/image/upload/${item.images}`; // Replace 'imageSrc' with the actual property name from your data
       image.alt = 'Sermon Image'; // Replace 'Sermon Image' with appropriate alt text
-      image.width = "100%";
-      image.height = "100%";
+      image.width = '350px';
+      image.height = "150px";
+      image.style.width = '400px';
+      image.style.height = '250px';
+      image.style.objectFit = 'cover'
+      image.style.cursor = 'pointer'
 
       imageThumb.appendChild(image);
 

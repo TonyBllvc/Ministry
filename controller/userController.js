@@ -480,6 +480,7 @@ const updateAccess = asyncHandler(async (req, res) => {
         res.status(404).json('User not found')
     }
 })
+
 const changePassword = asyncHandler(async (req, res) => {
     const { password, newPassword } = req.body;
 

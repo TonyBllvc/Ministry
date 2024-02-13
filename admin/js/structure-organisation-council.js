@@ -7,25 +7,25 @@ let pending = false
 
 function createDataset(url) {
 
-    async function createData(office, name, email, phone) {
+    async function createData(formData) {
         // console.log('27')
 
         // data = null
-        const details = {
-            office: office,
-            name: name,
-            email: email,
-            phone: phone
-        };
+        // const details = {
+        //     office: office,
+        //     name: name,
+        //     email: email,
+        //     phone: phone
+        // };
         // console.log(data)
         // pending = true
         try {
             const response = await fetch(url, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(details),
+                // headers: {
+                //     'Content-Type': 'application/json',
+                // },
+                body: formData,
             });
 
             const json = await response.json()
@@ -55,6 +55,34 @@ function createDataset(url) {
 
 }
 
+// Function to handle image selection and preview
+function handleImageChange(event) {
+    const imageContainer = document.getElementById('imageContainer');
+    const imageInput = event.target;
+
+    if (imageInput.files && imageInput.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            // Create an image element
+            const imagePreview = document.createElement('img');
+            imagePreview.src = e.target.result;
+            imagePreview.alt = 'Image Preview';
+            imagePreview.style.maxWidth = '100%';
+            imagePreview.style.maxHeight = '150px';
+
+            // Clear previous image previews
+            imageContainer.innerHTML = '';
+
+            // Append the new image preview to the image container
+            imageContainer.appendChild(imagePreview);
+        };
+
+        // Read the selected image file
+        reader.readAsDataURL(imageInput.files[0]);
+    }
+}
+
 async function handleSubmit(event) {
     event.preventDefault(); // Prevent default form submission behavior
     const { createData } = createDataset(api)
@@ -63,11 +91,20 @@ async function handleSubmit(event) {
     const office = document.getElementById('office').value
     const email = document.getElementById('email').value
     const phone = document.getElementById('phone').value
+    const image = document.getElementById('image').files[0]; // Get the uploaded image file
     // console.log('3')
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('office', office);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('image', image);
 
     try {
-        await createData(office, name, email, phone);
-        // window.location.href = redirectUrl;
+        // console.log(formData.image)
+        // console.log(formData)
+        await createData(formData);
+         // window.location.href = redirectUrl;
     } catch (error) {
         console.error('Error submitting data:', error);
         // Handle error, display message to the user, etc.
@@ -122,7 +159,7 @@ function createContentDataset(url) {
 }
 
 // Function to handle image selection and preview
-function handleImageChange(event) {
+function handleImageChangeH(event) {
     const imageContainer = document.getElementById('imageContainerH');
     const imageInput = event.target;
 
