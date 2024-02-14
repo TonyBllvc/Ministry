@@ -4,13 +4,14 @@ import dotenv from 'dotenv'
 import jpic from './routes/jpic.js'
 import user from './routes/user.js'
 import apostolate from './routes/apostolate.js'
-import personnelAll from './routes/personalAll.js'
+import houseAll from './routes/houseAll.js'
 import personnel from './routes/personnel.js'
 import information from './routes/information.js'
 import personnelExtra from './routes/personnelExtra.js'
 import personnelTable from './routes/personnelTable.js'
 import structureOrg from './routes/structureOrg.js'
 import spiritualM from './routes/spiritualM.js'
+import structureOrgProvince from './routes/structureOrgProvince.js'
 import support from './routes/support.js'
 import formation from './routes/formation.js'
 import image from './routes/imageOne.js'
@@ -64,15 +65,17 @@ app.use('/api/jpic', jpic)
 app.use('/api/apostolate', apostolate)
 app.use('/api/information', information)
 app.use('/api/personnel', personnel)
-app.use('/api/personnel_all', personnelAll)
 app.use('/api/personnel_extra', personnelExtra)
 app.use('/api/personnel_table', personnelTable)
 app.use('/api/formation', formation)
 app.use('/api/structure_organisation', structureOrg)
+app.use('/api/structure_organisation_province', structureOrgProvince)
 app.use('/api/spiritual_ms', spiritualM)
 app.use('/api/support', support)
 app.use('/api/structure_content', structureContent)
 
+// A special call api for client pages with more than in dataset
+app.use('/api/house_all', houseAll)
 
 app.get('/', (req, res) => {
     res.status(200)

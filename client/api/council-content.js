@@ -1,8 +1,8 @@
 // import { fetchContentDataset } from '../utility/api-calls.js';
 
-const contentApi = 'http://localhost:4242/api/structure_content'
+const contentApi = 'http://localhost:4242/api/house_all/organisation'
 // const updateApi = 'http://localhost:4242/api/jpic'
-let dataContent
+let data
 let pending = false
 
 // ensures the javascript runs before the dom is served
@@ -15,11 +15,11 @@ function fetchContentDataset(url) {
 
     async function contentDataSet() {
 
-        // dataContent = null
+        // data = null
         // // const details = {
         // //     access: access,
         // // };
-        // console.log(dataContent)
+        // console.log(data)
         pending = true
         try {
             const response = await fetch(url)
@@ -42,8 +42,7 @@ function fetchContentDataset(url) {
             if (response.status === 400 || response.status === 404) {
                 console.log(json?.message || json?.error)
             } else if (response.status === 200) {
-                console.log(json?.latest || 'nothing')
-                return dataContent = json
+                return data = json
             }
             pending = false
         } catch (error) {
@@ -59,40 +58,88 @@ function fetchContentDataset(url) {
 // 
 async function fetchContentDataAndPopulateTable() {
     try {
-        const latestTime = document.getElementById('lateTime');
+        const { contentDataSet } = fetchContentDataset(contentApi);
+        const { data, dataTwo } = await contentDataSet();
 
-        if (latestTime) {
-            const { contentDataSet } = fetchContentDataset(contentApi);
-            const { dataContent, latest } = await contentDataSet();
-
-            // console.log(dataContent)
-            // console.log(latestTime)
-            if (dataContent) {
-                populateTable(dataContent);
-            } else {
-                console.log('No dataContent available.');
-            }
-
-            // Update the latestTime div element with the latest update time
-            latestTime.textContent = "last updated " + latest;
+        if (data || dataTwo) {
+            populateTable(data, dataTwo);
         } else {
-            console.error('Element with ID "latestTime" not found');
+            console.log('No data available.');
         }
     } catch (error) {
-        console.error('Error fetching dataContent:', error);
+        console.error('Error fetching data:', error);
     }
 
 }
 
-function populateTable(dataContent) {
-    if (dataContent) {
+function populateTable(data, dataTwo) {
+    if (data) {
         const pageContentElement = document.getElementById('pageContent');
 
-        console.log(dataContent)
-        dataContent.map(dataContent => {
-            pageContentElement.querySelector('h1').textContent = dataContent.title;
-            pageContentElement.querySelector('p').textContent = dataContent.content;
-            // }
+        data.forEach(item => {
+            pageContentElement.classList.add('row');
+
+            // Create div element with class 'col-12', 'col-sm-6', 'col-lg-4'
+            const colDivTwo = document.createElement('div');
+            colDivTwo.classList.add('col-12', 'col-sm-6', 'col-lg-4');
+
+            // Create div element with class 'single-latest-sermons', 'mb-100'
+            const singleDivTwo = document.createElement('div');
+            singleDivTwo.classList.add('single-latest-sermons', 'mb-100');
+
+            // Create div element with class 'sermons-thumbnail'
+            const thumbnailDivTwo = document.createElement('div');
+            thumbnailDivTwo.classList.add('sermons-thumbnail');
+
+            // Create image element
+            const imageTwo = document.createElement('img');
+            imageTwo.alt = 'image_item';
+            imageTwo.width = '100px';
+            imageTwo.height = '200px';
+            imageTwo.style.width = '100%';
+            imageTwo.style.height = '200px';
+            imageTwo.style.objectFit = 'cover';
+            imageTwo.style.cursor = 'pointer';
+
+            const imageUrlTwo = `http://localhost:4242/api/image/upload/${item.images}`;
+            imageTwo.src = imageUrlTwo;
+
+            // Create div element with class 'sermons-meta-data'
+            const metaDataDivTwo = document.createElement('div');
+            metaDataDivTwo.classList.add('sermons-meta-data', 'pt-3');
+            console.log(item)
+
+            // Create p elements for each piece of data
+            const officePTwo = document.createElement('p');
+            officePTwo.innerHTML = `<i class="fa fa-tag" aria-hidden="true"></i> email: <span>${item.office}</span>`;
+
+            const namePTwo = document.createElement('p');
+            namePTwo.innerHTML = `<i class="fa fa-user" aria-hidden="true"></i> name: <span>${item.name}</span>`;
+
+            const emailPTwo = document.createElement('p');
+            emailPTwo.innerHTML = `<i class="fa fa-tag" aria-hidden="true"></i> email: <span>${item.email}</span>`;
+
+            const phonePTwo = document.createElement('p');
+            phonePTwo.innerHTML = `<i class="fa fa-clock-o" aria-hidden="true"></i> phone: <span>${item.phone}</span>`;
+
+            // Append p elements to metaDataDiv
+            metaDataDivTwo.appendChild(officePTwo);
+            metaDataDivTwo.appendChild(namePTwo);
+            metaDataDivTwo.appendChild(emailPTwo);
+            metaDataDivTwo.appendChild(phonePTwo);
+
+
+            thumbnailDivTwo.appendChild(imageTwo)
+
+            // Append thumbnailDiv and metaDataDiv to singleDiv
+            singleDivTwo.appendChild(thumbnailDivTwo);
+            singleDivTwo.appendChild(metaDataDivTwo);
+
+            // Append singleDiv to colDiv
+            colDivTwo.appendChild(singleDivTwo);
+
+            // Append colDiv to the 'dataTwo' element in the HTML
+            pageContentElement.appendChild(colDivTwo);
         });
     } else {
         console.log('Content is undefined.');

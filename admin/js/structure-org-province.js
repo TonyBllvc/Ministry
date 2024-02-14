@@ -1,6 +1,6 @@
-const api = 'http://localhost:4242/api/structure_organisation'
+const api = 'http://localhost:4242/api/structure_organisation_province?'
 // const secondApi = 'http://localhost:4242/api/structure_content'
-const redirectUrl = "/spiritual/structure-organisation-index.html"
+const redirectUrl = "/spiritual/structure-org-province-index.html"
 let data
 let pending = false
 
@@ -12,7 +12,7 @@ function createDataset(url) {
 
         // data = null
         // const details = {
-        //     office: office,
+        //     portfolio: portfolio,
         //     name: name,
         //     email: email,
         //     phone: phone
@@ -88,14 +88,14 @@ async function handleSubmit(event) {
     const { createData } = createDataset(api)
     // console.log('2')
     const name = document.getElementById('name').value
-    const office = document.getElementById('office').value
+    const portfolio = document.getElementById('portfolio').value
     const email = document.getElementById('email').value
     const phone = document.getElementById('phone').value
     const image = document.getElementById('image').files[0]; // Get the uploaded image file
     // console.log('3')
     const formData = new FormData();
     formData.append('name', name);
-    formData.append('office', office);
+    formData.append('portfolio', portfolio);
     formData.append('email', email);
     formData.append('phone', phone);
     formData.append('image', image);

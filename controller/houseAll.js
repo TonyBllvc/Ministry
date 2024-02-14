@@ -4,12 +4,14 @@ import Personnel from "../model/personnelModel.js";
 import moment from "moment";
 import PersonnelExtra from "../model/personnelExtraModel.js";
 import PersonnelTable from "../model/personnelTableModel.js";
+import Structure from "../model/structureModel.js";
+import StructureProvince from "../model/structureProvinceModel.js";
 
 
 // @desc    Fetch Contents
 // route    GET /api
 //@access   Public
-const getContents = asyncHandler(async (req, res) => {
+const getContentsForPersonnel = asyncHandler(async (req, res) => {
 
     try {
         let content = await Personnel.find()
@@ -28,6 +30,24 @@ const getContents = asyncHandler(async (req, res) => {
 })
 
 
+const getContentsForOrg = asyncHandler(async (req, res) => {
+
+    try {
+        let content = await Structure.find()
+        let contentTwo = await StructureProvince.find()
+
+        if (content.length === 0 && contentTwo.length === 0 ) {
+            return res.status(404).json({ error: "No content found" });
+        }
+
+        res.status(200).json({ data: content, dataTwo: contentTwo });
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+
+})
+
 export {
-    getContents
+    getContentsForPersonnel,
+    getContentsForOrg
 }

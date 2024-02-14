@@ -1,7 +1,7 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
 const api = 'http://localhost:4242/api/structure_organisation'
-const contentApi = 'http://localhost:4242/api/structure_content'
+// const contentApi = 'http://localhost:4242/api/structure_content'
 // const updateApi = 'http://localhost:4242/api/jpic'
 let data
 let pending = false
@@ -57,50 +57,50 @@ function fetchDataset(url) {
 
 }
 
-function fetchContentDataset(url) {
+// function fetchContentDataset(url) {
 
-  async function contentDataSet() {
+//   async function contentDataSet() {
 
-    // dataContent = null
-    // // const details = {
-    // //     access: access,
-    // // };
-    // console.log(dataContent)
-    pending = true
-    try {
-      const response = await fetch(url)
-      //     {
-      //     method: 'PUT',
-      //     headers: {
-      //         'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify(details),
-      // });
+//     // dataContent = null
+//     // // const details = {
+//     // //     access: access,
+//     // // };
+//     // console.log(dataContent)
+//     pending = true
+//     try {
+//       const response = await fetch(url)
+//       //     {
+//       //     method: 'PUT',
+//       //     headers: {
+//       //         'Content-Type': 'application/json',
+//       //     },
+//       //     body: JSON.stringify(details),
+//       // });
 
-      const json = await response.json()
-      console.log(response.status)
+//       const json = await response.json()
+//       console.log(response.status)
 
-      if (response.status === 401) {
+//       if (response.status === 401) {
 
-        console.log(json?.message || json?.error)
-      }
+//         console.log(json?.message || json?.error)
+//       }
 
-      if (response.status === 400 || response.status === 404) {
-        console.log(json?.message || json?.error)
-      } else if (response.status === 200) {
-        console.log(json?.latest || 'nothing')
-        return dataContent = json
-      }
-      pending = false
-    } catch (error) {
-      console.log(error.message)
-    };
-    pending = false
-  }
+//       if (response.status === 400 || response.status === 404) {
+//         console.log(json?.message || json?.error)
+//       } else if (response.status === 200) {
+//         console.log(json?.latest || 'nothing')
+//         return dataContent = json
+//       }
+//       pending = false
+//     } catch (error) {
+//       console.log(error.message)
+//     };
+//     pending = false
+//   }
 
-  return { contentDataSet, pending }
+//   return { contentDataSet, pending }
 
-}
+// }
 
 
 function updateDataset(url) {
@@ -203,13 +203,14 @@ function deleteDataset(url) {
 async function fetchDataAndPopulateTable() {
   try {
     const latestTimeElement = document.getElementById('latestTime');
-    const latestTime = document.getElementById('lateTime');
+    // const latestTime = document.getElementById('lateTime');
 
-    if (latestTimeElement || latestTime) {
-      const { contentDataSet } = fetchContentDataset(contentApi);
+    // if (latestTimeElement || latestTime) {
+    if (latestTimeElement) {
+      // const { contentDataSet } = fetchContentDataset(contentApi);
       const { dataSet } = fetchDataset(api);
 
-      const { dataContent, latest } = await contentDataSet();
+      // const { dataContent, latest } = await contentDataSet();
       const { data, latestUpdateTime } = await dataSet();
 
       // console.log(data)
@@ -221,14 +222,16 @@ async function fetchDataAndPopulateTable() {
       // }
       // console.log(data + " " + dataContent)
 
-      if (data || dataContent) {
-        populateTable(data, dataContent);
+      // if (data || dataContent) {
+      //   populateTable(data, dataContent);
+      if (data) {
+        populateTable(data);
       } else {
         console.log('No data available.');
       }
 
       // Update the latestTime div element with the latest update time
-      latestTime.textContent = "last updated " + latest;
+      // latestTime.textContent = "last updated " + latest;
       latestTimeElement.textContent = "last updated " + latestUpdateTime;
     } else {
       console.error('Element with ID "latestTime" not found');
@@ -239,30 +242,31 @@ async function fetchDataAndPopulateTable() {
 
 }
 
-function populateTable(data, dataContent) {
+// function populateTable(data, dataContent) {
+function populateTable(data) {
 
-  if (dataContent) {
-    const pageContentElement = document.getElementById('pageContent');
+  // if (dataContent) {
+  //   const pageContentElement = document.getElementById('pageContent');
 
-    console.log(dataContent)
-    dataContent.map(dataContent => {
-      pageContentElement.querySelector('h1').textContent = dataContent.title;
-      pageContentElement.querySelector('p').textContent = dataContent.content;
+  //   console.log(dataContent)
+  //   dataContent.map(dataContent => {
+  //     pageContentElement.querySelector('h1').textContent = dataContent.title;
+  //     pageContentElement.querySelector('p').textContent = dataContent.content;
 
-      // Set the src attribute of the image
-      const imageUrl = `http://localhost:4242/api/image/upload/${dataContent.images}`;
-      // imagePreview.setAttribute('src', imageUrl);
-      document.getElementById('imageC').src = imageUrl;
+  //     // Set the src attribute of the image
+  //     const imageUrl = `http://localhost:4242/api/image/upload/${dataContent.images}`;
+  //     // imagePreview.setAttribute('src', imageUrl);
+  //     document.getElementById('imageC').src = imageUrl;
 
-      // Hide the image if no image is available
-      if (!dataContent.images) {
-        document.getElementById('imageC').style.display = 'none';
-      }
-    });
-  } else {
-    console.log('Content is undefined.');
-  }
-
+  //     // Hide the image if no image is available
+  //     if (!dataContent.images) {
+  //       document.getElementById('imageC').style.display = 'none';
+  //     }
+  //   });
+  // } else {
+  //   console.log('Content is undefined.');
+  // }
+  console.log(data)
   if (data) {
     const tableBody = document.querySelector('#dataTable tbody');
     tableBody.innerHTML = ''; // Clear existing table rows
@@ -291,7 +295,7 @@ function populateTable(data, dataContent) {
 }
 
 // Call the function to populate the table
-populateTable();
+// populateTable();
 
 
 // Function to confirm edit data into the table
@@ -329,10 +333,10 @@ async function deleteRow(id) {
 
 
   // Access individual properties of the selected object
-  const { office, name, email, phone, _id, id: Id, images  } = selectedData;
+  const { office, name, email, phone, _id, id: Id, images } = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
-  document.getElementById("contentCouncil").style.display = 'none'
+  // document.getElementById("contentCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'flex'
 
 
@@ -354,7 +358,7 @@ function cancelBtn() {
   document.getElementById("updateCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'none'
   document.getElementById("fetchCouncil").style.display = 'flex'
-  document.getElementById("contentCouncil").style.display = 'flex'
+  // document.getElementById("contentCouncil").style.display = 'flex'
   // sessionStorage.setItem('id', JSON.stringify({ id }))
 }
 
