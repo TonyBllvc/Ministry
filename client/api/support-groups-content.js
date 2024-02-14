@@ -99,7 +99,8 @@ async function populateTable(data) {
       contentWrapper.classList.add('w-100');
 
       const aboutContent = document.createElement('div');
-      aboutContent.classList.add('about-content');
+      aboutContent.classList.add('section-heading');
+      // aboutContent.classList.add('about-content');
 
       const sermonTitle = document.createElement('h2');
       sermonTitle.textContent = item.title; // Replace 'title' with the actual property name from your data

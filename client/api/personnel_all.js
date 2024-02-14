@@ -60,12 +60,12 @@ async function fetchDataAndPopulateTable() {
     try {
 
         const { dataSet } = fetchDataset(api);
-        const { data, dataTwo, dataThree } = await dataSet();
+        const { dataTwo, dataThree } = await dataSet();
 
         // console.log(data)
         // console.log(latestTimeElement)
-        if (data || dataTwo || dataThree) {
-            populateTable(data, dataTwo, dataThree);
+        if (dataTwo || dataThree) {
+            populateTable(dataTwo, dataThree);
         } else {
             console.log('No data available.');
         }
@@ -76,46 +76,47 @@ async function fetchDataAndPopulateTable() {
 }
 
 async function populateTable(data, dataTwo, dataThree) {
-    if (data || dataTwo || dataThree) {
-        console.log(data)
-        const pageContentElement = document.getElementById('data');
+    if (dataTwo || dataThree) {
+        // console.log(data)
+        // const pageContentElement = document.getElementById('data');
         const pageContentElementings = document.getElementById('dataTwo');
         const pageContentElements = document.getElementById('dataThree');
 
-        data.forEach((item, index) => {
-            pageContentElement.classList.add('row');
+        // data.forEach((item, index) => {
+        //     pageContentElement.classList.add('row');
 
-            // Create the outer div with the determined class
-            const outerDiv = document.createElement('div');
-            outerDiv.classList.add('col-12')
+        //     // Create the outer div with the determined class
+        //     const outerDiv = document.createElement('div');
+        //     outerDiv.classList.add('col-12')
 
-            const sectionHeading = document.createElement('div');
-            sectionHeading.classList.add('section-heading');
+        //     const sectionHeading = document.createElement('div');
+        //     sectionHeading.classList.add('section-heading');
 
-            const sermonTitle = document.createElement('h2');
-            sermonTitle.textContent = item.title;
+        //     const sermonTitle = document.createElement('h2');
+        //     sermonTitle.textContent = item.title;
 
-            const sermonContent = document.createElement('p');
-            sermonContent.textContent = item.content;
+        //     const sermonContent = document.createElement('p');
+        //     sermonContent.textContent = item.content;
 
-            sectionHeading.appendChild(sermonTitle);
-            sectionHeading.appendChild(sermonContent);
+        //     sectionHeading.appendChild(sermonTitle);
+        //     sectionHeading.appendChild(sermonContent);
 
-            outerDiv.appendChild(sectionHeading);
+        //     outerDiv.appendChild(sectionHeading);
 
-            pageContentElement.appendChild(outerDiv);
-        });
+        //     pageContentElement.appendChild(outerDiv);
+        // });
         // Assuming dataTwo is an array of objects
         dataTwo.forEach(item => {
-            pageContentElementings.classList.add('row');
+            pageContentElementings.classList.add('row', 'mb-5');
 
             // Create div element with class 'col-12', 'col-sm-6', 'col-lg-4'
             const colDivTwo = document.createElement('div');
-            colDivTwo.classList.add('col-12', 'col-sm-6', 'col-lg-4');
+            colDivTwo.classList.add('col-12', 'col-sm-6', 'col-lg-2', 'my-2', "mx-0.5");
+            colDivTwo.style.boxShadow = '1.4px 5px 9px rgba(0, 0, 0, 0.2)'; // Add box shadow style here
 
             // Create div element with class 'single-latest-sermons', 'mb-100'
             const singleDivTwo = document.createElement('div');
-            singleDivTwo.classList.add('single-latest-sermons', 'mb-100');
+            singleDivTwo.classList.add('single-latest-sermons', 'my-2');
 
             // Create div element with class 'sermons-thumbnail'
             const thumbnailDivTwo = document.createElement('div');
@@ -140,7 +141,7 @@ async function populateTable(data, dataTwo, dataThree) {
 
             // Create p elements for each piece of data
             const namePTwo = document.createElement('p');
-            namePTwo.innerHTML = `<i class="fa fa-user" aria-hidden="true"></i> name: <span>${item.name}</span>`;
+            namePTwo.innerHTML = `<i class="fa fa-user" aria-hidden="true"></i> name: <span>${item.name} ff </span>`;
 
             const emailPTwo = document.createElement('p');
             emailPTwo.innerHTML = `<i class="fa fa-tag" aria-hidden="true"></i> email: <span>${item.email}</span>`;
@@ -202,7 +203,7 @@ async function populateTable(data, dataTwo, dataThree) {
 
             // Create p elements for each piece of data
             const namePThree = document.createElement('p');
-            namePThree.innerHTML = `<i class="fa fa-user" aria-hidden="true"></i> name: <span>${item.name}</span>`;
+            namePThree.innerHTML = `<i class="fa fa-user" aria-hidden="true"></i> name: <span>${item.name} fff</span>`;
 
             const emailPThree = document.createElement('p');
             emailPThree.innerHTML = `<i class="fa fa-tag" aria-hidden="true"></i> email: <span>${item.email}</span>`;
