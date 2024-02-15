@@ -87,28 +87,28 @@ const sortContent = asyncHandler(async (req, res) => {
 //@access   Public
 const createContent = asyncHandler(async (req, res) => {
     const { title, content } = req.body
-    const { file } = req
+    // const { file } = req
 
-    const mongoClient = new MongoClient(url);
-    await mongoClient.connect();
+    // const mongoClient = new MongoClient(url);
+    // await mongoClient.connect();
 
-    const database = mongoClient.db('test'); // Adjust database name if needed
-    const bucket = new GridFSBucket(database, { bucketName: 'images' });
+    // const database = mongoClient.db('test'); // Adjust database name if needed
+    // const bucket = new GridFSBucket(database, { bucketName: 'images' });
 
     try {
-        const structure = await StructureContent.find()
+        // const structure = await StructureContent.find()
 
 
-        if (!file) {
-            return res.status(404).json({ message: 'Field name "image" missing in form data' });
-        }
+        // if (!file) {
+        //     return res.status(404).json({ message: 'Field name "image" missing in form data' });
+        // }
 
         // Loop through structure and delete files
-        if (structure.length > 0) {
-            for (const data of structure) {
-                await bucket.delete(data.id);
-            }
-        }
+        // if (structure.length > 0) {
+        //     for (const data of structure) {
+        //         await bucket.delete(data.id);
+        //     }
+        // }
 
 
         await StructureContent.deleteMany();
@@ -116,8 +116,8 @@ const createContent = asyncHandler(async (req, res) => {
         var createContent = new StructureContent({
             title,
             content,
-            id: file.id,
-            images: file.filename
+            // id: file.id,
+            // images: file.filename
         })
 
         var singleContent = await createContent.save()

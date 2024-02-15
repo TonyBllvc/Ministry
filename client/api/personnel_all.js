@@ -111,7 +111,7 @@ async function populateTable(data, dataTwo, dataThree) {
 
             // Create div element with class 'col-12', 'col-sm-6', 'col-lg-4'
             const colDivTwo = document.createElement('div');
-            colDivTwo.classList.add('col-12', 'col-sm-6', 'col-lg-2', 'my-2', "mx-0.5");
+            colDivTwo.classList.add('col-12', 'col-md-3', 'col-lg-2', 'my-2', "mx-0.5");
             colDivTwo.style.boxShadow = '1.4px 5px 9px rgba(0, 0, 0, 0.2)'; // Add box shadow style here
 
             // Create div element with class 'single-latest-sermons', 'mb-100'
@@ -158,7 +158,7 @@ async function populateTable(data, dataTwo, dataThree) {
             thumbnailDivTwo.appendChild(imageTwo)
 
             // Append thumbnailDiv and metaDataDiv to singleDiv
-            singleDivTwo.appendChild(thumbnailDivTwo);
+            // singleDivTwo.appendChild(thumbnailDivTwo);
             singleDivTwo.appendChild(metaDataDivTwo);
 
             // Append singleDiv to colDiv

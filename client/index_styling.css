@@ -47,3 +47,63 @@
 .classynav ul ul li:hover {
     background-color: #f2f2f2;
 }
+
+/* Base styles */
+
+/* Adjustments for smaller screens (e.g., mobile devices) */
+/* Media query for mobile devices */
+@media only screen and (max-width: 767px) {
+    .classy-navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .crose-main-menu {
+        display: none;
+    }
+
+    .classy-nav-container {
+        /* display: none; */
+    }
+
+    .classy-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        /* Adjust background color as needed */
+        z-index: 1000;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .classy-menu.active {
+        display: flex;
+    }
+
+    .classynav ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        text-align: center;
+    }
+
+    .classynav ul li {
+        margin-bottom: 20px;
+        /* Adjust spacing between menu items */
+    }
+
+    .classynav ul li a {
+        font-size: 18px;
+        /* Adjust font size as needed */
+    }
+
+    .navbarToggler {
+        display: block;
+    }
+}

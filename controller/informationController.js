@@ -87,18 +87,18 @@ const sortContent = asyncHandler(async (req, res) => {
 //@access   Public
 const createContent = asyncHandler(async (req, res) => {
     const { title, content } = req.body
-    const { file } = req
+    // const { file } = req
 
     try {
-        if (!file) {
-            throw new Error('Field name "image" missing in form data');
-        }
+        // if (!file) {
+        //     throw new Error('Field name "image" missing in form data');
+        // }
 
         var createContent = new Information({
             title,
             content,
-            id: file.id,
-            images: file.filename
+            // id: file.id,
+            // images: file.filename
         })
 
         var singleContent = await createContent.save()
@@ -116,12 +116,12 @@ const createContent = asyncHandler(async (req, res) => {
 //@access   Public
 const updateContent = asyncHandler(async (req, res) => {
 
-    const { title, id, content } = req.body
+    // const { title, id, content } = req.body
 
     // console.log(req.params.os)
-    var contents = await Information.findById(id)
-    console.log(req.body.title)
-    if (!contents) {
+    var content = await Information.findById(req.body.id)
+    // console.log(req.body.title)
+    if (!content) {
         return res.status(404).json({ error: "Content not found" });
     }
 
@@ -130,21 +130,21 @@ const updateContent = asyncHandler(async (req, res) => {
         //     return res.status(404).json({ message: "File not found" });
         // }
         // Find the existing file document
-        const exist = Information.find({ images: req.body._images })
+        // const exist = Information.find({ images: req.body._images })
         // const existingFile = await bucket.find({ _id: new ObjectId(req.params.id) }).toArray();
-        if (!exist) {
-            // if we changed image, work with this logic instead
-            return res.status(404).json({ message: "File not found" });
-        }
+        // if (!exist) {
+        //     // if we changed image, work with this logic instead
+        //     return res.status(404).json({ message: "File not found" });
+        // }
 
-        // content.title = req.body.title || content.title
-        // content.content = req.body.content || content.content
+        content.title = req.body.title || content.title
+        content.content = req.body.content || content.content
 
-        // await content.save();
+        await content.save();
 
 
 
-        res.status(201).json({ content: contents, message: "Content updated successfully" })
+        res.status(201).json({ content: content, message: "Content updated successfully" })
 
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -156,22 +156,22 @@ const updateContent = asyncHandler(async (req, res) => {
 //@access   Public
 const deleteContent = asyncHandler(async (req, res) => {
 
-    const { id, Id } = req.body
+    const { id } = req.body
 
-    const mongoClient = new MongoClient(url);
-    await mongoClient.connect();
+    // const mongoClient = new MongoClient(url);
+    // await mongoClient.connect();
 
-    const database = mongoClient.db('test'); // Adjust database name if needed
-    const bucket = new GridFSBucket(database, { bucketName: 'images' });
+    // const database = mongoClient.db('test'); // Adjust database name if needed
+    // const bucket = new GridFSBucket(database, { bucketName: 'images' });
 
-    console.log(id + " " + Id)
+    // console.log(id + " " + Id)
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: "No such document" })
     }
 
     try {
 
-        console.log(id + " " + Id)
+        // console.log(id + " " + Id)
 
         const content = await Information.findById(id);
 
@@ -179,7 +179,7 @@ const deleteContent = asyncHandler(async (req, res) => {
             return res.status(404).json({ error: "Content not found" });
         }
 
-        await bucket.delete(new ObjectId(Id));
+        // await bucket.delete(new ObjectId(Id));
 
         const result = await Information.findByIdAndDelete({ _id: id })
 
