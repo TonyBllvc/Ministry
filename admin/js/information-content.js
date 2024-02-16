@@ -1,23 +1,28 @@
 const api = 'http://localhost:4242/api/information'
+const urlRedirect = '/spiritual/information-index.html'
 let data
 let pending = false
 
 function createDataset(url) {
 
-    async function createData(formData) {
+    async function createData(title, content) {
         // console.log('27')
 
         // data = null
-        // const details = {
-        //     title: title,
-        //     content: content
-        // };
+        const details = {
+            title: title,
+            content: content
+        };
         // console.log(data)
         // pending = true
         try {
             const response = await fetch(url, {
                 method: 'POST',
-                body: formData,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(details)
+                // body: formData,
             });
 
             const json = await response.json()
@@ -34,7 +39,7 @@ function createDataset(url) {
                 // console.log(json?.content || 'nothing')
                 // console.log(json?.message)
                 // return data = json?.content
-                window.location.href = "/spiritual/information-index.html"
+                window.location.href = urlRedirect
             }
             // pending = false
         } catch (error) {
@@ -47,33 +52,33 @@ function createDataset(url) {
 
 }
 
-// Function to handle image selection and preview
-function handleImageChange(event) {
-    const imageContainer = document.getElementById('imageContainer');
-    const imageInput = event.target;
+// // Function to handle image selection and preview
+// function handleImageChange(event) {
+//     const imageContainer = document.getElementById('imageContainer');
+//     const imageInput = event.target;
     
-    if (imageInput.files && imageInput.files[0]) {
-      const reader = new FileReader();
+//     if (imageInput.files && imageInput.files[0]) {
+//       const reader = new FileReader();
   
-      reader.onload = function(e) {
-        // Create an image element
-        const imagePreview = document.createElement('img');
-        imagePreview.src = e.target.result;
-        imagePreview.alt = 'Image Preview';
-        imagePreview.style.maxWidth = '100%';
-        imagePreview.style.maxHeight = '150px';
+//       reader.onload = function(e) {
+//         // Create an image element
+//         const imagePreview = document.createElement('img');
+//         imagePreview.src = e.target.result;
+//         imagePreview.alt = 'Image Preview';
+//         imagePreview.style.maxWidth = '100%';
+//         imagePreview.style.maxHeight = '150px';
   
-        // Clear previous image previews
-        imageContainer.innerHTML = '';
+//         // Clear previous image previews
+//         imageContainer.innerHTML = '';
   
-        // Append the new image preview to the image container
-        imageContainer.appendChild(imagePreview);
-      };
+//         // Append the new image preview to the image container
+//         imageContainer.appendChild(imagePreview);
+//       };
   
-      // Read the selected image file
-      reader.readAsDataURL(imageInput.files[0]);
-    }
-  }
+//       // Read the selected image file
+//       reader.readAsDataURL(imageInput.files[0]);
+//     }
+//   }
 
 async function handleSubmit(event) {
     event.preventDefault(); // Prevent default form submission behavior
@@ -81,16 +86,17 @@ async function handleSubmit(event) {
     // console.log('2')
     var title = document.getElementById('title').value
     var content = document.getElementById('content').value
-    const image = document.getElementById('image').files[0]; // Get the uploaded image file
-    // console.log('3')
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('image', image);
+    // const image = document.getElementById('image').files[0]; // Get the uploaded image file
+    // // console.log('3')
+    // const formData = new FormData();
+    // formData.append('title', title);
+    // formData.append('content', content);
+    // formData.append('image', image);
 
     try {
-        await createData(formData);
-        window.location.href = "/spiritual/information-index.html";
+        await createData(title, content);
+        // await createData(formData);
+        window.location.href = urlRedirect;
     } catch (error) {
         console.error('Error submitting data:', error);
         // Handle error, display message to the user, etc.

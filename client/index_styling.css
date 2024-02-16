@@ -48,11 +48,19 @@
     background-color: #f2f2f2;
 }
 
+.hamburger {
+    display: none;
+}
+
+.closer {
+    display: none;
+}
+
 /* Base styles */
 
 /* Adjustments for smaller screens (e.g., mobile devices) */
 /* Media query for mobile devices */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 999px) {
     .classy-navbar {
         display: flex;
         justify-content: space-between;
@@ -60,11 +68,24 @@
     }
 
     .crose-main-menu {
-        display: none;
+        /* display: none; */
     }
 
     .classy-nav-container {
         /* display: none; */
+    }
+
+    .hamburger {
+        display: flex;
+        color: #333;
+        transition: color 3s;
+        cursor: pointer;
+    }
+
+
+    .hamburger:hover {
+        display: flex;
+        color: #c92f2f;
     }
 
     .classy-menu {
@@ -76,31 +97,129 @@
         background-color: #fff;
         /* Adjust background color as needed */
         z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: flex-end; */
+        align-items: flex-start;
+    }
+
+    .closer {
+        display: inline;
+        /* justify-content: flex-start;
+        align-items: flex-start; */
+        position: fixed;
+        margin: 2rem 0 0 10%;
+        color: #f2f2f2;
+        font-weight: 800;
+        /* background-color: aqua; */
+        z-index: 500;
+        cursor: pointer;
+        transition: color 3s;
+        /* bottom: 30; */
+    }
+
+    .closer:hover {
+        color: #c92f2f;
+    }
+
+    .classy-menu {
         display: none;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        background-color: #333;
+        opacity: 0.95;
+        /* position: fixed; */
     }
 
-    .classy-menu.active {
+    .classynav {
+        /* background-color: aqua; */
+        position: absolute;
+        /* top: 30; */
+        margin: 7rem 0 0 16%;
+    }
+
+    .classy-menu .classynav ul {
         display: flex;
+        flex-direction: column;
+        /* justify-content: space-around; */
+        align-items: flex-start;
+        margin-bottom: 30px;
+        z-index: 40;
     }
 
-    .classynav ul {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        text-align: center;
-    }
-
-    .classynav ul li {
-        margin-bottom: 20px;
-        /* Adjust spacing between menu items */
-    }
 
     .classynav ul li a {
-        font-size: 18px;
-        /* Adjust font size as needed */
+        color: #333;
+        z-index: 100;
+        color: #f2f2f2;
+    }
+
+    .classy-menu .classynav ul li {
+        padding: 5px 10px;
+        color: #f2f2f2;
+        z-index: 100;
+        /* background-color: aqua; */
+    }
+
+    .classy-menu ul ul {
+        /* Existing styles */
+        display: block;
+        /* position: fixed; */
+        z-index: 50;
+        margin: 0;
+        /* New styles */
+        top: 0;
+        /* Adjust this value as needed */
+        right: 0;
+        /* Adjust this value as needed */
+        margin-top: 3rem;
+        /* Adjust this value as needed */
+        margin-right: 3rem;
+        /* Adjust this value as needed */
+    }
+
+    /* Add !important to override other CSS rules */
+    .classy-menu ul ul {
+        display: none !important;
+        position: fixed !important;
+        z-index: 500 !important;
+        margin: 0 !important;
+        top: 0 !important;
+        right: 0 !important;
+        left: 0 !important;
+        margin-left: 37% !important;
+        margin-top: 10rem !important;
+        margin-right: 2rem !important;
+    }
+
+    /* New styles to show the dropdown menu when hovering over the "Mission" menu item */
+    .classynav ul>li:nth-child(2):hover .first {
+        display: block !important;
+        position: fixed !important;
+        z-index: 500 !important;
+        margin: 0 !important;
+        top: 0 !important;
+        right: 0 !important;
+        left: 0 !important;
+        margin-left: 37% !important;
+        margin-top: 10rem !important;
+        margin-right: 2rem !important;
+    }
+
+    .classynav ul>li:nth-child(3):hover .second {
+        display: block !important;
+        position: fixed !important;
+        z-index: 500 !important;
+        margin: 0 !important;
+        top: 0 !important;
+        right: 0 !important;
+        left: 0 !important;
+        margin-left: 37% !important;
+        margin-top: 10rem !important;
+        margin-right: 2rem !important;
+    }
+
+    .classy-menu .classynav ul li ul li {
+        display: block;
     }
 
     .navbarToggler {

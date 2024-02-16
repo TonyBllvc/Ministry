@@ -65,16 +65,37 @@
 
                         <a href="/" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
 
-                        <div class="classy-navbar-toggler">
+                        <!-- <div class="classy-navbar-toggler"> -->
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                        </svg> -->
+                        <!-- <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>  -->
 
-                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        <div class="hamburger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" fill="currentColor"
+                                class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                            </svg>
                         </div>
-
                         <div class="classy-menu">
-
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            <div class="closer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                                    class="bi bi-x-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                    <path
+                                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                                </svg>
                             </div>
+
+                            <!-- <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div> -->
+
+                            <!-- <input class="side-menu" type="checkbox" id="side-menu" />
+                            <label class="hamb" for="side-menu"><span class="hamb-line"></span></label> -->
 
                             <div class="classynav">
                                 <ul>
@@ -87,7 +108,7 @@
                                                     d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                                             </svg>
                                         </a>
-                                        <ul>
+                                        <ul class="first">
                                             <li><a href="development.html">JPIC/Development</a></li>
                                             <li><a href="apostolate.html">Apostolate</a></li>
                                             <li><a href="personnel.html">Personnel</a></li>
@@ -104,7 +125,7 @@
                                                     d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                                             </svg>
                                         </a>
-                                        <ul>
+                                        <ul class="second">
                                             <li><a href="structure-and-organisation.html">Structure and Organization</a>
                                             </li>
                                             <li><a href="spiritual-mission-and-spirituality.html">Spiritual Mission and
@@ -115,7 +136,7 @@
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
 
-                                <div id="header-search"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                <!-- <div id="header-search"><i class="fa fa-search" aria-hidden="true"></i></div> -->
 
                                 <a href="#" class="btn crose-btn header-btn">Support Us</a>
                             </div>
@@ -135,7 +156,7 @@
                                         placeholder="Enter keywords &amp; hit enter...">
                                     <button type="submit" class="d-none"></button>
                                 </form>
-                                <div class="close-icon mr-15" id="searchCloseIcon"><i class="fa fa-close"
+                                <div class="close-icon" id="searchCloseIcon"><i class="fa fa-close"
                                         aria-hidden="true"></i></div>
                             </div>
                         </div>
@@ -143,6 +164,7 @@
                 </div>
             </div>
         </div>
+
         
     </header>
 
@@ -465,6 +487,42 @@
     </footer>
 
 
+
+    <!-- for the transition -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const hamburger = document.querySelector('.hamburger');
+            const classyMenu = document.querySelector('.classy-menu');
+            const closer = document.querySelector('.closer');
+
+            // Set initial transition duration
+            classyMenu.style.transition = 'opacity 4s';
+
+            // Event listener for clicking on the hamburger icon
+            hamburger.addEventListener('click', function () {
+                setTimeout(() => {
+                    classyMenu.style.opacity = '.04';
+                    classyMenu.style.display = 'flex';
+                }, 10); // Wait for the transition to complete
+                setTimeout(() => {
+                    classyMenu.style.opacity = '.6';
+                    classyMenu.style.display = 'flex';
+                }, 50); // Wait for the transition to complete
+                setTimeout(() => {
+                    classyMenu.style.opacity = '1';
+                    classyMenu.style.display = 'flex';
+                }, 70); // Wait for the transition to complete
+            });
+
+            // Event listener for clicking on the closer icon
+            closer.addEventListener('click', function () {
+                classyMenu.style.opacity = '0';
+                setTimeout(() => {
+                    classyMenu.style.display = 'none';
+                }, 2200); // Wait for the transition to complete
+            });
+        });
+    </script>
 
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
 

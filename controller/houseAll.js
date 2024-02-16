@@ -15,8 +15,8 @@ const getContentsForPersonnel = asyncHandler(async (req, res) => {
 
     try {
         let content = await Personnel.find()
-        let contentTwo = await PersonnelExtra.find()
-        let contentThree = await PersonnelTable.find()
+        let contentTwo =  await PersonnelTable.find()
+        let contentThree =await PersonnelExtra.find()
 
         if (content.length === 0 && contentTwo.length === 0 && contentThree.length === 0) {
             return res.status(404).json({ error: "No content found" });

@@ -251,6 +251,7 @@
                                     <th>Office</th>
                                     <th>Name</th>
                                     <th>Phone no.</th>
+                                    <th>Email</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -271,31 +272,36 @@
                                             placeholder="Phone no.." disabled>
                                     </td>
                                     <td>
+                                        <input type="text" id="emailD" class="form-control px-2"
+                                            style="color: black; font-size: medium; font-weight: 600"
+                                            placeholder="Email.." disabled>
+                                    </td>
+                                    <td>
                                         <input type="hidden" id="idD" class="form-control px-2"
                                             style="color: black; font-size: medium; font-weight: 600"
                                             placeholder="Id grab" required>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 250px; height: 150px;">
+                                    <!-- <td style="width: 250px; height: 150px;">
                                         <img id="imageD" alt="image_item" width="100%" height="100%">
                                         <input type="hidden" id="imageD" class="form-control px-2"
                                             style="color: black; font-size: medium; font-weight: 600"
                                             placeholder="Content.." disabled>
-                                    </td>
-                                    <td>
+                                    </td> -->
+                                    <!-- <td>
                                         <input type="text" id="emailD" class="form-control px-2"
                                             style="color: black; font-size: medium; font-weight: 600"
                                             placeholder="Email.." disabled>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             </tbody>
-                            <tfoot>
+                            <!-- <tfoot>
                                 <tr>
                                     <th>Image</th>
                                     <th>Email</th>
                                 </tr>
-                            </tfoot>
+                            </tfoot> -->
                         </table>
                     </div>
                 </div>
@@ -335,45 +341,45 @@
             <!-- <input type="hidden" id="imageD" class="form-control px-2"
                         style="color: black; font-size: medium; font-weight: 600"
                         placeholder="Content.." disabled> -->
-        <!-- </div> -->
-        <!-- </div>
+            <!-- </div> -->
+            <!-- </div>
                 <div id="lateTime" class="card-footer small text-muted">
 
                 </div> -->
-    <!-- </div> -->
-    <!-- ***************************************** ends ******************************************* -->
+            <!-- </div> -->
+            <!-- ***************************************** ends ******************************************* -->
 
-    <!-- DataTables Card-->
-    <div class="card mb-3" id="fetchCouncil" style="display: flex;">
-        <div class="card-header">
-            <i class="fa fa-table"></i> Data Table Example
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Office</th>
-                            <th>Email</th>
-                            <th>Phone number</th>
-                            <th>Update</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Office</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th> Update</th>
-                            <th>Delete</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <!-- Data goes here -->
-                        <!--                                 
+            <!-- DataTables Card-->
+            <div class="card mb-3" id="fetchCouncil" style="display: flex;">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Data Table Example
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Office</th>
+                                    <th>Email</th>
+                                    <th>Phone number</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Office</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th> Update</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <!-- Data goes here -->
+                                <!--                                 
                                 <tr class="table-danger">
                                     <td colspan="6" class="text-center text-danger"
                                         style="font-size: large; font-weight: 700;"> Are you sure you want to delete
@@ -397,68 +403,68 @@
                                         </div>
                                     </td>
                                 </tr> -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div id="latestTime" class="card-footer small text-muted">
-
-        </div>
-    </div>
-
-
-    <div class="my-4">
-        <a href="structure-organisation-council.html" class="text-center text-white "
-            style=" padding: 15px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: large; font-weight: 800; border-radius: .7rem; border: none;  background-color:  #126912; text-decoration: none;">
-            Upload New Table</a>
-    </div>
-    </div>
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-        <div class="container">
-            <div class="text-center">
-                <small>Copyright © Eventniche.com 2018</small>
-            </div>
-        </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                <div id="latestTime" class="card-footer small text-muted">
+
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Import external JavaScript file -->
 
-    <!-- <script src="api/council.js"></script> -->
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-datatables.min.js"></script>
+
+            <div class="my-4">
+                <a href="structure-organisation-council.html" class="text-center text-white "
+                    style=" padding: 15px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: large; font-weight: 800; border-radius: .7rem; border: none;  background-color:  #126912; text-decoration: none;">
+                    Upload New Table</a>
+            </div>
+        </div>
+        <!-- /.content-wrapper-->
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © Eventniche.com 2018</small>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Import external JavaScript file -->
+
+        <!-- <script src="api/council.js"></script> -->
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Page level plugin JavaScript-->
+        <script src="vendor/datatables/jquery.dataTables.js"></script>
+        <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin.min.js"></script>
+        <!-- Custom scripts for this page-->
+        <script src="js/sb-admin-datatables.min.js"></script>
     </div>
 </body>
 

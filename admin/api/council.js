@@ -155,12 +155,12 @@ function updateDataset(url) {
 
 function deleteDataset(url) {
 
-  async function deleteData(id, Id) {
+  async function deleteData(id, ) {
 
     // data = null
     const details = {
       id: id,
-      Id: Id,
+      // Id: Id,
     };
     // console.log(data)
     pending = true
@@ -333,7 +333,7 @@ async function deleteRow(id) {
 
 
   // Access individual properties of the selected object
-  const { office, name, email, phone, _id, id: Id, images } = selectedData;
+  const { office, name, email, phone, _id} = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
   // document.getElementById("contentCouncil").style.display = 'none'
@@ -345,12 +345,12 @@ async function deleteRow(id) {
   document.getElementById('nameD').value = name
   document.getElementById('emailD').value = email
   document.getElementById('phoneD').value = phone
-  document.getElementById('imageD').value = Id
+  // document.getElementById('imageD').value = Id
   document.getElementById('idD').value = id || _id
 
   // Set the src attribute of the img element to the URL of the image
-  const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
-  document.getElementById('imageD').src = imageUrl;
+  // const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
+  // document.getElementById('imageD').src = imageUrl;
 }
 
 // Function to cancel any update/delete to the data into the table
@@ -387,9 +387,9 @@ async function handleDelete() {
   // const office = document.getElementById('titleD').value
   // const name = document.getElementById('contentD').value
   const id = document.getElementById('idD').value
-  const Id = document.getElementById('imageD').value
+  // const Id = document.getElementById('imageD').value
 
-  await deleteData(id, Id)
+  await deleteData(id)
   // alert('Working:' + office + " " + name + " ")
 
   // After the asynchronous operation is complete, reload the page

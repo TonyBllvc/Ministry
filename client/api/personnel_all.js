@@ -62,7 +62,7 @@ async function fetchDataAndPopulateTable() {
         const { dataSet } = fetchDataset(api);
         const { dataTwo, dataThree } = await dataSet();
 
-        // console.log(data)
+        // console.log(dataTwo)
         // console.log(latestTimeElement)
         if (dataTwo || dataThree) {
             populateTable(dataTwo, dataThree);
@@ -75,9 +75,10 @@ async function fetchDataAndPopulateTable() {
 
 }
 
-async function populateTable(data, dataTwo, dataThree) {
+async function populateTable(dataTwo, dataThree) {
     if (dataTwo || dataThree) {
-        // console.log(data)
+        console.log(dataThree)
+        console.log(dataTwo)
         // const pageContentElement = document.getElementById('data');
         const pageContentElementings = document.getElementById('dataTwo');
         const pageContentElements = document.getElementById('dataThree');
@@ -96,6 +97,7 @@ async function populateTable(data, dataTwo, dataThree) {
         //     sermonTitle.textContent = item.title;
 
         //     const sermonContent = document.createElement('p');
+            // namePTwo.style.fontWeight = 'bold';
         //     sermonContent.textContent = item.content;
 
         //     sectionHeading.appendChild(sermonTitle);
@@ -111,7 +113,7 @@ async function populateTable(data, dataTwo, dataThree) {
 
             // Create div element with class 'col-12', 'col-sm-6', 'col-lg-4'
             const colDivTwo = document.createElement('div');
-            colDivTwo.classList.add('col-12', 'col-md-3', 'col-lg-2', 'my-2', "mx-0.5");
+            colDivTwo.classList.add('col-12', 'col-md-6', 'col-lg-4', 'my-2', "mx-0.5");
             colDivTwo.style.boxShadow = '1.4px 5px 9px rgba(0, 0, 0, 0.2)'; // Add box shadow style here
 
             // Create div element with class 'single-latest-sermons', 'mb-100'
@@ -141,13 +143,16 @@ async function populateTable(data, dataTwo, dataThree) {
 
             // Create p elements for each piece of data
             const namePTwo = document.createElement('p');
-            namePTwo.innerHTML = `<i class="fa fa-user" aria-hidden="true"></i> name: <span>${item.name} ff </span>`;
+            namePTwo.style.fontWeight = 'bold';
+            namePTwo.innerHTML = `<i class="fa fa-user" aria-hidden="true"></i> Name: <span style='font-weight: 500;'>${item.name}</span>`;
 
             const emailPTwo = document.createElement('p');
-            emailPTwo.innerHTML = `<i class="fa fa-tag" aria-hidden="true"></i> email: <span>${item.email}</span>`;
+            emailPTwo.style.fontWeight = 'bold';
+            emailPTwo.innerHTML = `<i class="fa fa-tag" aria-hidden="true"></i> Email: <span style='font-weight: 500;'>${item.email}</span>`;
 
             const phonePTwo = document.createElement('p');
-            phonePTwo.innerHTML = `<i class="fa fa-clock-o" aria-hidden="true"></i> phone: <span>${item.phone}</span>`;
+            phonePTwo.style.fontWeight = 'bold';
+            phonePTwo.innerHTML = `<i class="fa fa-clock-o" aria-hidden="true"></i> Phone: <span style='font-weight: 500;'>${item.phone}</span>`;
 
             // Append p elements to metaDataDiv
             metaDataDivTwo.appendChild(namePTwo);
@@ -174,7 +179,10 @@ async function populateTable(data, dataTwo, dataThree) {
 
             // Create div element with class 'col-12', 'col-sm-6', 'col-lg-4'
             const colDivThree = document.createElement('div');
-            colDivThree.classList.add('col-12', 'col-sm-6', 'col-lg-4');
+            // colDivThree.classList.add('col-12', 'col-sm-6', 'col-lg-4');
+            colDivThree.classList.add('col-12', 'col-md-4', 'col-lg-4', 'my-2', "mx-0.5");
+            colDivThree.style.boxShadow = '1.4px 5px 9px rgba(0, 0, 0, 0.2)'; // Add box shadow style here
+
 
             // Create div element with class 'single-latest-sermons', 'mb-100'
             const singleDivThree = document.createElement('div');
@@ -203,13 +211,16 @@ async function populateTable(data, dataTwo, dataThree) {
 
             // Create p elements for each piece of data
             const namePThree = document.createElement('p');
-            namePThree.innerHTML = `<i class="fa fa-user" aria-hidden="true"></i> name: <span>${item.name} fff</span>`;
+            namePThree.style.fontWeight = 'bold';
+            namePThree.innerHTML = `<i class="fa fa-user" aria-hidden="true"></i> Name: <span style='font-weight: 500;'>${item.name} </span>`;
 
             const emailPThree = document.createElement('p');
-            emailPThree.innerHTML = `<i class="fa fa-tag" aria-hidden="true"></i> email: <span>${item.email}</span>`;
+            emailPThree.style.fontWeight = 'bold';
+            emailPThree.innerHTML = `<i class="fa fa-tag" aria-hidden="true"></i> Email: <span style='font-weight: 500;'>${item.email}</span>`;
 
             const phonePThree = document.createElement('p');
-            phonePThree.innerHTML = `<i class="fa fa-clock-o" aria-hidden="true"></i> phone: <span>${item.phone}</span>`;
+            phonePThree.style.fontWeight = 'bold';
+            phonePThree.innerHTML = `<i class="fa fa-clock-o" aria-hidden="true"></i> Phone: <span style='font-weight: 500;'>${item.phone}</span>`;
 
             // Append p elements to metaDataDiv
             metaDataDivThree.appendChild(namePThree);
@@ -220,7 +231,7 @@ async function populateTable(data, dataTwo, dataThree) {
             thumbnailDivThree.appendChild(imageThree)
 
             // Append thumbnailDiv and metaDataDiv to singleDiv
-            singleDivThree.appendChild(thumbnailDivThree);
+            // singleDivThree.appendChild(thumbnailDivThree);
             singleDivThree.appendChild(metaDataDivThree);
 
             // Append singleDiv to colDiv
