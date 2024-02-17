@@ -108,10 +108,10 @@ async function populateTable(data) {
 
       // Another div
       const imageColumn = document.createElement('div');
-      imageColumn.classList.add('col-12', '-pt-5', 'col-lg-6', 'bg-danger', 'w-100');
+      imageColumn.classList.add('col-12', '-pt-5', 'col-lg-6', 'w-100');
 
       const aboutThumbnail = document.createElement('div');
-      aboutThumbnail.classList.add('about-thumbnail', 'h-100', 'w-100', 'bg-info');
+      aboutThumbnail.classList.add('about-thumbnail', 'h-100', 'w-100');
 
       const image = document.createElement('img');
       image.id = 'imagery';
@@ -119,7 +119,7 @@ async function populateTable(data) {
       image.width = '350px';
       image.height = '150px';
       image.style.width = '100%';
-      image.style.height = '250px';
+      image.style.height = '350px';
       image.style.objectFit = 'cover';
       image.style.cursor = 'pointer';
 

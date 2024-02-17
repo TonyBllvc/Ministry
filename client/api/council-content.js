@@ -77,7 +77,7 @@ function populateTable(data, dataTwo) {
         const pageContentElement = document.getElementById('pageContent');
 
         data.forEach(item => {
-            pageContentElement.classList.add('row', 'mb-5');
+            pageContentElement.classList.add('row', 'my-5');
 
             // Create div element with class 'col-12', 'col-sm-6', 'col-lg-4'
             const colDivTwo = document.createElement('div');
@@ -124,7 +124,7 @@ function populateTable(data, dataTwo) {
 
             // Create p elements for each piece of data
             const officePTwo = document.createElement('p');
-            officePTwo.innerHTML = `<i class="fa fa-tag" aria-hidden="true"></i> Email: <span>${item.office}</span>`;
+            officePTwo.innerHTML = `<i class="fa fa-tag" aria-hidden="true"></i> Portfolio: <span>${item.office}</span>`;
 
             const namePTwo = document.createElement('p');
             namePTwo.innerHTML = `<i class="fa fa-user" aria-hidden="true"></i> Name: <span>${item.name}</span>`;
@@ -145,7 +145,7 @@ function populateTable(data, dataTwo) {
             thumbnailDivTwo.appendChild(imageTwo)
 
             // Append thumbnailDiv and metaDataDiv to singleDiv
-            singleDivTwo.appendChild(thumbnailDivTwo);
+            // singleDivTwo.appendChild(thumbnailDivTwo);
             singleDivTwo.appendChild(metaDataDivTwo);
 
             // Append singleDiv to colDiv
@@ -163,7 +163,7 @@ function populateTable(data, dataTwo) {
         const pageContentElement = document.getElementById('pageContentTwo');
 
         dataTwo.forEach(item => {
-            pageContentElement.classList.add('row', 'mb-5');
+            pageContentElement.classList.add('row', 'my-5');
             // pageContentElement.style.border = "1px solid black"
             
             // Create div element with class 'col-12', 'col-sm-6', 'col-lg-4'
@@ -223,7 +223,7 @@ function populateTable(data, dataTwo) {
             thumbnailDivTwo.appendChild(imageTwo)
 
             // Append thumbnailDiv and metaDataDiv to singleDiv
-            singleDivTwo.appendChild(thumbnailDivTwo);
+            // singleDivTwo.appendChild(thumbnailDivTwo);
             singleDivTwo.appendChild(metaDataDivTwo);
 
             // Append singleDiv to colDiv

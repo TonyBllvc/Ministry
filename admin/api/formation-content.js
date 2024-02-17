@@ -282,9 +282,19 @@ function handleImageChange(event) {
   const imageContainer = document.getElementById('imageContainer');
   const imageInput = event.target;
   const form = document.getElementById('updateCouncil');
+  const MAX_FILE_SIZE = 1024 * 1024 * 1.5; // 1.5MB in bytes
 
   if (imageInput.files && imageInput.files[0]) {
+    const file = imageInput.files[0];
     const reader = new FileReader();
+
+    // console.log(file.size)
+    if (file.size > MAX_FILE_SIZE) {
+      alert('File size can not exceed 1.5MB. Please choose a smaller file.');
+      imageInput.value = ''; // Reset the file input
+      imagePreview.src = ''; // Clear the image preview
+      return;
+    }
 
     reader.onload = function (e) {
       // Create an image element
@@ -438,11 +448,10 @@ async function handleUpdate() {
     console.error('Error submitting data:', error);
   }
 }
+// const form = document.getElementById('updateCouncil');
+// form.enctype = "multipart/form-data"
+// form.addEventListener('submit', handleUpdate);
 
-
-const form = document.getElementById('updateCouncil');
-form.enctype = "multipart/form-data"
-form.addEventListener('submit', handleUpdate);
 
 async function handleDelete() {
   const { deleteData } = deleteDataset(api)

@@ -180,41 +180,41 @@
     /* Add !important to override other CSS rules */
     .classy-menu ul ul {
         display: none !important;
-        position: fixed !important;
+        position: absolute !important;
         z-index: 500 !important;
         margin: 0 !important;
         top: 0 !important;
         right: 0 !important;
         left: 0 !important;
-        margin-left: 37% !important;
-        margin-top: 10rem !important;
+        margin-left: 8rem !important;
+        margin-top: 2rem !important;
         margin-right: 2rem !important;
     }
 
     /* New styles to show the dropdown menu when hovering over the "Mission" menu item */
     .classynav ul>li:nth-child(2):hover .first {
         display: block !important;
-        position: fixed !important;
+        position: absolute !important;
         z-index: 500 !important;
         margin: 0 !important;
         top: 0 !important;
         right: 0 !important;
         left: 0 !important;
-        margin-left: 37% !important;
-        margin-top: 10rem !important;
+        margin-left: 7.5rem !important;
+        /* margin-top: 0.7rem !important; */
         margin-right: 2rem !important;
     }
 
     .classynav ul>li:nth-child(3):hover .second {
         display: block !important;
-        position: fixed !important;
+        position: absolute !important;
         z-index: 500 !important;
         margin: 0 !important;
         top: 0 !important;
         right: 0 !important;
         left: 0 !important;
-        margin-left: 37% !important;
-        margin-top: 10rem !important;
+        margin-left: 7.5rem !important;
+        /* margin-top: 0.7rem !important; */
         margin-right: 2rem !important;
     }
 
