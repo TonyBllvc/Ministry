@@ -11,7 +11,7 @@ import { MongoClient } from "mongodb";
 import Grid from 'gridfs-stream';
 
 let gfs
-const conn = mongoose.createConnection('mongodb://127.0.0.1:27017/', {
+const conn = mongoose.createConnection('mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // useCreateIndex: true
@@ -27,7 +27,7 @@ conn.once('open', () => {
 // export function grid() {
 const storage = new GridFsStorage({
     // db: promise,
-    url: 'mongodb://127.0.0.1:27017/',
+    url: 'mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.net/?retryWrites=true&w=majority',
     cache: true,
     options: {
         // useUnifiedTopology: true

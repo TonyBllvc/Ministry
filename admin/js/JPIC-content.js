@@ -1,4 +1,4 @@
-const api = 'https://spiritan.vercel.app/api/jpic'
+const api = 'https://spiritan-tonybllvc.vercel.app/api/jpic'
 let data
 let pending = false
 
