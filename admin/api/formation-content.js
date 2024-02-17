@@ -1,7 +1,7 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
 const api = 'http://localhost:4242/api/formation'
-const updateApi = 'http://localhost:4242/api/formation/upload'
+const Api = 'http://localhost:4242/api/formation/upload'
 let data
 let pending = false
 
@@ -108,6 +108,11 @@ function updateDatasetWithImage(url) {
 
   async function updateDataWithImage(formData) {
 
+
+    const form = document.getElementById('updateCouncil');
+    // form.addEventListener('submit', handleUpdate);
+    form.enctype = "multipart/form-data"
+    form.method = "PUT"
     // data = null
     // const details = {
     //   id: id,
@@ -115,15 +120,16 @@ function updateDatasetWithImage(url) {
     //   content: content
     // };
     // console.log(data)
-    pending = true
+    // pending = true
     try {
       const response = await fetch(url, {
         method: 'PUT',
         // headers: {
-        //   'Content-Type': 'application/json',
+        //   'Accept': '*/*',
+        //   'Content-Type': 'multipart/form-data',
         // },
         // body: JSON.stringify(details),
-        body: formData
+        body: formData,
       });
 
       const json = await response.json()
@@ -137,15 +143,15 @@ function updateDatasetWithImage(url) {
       if (response.status === 400 || response.status === 404) {
         console.log(json?.message || json?.error)
       } else if (response.status === 201) {
-        console.log(json?.content || 'nothing')
+        console.log(json?.table || 'nothing')
         console.log(json?.message)
         // return data = json?.content
       }
-      pending = false
+      // pending = false
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message + "from here")
     };
-    pending = false
+    // pending = false
   }
 
   return { updateDataWithImage, pending }
@@ -275,6 +281,7 @@ populateTable();
 function handleImageChange(event) {
   const imageContainer = document.getElementById('imageContainer');
   const imageInput = event.target;
+  const form = document.getElementById('updateCouncil');
 
   if (imageInput.files && imageInput.files[0]) {
     const reader = new FileReader();
@@ -285,8 +292,8 @@ function handleImageChange(event) {
       // const imagePreview = document.createElement('img');
       imagePreview.src = e.target.result;
       // imagePreview.alt = 'Image Preview';
-      // imagePreview.style.maxWidth = '100%';
-      // imagePreview.style.maxHeight = '150px';
+      imagePreview.style.maxWidth = '100%';
+      imagePreview.style.maxHeight = '150px';
 
       // Clear previous image previews
       // imageContainer.style.;
@@ -301,8 +308,12 @@ function handleImageChange(event) {
 
   const image = document.getElementById('image').files[0];
 
+  // const image = document.getElementById('image').files[0];
+  // const Id = document.getElementById('imageU').value
+  // var id = document.getElementById('id').value
   console.log(image)
-
+  form.enctype = "multipart/form-data"
+  console.log(form.enctype)
   console.log(document.getElementById('imageU').value)
 }
 
@@ -328,6 +339,13 @@ async function editRow(id) {
   document.getElementById('id').value = id || _id
 
   console.log(document.getElementById('imageU').value)
+
+  const image = document.getElementById('image').files[0];
+
+  // const image = document.getElementById('image').files[0];
+  // const Id = document.getElementById('imageU').value
+  // var id = document.getElementById('id').value
+  console.log(image)
   // Set the src attribute of the img element to the URL of the image
   const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
   document.getElementById('imageU').src = imageUrl;
@@ -372,7 +390,9 @@ function cancelBtn() {
 // Function to update a dataset on the table
 async function handleUpdate() {
   const { updateData } = updateDataset(api)
-  const { updateDataWithImage } = updateDatasetWithImage(updateApi)
+  const { updateDataWithImage } = updateDatasetWithImage(Api)
+
+  // const form = document.getElementById('updateCouncil');
 
   var title = document.getElementById('title').value
   var content = document.getElementById('content').value
@@ -382,36 +402,47 @@ async function handleUpdate() {
   var id = document.getElementById('id').value
 
 
-  const formData = new FormData();
-  formData.append('title', title);
-  formData.append('content', content);
-  formData.append('image', image);
-  formData.append('id', id);
-  formData.append('Id', Id);
-
   // console.log(id + " " + image + " " + Id)
-  if (!image) {
-  //   // console.log('no image')
-    await updateData(id, title, content)
+  try {
+    if (image) {
 
-    document.getElementById("updateCouncil").style.display = 'none'
-    document.getElementById("deleteCouncil").style.display = 'none'
-    document.getElementById("fetchCouncil").style.display = 'flex'
+      const formData = new FormData();
+      formData.append('id', id);
+      formData.append('title', title);
+      formData.append('content', content);
+      formData.append('image', image);
+      formData.append('Id', Id);
+      // form.enctype = "multipart/form-data"
+      // console.log('yes image')
+      await updateDataWithImage(formData)
+      //   // // alert('Working:' + title + " " + content + " ")
+      //   // // localStorage.setItem('jwt', JSON.stringify({ title: title }))
 
-    return
-  } else if (image) {
+      document.getElementById("updateCouncil").style.display = 'none'
+      document.getElementById("deleteCouncil").style.display = 'none'
+      document.getElementById("fetchCouncil").style.display = 'flex'
+      return
+    }
 
-    console.log('yes image')
-    await updateDataWithImage(formData)
-  //   // // alert('Working:' + title + " " + content + " ")
-  //   // // localStorage.setItem('jwt', JSON.stringify({ title: title }))
+    if (!image || image == undefined) {
+      //   // console.log('no image')
+      await updateData(id, title, content)
 
-    document.getElementById("updateCouncil").style.display = 'none'
-    document.getElementById("deleteCouncil").style.display = 'none'
-    document.getElementById("fetchCouncil").style.display = 'flex'
-    return
+      document.getElementById("updateCouncil").style.display = 'none'
+      document.getElementById("deleteCouncil").style.display = 'none'
+      document.getElementById("fetchCouncil").style.display = 'flex'
+
+      return
+    }
+  } catch (error) {
+    console.error('Error submitting data:', error);
   }
 }
+
+
+const form = document.getElementById('updateCouncil');
+form.enctype = "multipart/form-data"
+form.addEventListener('submit', handleUpdate);
 
 async function handleDelete() {
   const { deleteData } = deleteDataset(api)
