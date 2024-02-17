@@ -1,7 +1,7 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
 const api = 'http://localhost:4242/api/formation'
-// const updateApi = 'http://localhost:4242/api/jpic'
+const updateApi = 'http://localhost:4242/api/formation/upload'
 let data
 let pending = false
 
@@ -104,14 +104,63 @@ function updateDataset(url) {
 }
 
 
+function updateDatasetWithImage(url) {
+
+  async function updateDataWithImage(formData) {
+
+    // data = null
+    // const details = {
+    //   id: id,
+    //   title: title,
+    //   content: content
+    // };
+    // console.log(data)
+    pending = true
+    try {
+      const response = await fetch(url, {
+        method: 'PUT',
+        // headers: {
+        //   'Content-Type': 'application/json',
+        // },
+        // body: JSON.stringify(details),
+        body: formData
+      });
+
+      const json = await response.json()
+      console.log(response.status)
+
+      if (response.status === 401) {
+
+        console.log(json?.message || json?.error)
+      }
+
+      if (response.status === 400 || response.status === 404) {
+        console.log(json?.message || json?.error)
+      } else if (response.status === 201) {
+        console.log(json?.content || 'nothing')
+        console.log(json?.message)
+        // return data = json?.content
+      }
+      pending = false
+    } catch (error) {
+      console.log(error.message)
+    };
+    pending = false
+  }
+
+  return { updateDataWithImage, pending }
+
+}
+
+
 function deleteDataset(url) {
 
-  async function deleteData(id) {
+  async function deleteData(id, Id) {
 
     // data = null
     const details = {
       id: id,
-      // Id: Id,
+      Id: Id,
       // content: content
     };
     // console.log(data)
@@ -222,6 +271,40 @@ async function populateTable(data) {
 // Call the function to populate the table
 populateTable();
 
+// Function to handle image selection and preview
+function handleImageChange(event) {
+  const imageContainer = document.getElementById('imageContainer');
+  const imageInput = event.target;
+
+  if (imageInput.files && imageInput.files[0]) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      // Create an image element
+      const imagePreview = document.getElementById('imageU')
+      // const imagePreview = document.createElement('img');
+      imagePreview.src = e.target.result;
+      // imagePreview.alt = 'Image Preview';
+      // imagePreview.style.maxWidth = '100%';
+      // imagePreview.style.maxHeight = '150px';
+
+      // Clear previous image previews
+      // imageContainer.style.;
+
+      // Append the new image preview to the image container
+      // imageContainer.appendChild(imagePreview);
+    };
+
+    // Read the selected image file
+    reader.readAsDataURL(imageInput.files[0]);
+  }
+
+  const image = document.getElementById('image').files[0];
+
+  console.log(image)
+
+  console.log(document.getElementById('imageU').value)
+}
 
 // Function to confirm edit data into the table
 async function editRow(id) {
@@ -233,17 +316,21 @@ async function editRow(id) {
 
 
   // Access individual properties of the selected object
-  const { title, content, _id } = selectedData;
+  const { title, content, _id, id: Id, images } = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
   document.getElementById("updateCouncil").style.display = 'flex'
 
-
   // pass values from api to each element
   document.getElementById('title').value = title
   document.getElementById('content').value = content
+  document.getElementById('imageU').value = Id
   document.getElementById('id').value = id || _id
 
+  console.log(document.getElementById('imageU').value)
+  // Set the src attribute of the img element to the URL of the image
+  const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
+  document.getElementById('imageU').src = imageUrl;
 }
 
 
@@ -256,7 +343,7 @@ async function deleteRow(id) {
   const selectedData = data.find(data => data._id === id);
 
   // Access individual properties of the selected object
-  const { title, content, _id } = selectedData;
+  const { title, content, _id, id: Id, images } = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'flex'
@@ -265,12 +352,13 @@ async function deleteRow(id) {
   // pass values from api to each element
   document.getElementById('titleD').value = title
   document.getElementById('contentD').value = content
-  // document.getElementById('imageD').value = Id
+  document.getElementById('imageD').value = Id
   document.getElementById('idD').value = id || _id
 
+  console.log(document.getElementById('imageD').value)
   // Set the src attribute of the img element to the URL of the image
-  // const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
-  // document.getElementById('imageD').src = imageUrl;
+  const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
+  document.getElementById('imageD').src = imageUrl;
 }
 
 // Function to cancel any update/delete to the data into the table
@@ -284,28 +372,55 @@ function cancelBtn() {
 // Function to update a dataset on the table
 async function handleUpdate() {
   const { updateData } = updateDataset(api)
+  const { updateDataWithImage } = updateDatasetWithImage(updateApi)
 
   var title = document.getElementById('title').value
   var content = document.getElementById('content').value
+  // const image = document.getElementById('image').value
+  const image = document.getElementById('image').files[0];
+  const Id = document.getElementById('imageU').value
   var id = document.getElementById('id').value
 
-  await updateData(id, title, content)
-  // alert('Working:' + title + " " + content + " ")
-  // localStorage.setItem('jwt', JSON.stringify({ title: title }))
 
-  document.getElementById("updateCouncil").style.display = 'none'
-  document.getElementById("deleteCouncil").style.display = 'none'
-  document.getElementById("fetchCouncil").style.display = 'flex'
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('content', content);
+  formData.append('image', image);
+  formData.append('id', id);
+  formData.append('Id', Id);
+
+  // console.log(id + " " + image + " " + Id)
+  if (!image) {
+  //   // console.log('no image')
+    await updateData(id, title, content)
+
+    document.getElementById("updateCouncil").style.display = 'none'
+    document.getElementById("deleteCouncil").style.display = 'none'
+    document.getElementById("fetchCouncil").style.display = 'flex'
+
+    return
+  } else if (image) {
+
+    console.log('yes image')
+    await updateDataWithImage(formData)
+  //   // // alert('Working:' + title + " " + content + " ")
+  //   // // localStorage.setItem('jwt', JSON.stringify({ title: title }))
+
+    document.getElementById("updateCouncil").style.display = 'none'
+    document.getElementById("deleteCouncil").style.display = 'none'
+    document.getElementById("fetchCouncil").style.display = 'flex'
+    return
+  }
 }
 
 async function handleDelete() {
   const { deleteData } = deleteDataset(api)
-   // const title = document.getElementById('titleD').value
+  // const title = document.getElementById('titleD').value
   // const content = document.getElementById('contentD').value
   const id = document.getElementById('idD').value
-  // const Id = document.getElementById('imageD').value
+  const Id = document.getElementById('imageD').value
 
-  await deleteData(id)
+  await deleteData(id, Id)
   // alert('Working:' + title + " " + content + " ")
 
 

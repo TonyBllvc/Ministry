@@ -106,12 +106,12 @@ function updateDataset(url) {
 
 function deleteDataset(url) {
 
-  async function deleteData(id) {
+  async function deleteData(id, Id) {
 
     // data = null
     const details = {
       id: id,
-      // Id: Id,
+      Id: Id,
       // content: content
     };
     // console.log(data)
@@ -222,6 +222,33 @@ async function populateTable(data) {
 // Call the function to populate the table
 populateTable();
 
+// Function to handle image selection and preview
+function handleImageChange(event) {
+    const imageContainer = document.getElementById('imageContainer');
+    const imageInput = event.target;
+
+    if (imageInput.files && imageInput.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            // Create an image element
+            const imagePreview = document.createElement('img');
+            imagePreview.src = e.target.result;
+            imagePreview.alt = 'Image Preview';
+            imagePreview.style.maxWidth = '100%';
+            imagePreview.style.maxHeight = '150px';
+
+            // Clear previous image previews
+            imageContainer.innerHTML = '';
+
+            // Append the new image preview to the image container
+            imageContainer.appendChild(imagePreview);
+        };
+
+        // Read the selected image file
+        reader.readAsDataURL(imageInput.files[0]);
+    }
+}
 
 // Function to confirm edit data into the table
 async function editRow(id) {
@@ -256,7 +283,7 @@ async function deleteRow(id) {
   const selectedData = data.find(data => data._id === id);
 
   // Access individual properties of the selected object
-  const { title, content, _id,  } = selectedData;
+  const { title, content, _id, id: Id, images  } = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'flex'
@@ -265,12 +292,12 @@ async function deleteRow(id) {
   // pass values from api to each element
   document.getElementById('titleD').value = title
   document.getElementById('contentD').value = content
-  // document.getElementById('imageD').value = Id
+  document.getElementById('imageD').value = Id
   document.getElementById('idD').value = id || _id
 
   // Set the src attribute of the img element to the URL of the image
-  // const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
-  // document.getElementById('imageD').src = imageUrl;
+  const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
+  document.getElementById('imageD').src = imageUrl;
 }
 
 // Function to cancel any update/delete to the data into the table
@@ -303,9 +330,9 @@ async function handleDelete() {
   // const title = document.getElementById('titleD').value
   // const content = document.getElementById('contentD').value
   const id = document.getElementById('idD').value
-  // const Id = document.getElementById('imageD').value
+  const Id = document.getElementById('imageD').value
 
-  await deleteData(id)
+  await deleteData(id, Id)
   // alert('Working:' + title + " " + content + " ")
 
   // After the asynchronous operation is complete, reload the page

@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Admin Control Panel</title>
-    
+
     <script src="api/formation-content.js"></script>
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -177,6 +177,7 @@
                                     <tr>
                                         <th>Title</th>
                                         <th>Content</th>
+                                        <th>Image</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -191,6 +192,30 @@
                                             <textarea id="content" class="form-control px-2 py-3" rows="4" cols="25"
                                                 placeholder="Content.." required>
                                           </textarea>
+                                        </td>
+                                        <td>
+                                            <div id="imageContainer"
+                                                style="width: 200px; height: 170px; text-align: center;">
+                                                <img id="imageU" alt="image_item" width="100%" height="100%">
+                                                <input class="form-control" type="hidden" id="imageU" class="form-control px-2"
+                                                    style="color: black; font-size: medium; font-weight: 600"
+                                                    placeholder="Content.." disabled>
+                                                <!-- Image preview will be displayed here -->
+                                            </div>
+                                            <!-- Hidden file input -->
+                                            <input type="file" id="image" class="form-control" name="image" accept="image/*"
+                                                style="display: none;" onchange="handleImageChange(event)" >
+                                            <!-- Download icon -->
+                                            <a href="#"
+                                                style="display: flex; align-items: center; justify-content: center;"
+                                                onclick="document.getElementById('image').click(); return false;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    strokeWidth={1.5} stroke="currentColor"
+                                                    style="width: 150px; height: 80px;">
+                                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                                </svg>
+                                            </a>
                                         </td>
                                         <td>
                                             <input type="hidden" id="id" class="form-control px-2"
@@ -240,7 +265,7 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Content</th>
-                                    <!-- <th>Image</th> -->
+                                    <th>Image</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -255,12 +280,12 @@
                                             style="color: black; font-size: medium; font-weight: 600"
                                             placeholder="Content.." disabled>
                                     </td>
-                                    <!-- <td  style="width: 250px; height: 150px;">
+                                    <td style="width: 250px; height: 150px;">
                                         <img id="imageD" alt="image_item" width="100%" height="100%">
                                         <input type="hidden" id="imageD" class="form-control px-2"
                                             style="color: black; font-size: medium; font-weight: 600"
                                             placeholder="Content.." disabled>
-                                    </td> -->
+                                    </td>
                                     <td>
                                         <input type="hidden" id="idD" class="form-control px-2"
                                             style="color: black; font-size: medium; font-weight: 600"
@@ -318,15 +343,15 @@
                                 <!-- <tr class="table-danger">
                                     <td colspan="1" class="text-center text-danger"
                                         style="font-size: large; font-weight: 700; width: 20%; word-break: break-all;">
-                                        Are you sure you want to delete gdfgggggggggggggggggggggggggfgggfgfgfgfgddddddddddd
+                                        Are you sure you want to delete 
                                         this?</td>
                                 </tr> -->
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div id="latestTime" class="card-footer small text-muted"> 
-                    
+                <div id="latestTime" class="card-footer small text-muted">
+
                 </div>
             </div>
 

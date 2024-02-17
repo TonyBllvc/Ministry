@@ -3,6 +3,7 @@ import mongoose from "mongoose"
 import Information from "../model/informationModel.js";
 import moment from "moment";
 import { GridFSBucket, MongoClient, ObjectId } from "mongodb";
+import formidable from "formidable";
 
 const url = 'mongodb://127.0.0.1:27017/'
 const baseUrl = ' http://localhost:4242/api/image/upload/'
@@ -87,18 +88,18 @@ const sortContent = asyncHandler(async (req, res) => {
 //@access   Public
 const createContent = asyncHandler(async (req, res) => {
     const { title, content } = req.body
-    // const { file } = req
+    const { file } = req
 
     try {
-        // if (!file) {
-        //     throw new Error('Field name "image" missing in form data');
-        // }
+        if (!file) {
+            throw new Error('Field name "image" missing in form data');
+        }
 
         var createContent = new Information({
             title,
             content,
-            // id: file.id,
-            // images: file.filename
+            id: file.id,
+            images: file.filename
         })
 
         var singleContent = await createContent.save()
@@ -114,55 +115,150 @@ const createContent = asyncHandler(async (req, res) => {
 // @desc    Create content
 // route    PATCH /api/content/:id
 //@access   Public
+// access   Public
 const updateContent = asyncHandler(async (req, res) => {
 
-    // const { title, id, content } = req.body
+    // const { title, Id, content, id } = req.body
 
-    // console.log(req.params.os)
-    var content = await Information.findById(req.body.id)
-    // console.log(req.body.title)
-    if (!content) {
+    const contents = await Information.findById(req.body.id)
+
+    if (!contents) {
         return res.status(404).json({ error: "Content not found" });
     }
 
     try {
-        // if (!req.file) {
-        //     return res.status(404).json({ message: "File not found" });
-        // }
-        // Find the existing file document
-        // const exist = Information.find({ images: req.body._images })
-        // const existingFile = await bucket.find({ _id: new ObjectId(req.params.id) }).toArray();
-        // if (!exist) {
-        //     // if we changed image, work with this logic instead
-        //     return res.status(404).json({ message: "File not found" });
-        // }
 
-        content.title = req.body.title || content.title
-        content.content = req.body.content || content.content
+        //     //     // Find the existing file document
+        //     //     // const existingFile = await bucket.find({ _id: new ObjectId(req.body.id) }).toArray();
+        contents.title = req.body.title || contents.title
+        contents.content = req.body.content || contents.content
 
-        await content.save();
+        await contents.save();
 
 
 
-        res.status(201).json({ content: content, message: "Content updated successfully" })
+        res.status(201).json({ content: contents, message: "Content updated successfully" })
 
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
 })
 
+
+// @desc    Handle Image independently
+// route    POST /api
+//@access   Public
+const updateWithImage = asyncHandler(async (req, res) => {
+    // const { title, content } = req.body
+    const { file } = req
+    // console.log(req.body.title)
+    // console.log('stage 1')
+    const mongoClient = new MongoClient(url);
+    await mongoClient.connect();
+
+    // console.log('stage 2')
+    const database = mongoClient.db('test'); // Adjust database name if needed
+    const bucket = new GridFSBucket(database, { bucketName: 'images' });
+
+    // console.log('stage 3')
+    try {
+        console.log(req.body.title)
+        if (!file) {
+            throw new Error('Field name "image" missing in form data');
+        }
+        // console.log('stage 1b')
+
+        // await bucket.delete(data.id);
+        await bucket.delete(new ObjectId(req.body.Id));
+
+        // console.log('stage 1c')
+        const contents = await Information.findById(req.body.id)
+
+        // console.log('stage d')
+        if (!contents) {
+            // console.log('stage er')
+            return res.status(404).json({ error: "Content not found" });
+        }
+        // console.log('stage 2a')
+
+        contents.title = req.body.title || contents.title
+        contents.content = req.body.content || contents.content
+        contents.id = file.id
+        contents.images = file.filename
+
+        // console.log('stage 2b')
+        await contents.save()
+        // await contents.save()
+
+        // console.log('stage 3')
+        res.status(201).json({ table: contents, message: "Content created Successfully" })
+    } catch {
+        console.log("Not Done")
+        res.status(400).json({ error: error.message })
+    }
+
+});
+
+// const updateContent = asyncHandler(async (req, res) => {
+
+//     const { title, id, content } = req.body
+
+//     // console.log(req.params.os)
+//     var contents = await Information.findById(req.body._id)
+//     // console.log(req.body.title)
+//     if (!content) {
+//         return res.status(404).json({ error: "Content not found" });
+//     }
+
+//     try {
+//         if (req.file) {
+
+//             const mongoClient = new MongoClient(url);
+//             await mongoClient.connect();
+
+//             const database = mongoClient.db('test'); // Adjust database name if needed
+//             const bucket = new GridFSBucket(database, { bucketName: 'images' });
+
+//             //     // return res.status(404).json({ message: "File not found" });
+//             // }
+//             // Find the existing file document
+//             const exist = Information.find({ images: req.body._images })
+//             const existingFile = await bucket.find({ _id: new ObjectId(req.params.id) }).toArray();
+//             if (!exist) {
+//                 // if we changed image, work with this logic instead
+//                 return res.status(404).json({ message: "File not found" });
+//             }
+
+//             // if (!req.file) {
+//             //     return res.status(404).json({ message: "File not found" });
+//         }
+//         contents.title = req.body.title || contents.title
+//         contents.content = req.body.content || contents.content
+
+//         // await contents.save();
+
+
+
+//         res.status(201).json({ message: "Content updated successfully" })
+//         // res.status(201).json({ content: contents, message: "Content updated successfully" })
+
+//     } catch (error) {
+//         res.status(400).json({ error: error.message })
+//     }
+// })
+
 // @desc    Create content
 // route    DELETE /api/content/
 //@access   Public
 const deleteContent = asyncHandler(async (req, res) => {
 
-    const { id } = req.body
+    const { id, Id } = req.body
 
-    // const mongoClient = new MongoClient(url);
-    // await mongoClient.connect();
+    const mongoClient = new MongoClient(url);
+    await mongoClient.connect();
 
-    // const database = mongoClient.db('test'); // Adjust database name if needed
-    // const bucket = new GridFSBucket(database, { bucketName: 'images' });
+    const database = mongoClient.db('test'); // Adjust database name if needed
+    const bucket = new GridFSBucket(database, { bucketName: 'images' });
 
     // console.log(id + " " + Id)
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -179,7 +275,7 @@ const deleteContent = asyncHandler(async (req, res) => {
             return res.status(404).json({ error: "Content not found" });
         }
 
-        // await bucket.delete(new ObjectId(Id));
+        await bucket.delete(new ObjectId(Id));
 
         const result = await Information.findByIdAndDelete({ _id: id })
 
@@ -200,6 +296,7 @@ export {
     sortContent,
     createContent,
     updateContent,
+    updateWithImage,
     deleteContent,
 }
 

@@ -106,12 +106,12 @@ function updateDataset(url) {
 
 function deleteDataset(url) {
 
-  async function deleteData(id) {
+  async function deleteData(id, Id) {
 
     // data = null
     const details = {
       id: id,
-      // Id: Id,
+      Id: Id,
       // content: content
     };
     // console.log(data)
@@ -181,7 +181,7 @@ async function fetchDataAndPopulateTable() {
 
 // Function to populate data into the table
 async function populateTable(data) {
-  
+
   if (data) {
     // console.log(data)
     const tableBody = document.querySelector('#dataTable tbody');
@@ -257,7 +257,7 @@ async function deleteRow(id) {
   const selectedData = data.find(data => data._id === id);
 
   // Access individual properties of the selected object
-  const { title, content, _id } = selectedData;
+  const { title, content, _id, id: Id, images } = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'flex'
@@ -304,9 +304,9 @@ async function handleDelete() {
   // const title = document.getElementById('titleD').value
   // const content = document.getElementById('contentD').value
   const id = document.getElementById('idD').value
-  // const Id = document.getElementById('imageD').value
+  const Id = document.getElementById('imageD').value
 
-  await deleteData(id)
+  await deleteData(id, Id)
   // alert('Working:' + title + " " + content + " ")
 
   // After the asynchronous operation is complete, reload the page

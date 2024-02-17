@@ -85,19 +85,19 @@ const sortContent = asyncHandler(async (req, res) => {
 //@access   Public
 const createContent = asyncHandler(async (req, res) => {
     const { title, content } = req.body
-    // const { file } = req
+    const { file } = req
 
     try {
 
-        // if (!file) {
-        //     throw new Error('Field name "image" missing in form data');
-        // }
+        if (!file) {
+            throw new Error('Field name "image" missing in form data');
+        }
 
         var createContent = new Jpic({
             title,
             content,
-            // id: file.id,
-            // images: file.filename
+            id: file.id,
+            images: file.filename
         })
 
         var singleContent = await createContent.save()
@@ -116,13 +116,13 @@ const createContent = asyncHandler(async (req, res) => {
 const updateContent = asyncHandler(async (req, res) => {
     var content = await Jpic.findById(req.body.id)
 
-    // const { file } = req
+    const { file } = req
 
-    // const mongoClient = new MongoClient(url);
-    // await mongoClient.connect();
+    const mongoClient = new MongoClient(url);
+    await mongoClient.connect();
 
-    // const database = mongoClient.db('test'); // Adjust database name if needed
-    // const bucket = new GridFSBucket(database, { bucketName: 'images' });
+    const database = mongoClient.db('test'); // Adjust database name if needed
+    const bucket = new GridFSBucket(database, { bucketName: 'images' });
 
     if (!content) {
         return res.status(404).json({ error: "Content not found" });
@@ -130,11 +130,11 @@ const updateContent = asyncHandler(async (req, res) => {
     console.log(req.body.content)
 
     try {
-        // if (structure.length > 0) {
-        //     for (const data of structure) {
-        //         await bucket.delete(data.id);
-        //     }
-        // }
+        if (structure.length > 0) {
+            for (const data of structure) {
+                await bucket.delete(data.id);
+            }
+        }
 
         content.title = req.body.title || content.title
         content.content = req.body.content || content.content
@@ -152,17 +152,72 @@ const updateContent = asyncHandler(async (req, res) => {
     }
 })
 
+
+// @desc    Handle Image independently
+// route    POST /api
+//@access   Public
+const updateWithImage = asyncHandler(async (req, res) => {
+    // const { title, content } = req.body
+    const { file } = req
+    // console.log(req.body.title)
+    // console.log('stage 1')
+    const mongoClient = new MongoClient(url);
+    await mongoClient.connect();
+
+    // console.log('stage 2')
+    const database = mongoClient.db('test'); // Adjust database name if needed
+    const bucket = new GridFSBucket(database, { bucketName: 'images' });
+
+    // console.log('stage 3')
+    try {
+        console.log(req.body.title)
+        if (!file) {
+            throw new Error('Field name "image" missing in form data');
+        }
+        // console.log('stage 1b')
+
+        // await bucket.delete(data.id);
+        await bucket.delete(new ObjectId(req.body.Id));
+
+        // console.log('stage 1c')
+        const contents = await Jpic.findById(req.body.id)
+
+        // console.log('stage d')
+        if (!contents) {
+            // console.log('stage er')
+            return res.status(404).json({ error: "Content not found" });
+        }
+        // console.log('stage 2a')
+
+        contents.title = req.body.title || contents.title
+        contents.content = req.body.content || contents.content
+        contents.id = file.id
+        contents.images = file.filename
+
+        // console.log('stage 2b')
+        await contents.save()
+        // await contents.save()
+
+        // console.log('stage 3')
+        res.status(201).json({ table: contents, message: "Content created Successfully" })
+    } catch {
+        console.log("Not Done")
+        res.status(400).json({ error: error.message })
+    }
+
+});
+
 // @desc    Create content
 // route    DELETE /api/content/:id
 //@access   Public
 const deleteContent = asyncHandler(async (req, res) => {
-    const { id } = req.body
+    const { id, Id } = req.body
 
-    // const mongoClient = new MongoClient(url);
-    // await mongoClient.connect();
+    const mongoClient = new MongoClient(url);
+    await mongoClient.connect();
 
-    // const database = mongoClient.db('test'); // Adjust database name if needed
-    // const bucket = new GridFSBucket(database, { bucketName: 'images' });
+    const database = mongoClient.db('test'); // Adjust database name if needed
+    const bucket = new GridFSBucket(database, { bucketName: 'images' });
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: "No such document" })
@@ -175,7 +230,7 @@ const deleteContent = asyncHandler(async (req, res) => {
             return res.status(404).json({ error: "Content not found" });
         }
 
-        // await bucket.delete(new ObjectId(Id));
+        await bucket.delete(new ObjectId(Id));
 
         const result = await Jpic.findByIdAndDelete({ _id: id })
 
@@ -196,5 +251,6 @@ export {
     sortContent,
     createContent,
     updateContent,
+    updateWithImage,
     deleteContent,
 }

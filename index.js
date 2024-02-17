@@ -46,10 +46,7 @@ const app = express()
 // app.use(bodyParser.json());
 // app.use('/spiritual', express.static(path.join(__dirname + '/jpic')));
 
-app.use(express.json({
-    extended: true, //convert to true later
-    limit: '10mb'
-}))
+app.use(express.json())
 app.use(express.urlencoded({
     extended: true, //convert to true later
     limit: '10mb'
