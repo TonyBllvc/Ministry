@@ -1,7 +1,7 @@
 // import { fetchContentDataset } from '../utility/api-calls.js';
 
-const contentApi = 'http://localhost:4242/api/structure_content'
-// const updateApi = 'http://localhost:4242/api/jpic'
+const contentApi = 'https://spiritan.vercel.app/api/structure_content'
+// const updateApi = 'https://spiritan.vercel.app/api/jpic'
 let dataContent
 let pending = false
 
@@ -94,7 +94,7 @@ function populateTable(dataContent) {
             pageContentElement.querySelector('p').textContent = dataContent.content;
             // }
             // Set the src attribute of the image
-            const imageUrl = `http://localhost:4242/api/image/upload/${dataContent.images}`;
+            const imageUrl = `https://spiritan.vercel.app/api/image/upload/${dataContent.images}`;
             // imagePreview.setAttribute('src', imageUrl);
             document.getElementById('imageC').src = imageUrl;
 

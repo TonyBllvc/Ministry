@@ -1,7 +1,7 @@
 // import { fetchContentDataset } from '../utility/api-calls.js';
 
-const contentApi = 'http://localhost:4242/api/house_all/organisation'
-// const updateApi = 'http://localhost:4242/api/jpic'
+const contentApi = 'https://spiritan.vercel.app/api/house_all/organisation'
+// const updateApi = 'https://spiritan.vercel.app/api/jpic'
 let data
 let pending = false
 
@@ -114,7 +114,7 @@ function populateTable(data, dataTwo) {
             imageTwo.style.objectFit = 'cover';
             imageTwo.style.cursor = 'pointer';
 
-            const imageUrlTwo = `http://localhost:4242/api/image/upload/${item.images}`;
+            const imageUrlTwo = `https://spiritan.vercel.app/api/image/upload/${item.images}`;
             imageTwo.src = imageUrlTwo;
 
             // Create div element with class 'sermons-meta-data'
@@ -192,7 +192,7 @@ function populateTable(data, dataTwo) {
             imageTwo.style.objectFit = 'cover';
             imageTwo.style.cursor = 'pointer';
 
-            const imageUrlTwo = `http://localhost:4242/api/image/upload/${item.images}`;
+            const imageUrlTwo = `https://spiritan.vercel.app/api/image/upload/${item.images}`;
             imageTwo.src = imageUrlTwo;
 
             // Create div element with class 'sermons-meta-data'

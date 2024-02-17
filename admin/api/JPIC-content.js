@@ -1,7 +1,7 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
-const api = 'http://localhost:4242/api/jpic'
-const Api = 'http://localhost:4242/api/jpic/upload'
+const api = 'https://spiritan.vercel.app/api/jpic'
+const Api = 'https://spiritan.vercel.app/api/jpic/upload'
 let data
 let pending = false
 
@@ -356,7 +356,7 @@ async function editRow(id) {
   // var id = document.getElementById('id').value
   console.log(image)
   // Set the src attribute of the img element to the URL of the image
-  const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
+  const imageUrl = `https://spiritan.vercel.app/api/image/upload/${images}`;
   document.getElementById('imageU').src = imageUrl;
 }
 
@@ -384,7 +384,7 @@ async function deleteRow(id) {
   document.getElementById('idD').value = id || _id
 
   // Set the src attribute of the img element to the URL of the image
-  const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
+  const imageUrl = `https://spiritan.vercel.app/api/image/upload/${images}`;
   document.getElementById('imageD').src = imageUrl;
 }
 

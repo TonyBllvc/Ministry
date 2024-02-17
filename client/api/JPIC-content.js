@@ -1,7 +1,7 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
-const api = 'http://localhost:4242/api/jpic'
-// const updateApi = 'http://localhost:4242/api/jpic'
+const api = 'https://spiritan.vercel.app/api/jpic'
+// const updateApi = 'https://spiritan.vercel.app/api/jpic'
 let data
 let pending = false
 
@@ -124,7 +124,7 @@ async function populateTable(data) {
       image.style.cursor = 'pointer';
 
       // Set the src attribute of the img element to the URL of the image
-      const imageUrl = `http://localhost:4242/api/image/upload/${item.images}`;
+      const imageUrl = `https://spiritan.vercel.app/api/image/upload/${item.images}`;
       image.src = imageUrl;
 
       aboutThumbnail.appendChild(image);

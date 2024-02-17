@@ -1,4 +1,4 @@
-const api = 'http://localhost:4242/api/jpic'
+const api = 'https://spiritan.vercel.app/api/jpic'
 let data
 let pending = false
 
