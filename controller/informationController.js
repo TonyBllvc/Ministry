@@ -3,7 +3,6 @@ import mongoose from "mongoose"
 import Information from "../model/informationModel.js";
 import moment from "moment";
 import { GridFSBucket, MongoClient, ObjectId } from "mongodb";
-import formidable from "formidable";
 
 const url = 'mongodb://127.0.0.1:27017/'
 const baseUrl = ' http://localhost:4242/api/image/upload/'
