@@ -5,11 +5,13 @@
   "type": "module",
   "main": "index.js",
   "engines": {
-    "node": "14.x"
+    "node": "20.x"
   },
   "scripts": {
     "start": "node index.js",
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "dev": "nodemon index.js",
+    "build": "npm install && npm install --prefix admin && npm run build --prefix admin"
   },
   "keywords": [],
   "author": "",

@@ -74,7 +74,7 @@ app.use('/api/structure_content', structureContent)
 // A special call api for client pages with more than in dataset
 app.use('/api/house_all', houseAll)
 
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
     res.status(200)
     res.send('Server started')
 })
