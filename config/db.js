@@ -18,7 +18,7 @@ import mongoose from "mongoose"
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect('mongodb+srv://bllvcjboi:<password>@cluster0.sbsoszl.mongodb.net/?retryWrites=true&w=majority', {
+        const conn = await mongoose.connect('mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.net/?retryWrites=true&w=majority', {
         // const conn = await mongoose.connect('mongodb://127.0.0.1:27017/', {
             useNewUrlParser: true,
             useUnifiedTopology: true
