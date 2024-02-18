@@ -116,25 +116,25 @@ const createContent = asyncHandler(async (req, res) => {
 const updateContent = asyncHandler(async (req, res) => {
     var content = await Jpic.findById(req.body.id)
 
-    const { file } = req
+    // const { file } = req
 
-    const mongoClient = new MongoClient(url);
-    await mongoClient.connect();
+    // const mongoClient = new MongoClient(url);
+    // await mongoClient.connect();
 
-    const database = mongoClient.db('test'); // Adjust database name if needed
-    const bucket = new GridFSBucket(database, { bucketName: 'images' });
+    // const database = mongoClient.db('test'); // Adjust database name if needed
+    // const bucket = new GridFSBucket(database, { bucketName: 'images' });
 
     if (!content) {
         return res.status(404).json({ error: "Content not found" });
     }
-    console.log(req.body.content)
+    // console.log(req.body.content)
 
     try {
-        if (structure.length > 0) {
-            for (const data of structure) {
-                await bucket.delete(data.id);
-            }
-        }
+        // if (structure.length > 0) {
+        //     for (const data of structure) {
+        //         await bucket.delete(data.id);
+        //     }
+        // }
 
         content.title = req.body.title || content.title
         content.content = req.body.content || content.content
