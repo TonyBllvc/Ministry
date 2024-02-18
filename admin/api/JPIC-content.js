@@ -422,7 +422,7 @@ async function handleUpdate() {
       formData.append('image', image);
       formData.append('Id', Id);
       // form.enctype = "multipart/form-data"
-      // console.log('yes image')
+      console.log('yes image')
       await updateDataWithImage(formData)
       //   // // alert('Working:' + title + " " + content + " ")
       //   // // localStorage.setItem('jwt', JSON.stringify({ title: title }))
@@ -434,7 +434,7 @@ async function handleUpdate() {
     }
 
     if (!image || image == undefined) {
-      //   // console.log('no image')
+        console.log('no image')
       await updateData(id, title, content)
 
       document.getElementById("updateCouncil").style.display = 'none'

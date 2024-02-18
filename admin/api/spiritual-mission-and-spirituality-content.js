@@ -361,6 +361,34 @@ async function editRow(id) {
   document.getElementById('imageU').src = imageUrl;
 }
 
+
+// Function to confirm delete data into the table
+async function deleteRow(id) {
+  const { dataSet } = fetchDataset(api)
+
+  const { data } = await dataSet()
+  // Find the corresponding object in the dataSet array
+  const selectedData = data.find(data => data._id === id);
+
+  // Access individual properties of the selected object
+  const { title, content, _id, id: Id, images  } = selectedData;
+
+  document.getElementById("fetchCouncil").style.display = 'none'
+  document.getElementById("deleteCouncil").style.display = 'flex'
+
+
+  // pass values from api to each element
+  document.getElementById('titleD').value = title
+  document.getElementById('contentD').value = content
+  document.getElementById('imageD').value = Id
+  document.getElementById('idD').value = id || _id
+
+  // Set the src attribute of the img element to the URL of the image
+  const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
+  document.getElementById('imageD').src = imageUrl;
+}
+
+
 // Function to cancel any update/delete to the data into the table
 function cancelBtn() {
   document.getElementById("updateCouncil").style.display = 'none'
