@@ -12,8 +12,8 @@ import { GridFSBucket, MongoClient, ObjectId } from "mongodb";
 // import { updateStore } from "../middleware/imageTwo.js";
 
 const router = express.Router()
-const url = 'mongodb://127.0.0.1:27017/'
-const baseUrl = ' http://localhost:4242/api/image/upload/'
+const url = 'mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.net/?retryWrites=true&w=majority'
+const baseUrl = 'https://spiritan-tonybllvc.vercel.app/api/image/upload/'
 
 // router.route('/upload').post(store.single('image'), async (req, res) => {
 router.route('/upload').post(uploadMiddleware, async (req, res) => {
