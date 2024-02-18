@@ -23,6 +23,7 @@
         // }
     </script>
 
+    <script src="api/JPIC-content.js"></script>
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -212,16 +213,14 @@
                                             <div id="imageContainer"
                                                 style="width: 200px; height: 170px; text-align: center;">
                                                 <img id="imageU" alt="image_item" width="100%" height="150px">
-                                                <input class="form-control" type="hidden" id="imageU"
-                                                    class="form-control px-2"
+                                                <input class="form-control" type="hidden" id="imageU" class="form-control px-2"
                                                     style="color: black; font-size: medium; font-weight: 600"
                                                     placeholder="Content.." disabled>
                                                 <!-- Image preview will be displayed here -->
                                             </div>
                                             <!-- Hidden file input -->
-                                            <input type="file" id="image" class="form-control" name="image"
-                                                accept="image/*" style="display: none;"
-                                                onchange="handleImageChange(event)">
+                                            <input type="file" id="image" class="form-control" name="image" accept="image/*"
+                                                style="display: none;" onchange="handleImageChange(event)" >
                                             <!-- Download icon -->
                                             <a href="#"
                                                 style="display: flex; align-items: center; justify-content: center;"
@@ -355,6 +354,9 @@
                                 </tr>
                             </tfoot>
                             <tbody>
+                                <tr>
+                                    <td>djkd</td>
+                                </tr>
                                 <!-- Data goes here -->
 
                             </tbody>
@@ -404,9 +406,6 @@
                 </div>
             </div>
         </div>
-
-
-        <script src="api/JPIC-content.js"></script>
         <!-- Import external JavaScript file -->
         <!-- <script src="api/council.js"></script> -->
         <!-- Bootstrap core JavaScript-->

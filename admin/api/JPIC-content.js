@@ -6,10 +6,10 @@ let data
 let pending = false
 
 // ensures the javascript runs before the dom is served
-// document.addEventListener('DOMContentLoaded', async function () {
-// Fetch dataset and populate table
-fetchDataAndPopulateTable();
-// });
+document.addEventListener('DOMContentLoaded', async function () {
+  // Fetch dataset and populate table
+  await fetchDataAndPopulateTable();
+});
 
 function fetchDataset(url) {
 
@@ -211,7 +211,6 @@ async function fetchDataAndPopulateTable() {
 
     if (latestTimeElement) {
       const { dataSet } = fetchDataset(api);
-      
       const { data, latestUpdateTime } = await dataSet();
 
       // console.log(data)
@@ -372,7 +371,7 @@ async function deleteRow(id) {
   const selectedData = data.find(data => data._id === id);
 
   // Access individual properties of the selected object
-  const { title, content, _id, id: Id, images } = selectedData;
+  const { title, content, _id, id: Id, images  } = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'flex'
