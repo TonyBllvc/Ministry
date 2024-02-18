@@ -18,7 +18,7 @@ import image from './routes/imageOne.js'
 import structureContent from './routes/structureContent.js'
 import { notFound, errorHandler } from "./middleware/errorMiddelware.js";
 import connectDB from "./config/db.js";
-// import cors from 'cors'
+import cors from 'cors'
 import methodOverride from 'method-override';
 import path from "path";
 import { fileURLToPath } from 'url'; // Import fileURLToPath function
@@ -35,14 +35,17 @@ const app = express()
 // const stripe = new Stripe(STRIPE_SK);
 
 // const corsOptions = {
-//     origin: 'http://localhost:3000',
+//     origin: [
+// 'https://spiritan-tonybllvc.vercel.app/',
+// 'https://spiritan.vercel.app/',
+// ],
 //     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
 //     allowedHeaders: [
 //         'Content-Type', 'Authorization'
 //     ]
 // }
 
-// app.use(cors(corsOptions))
+app.use(cors())
 // app.use(bodyParser.json());
 // app.use('/spiritual', express.static(path.join(__dirname + '/jpic')));
 
