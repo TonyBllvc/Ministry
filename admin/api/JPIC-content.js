@@ -20,7 +20,7 @@ function fetchDataset(url) {
     // //     access: access,
     // // };
     // console.log(data)
-    pending = true
+    // pending = true
     try {
       const response = await fetch(url)
       //     {
@@ -45,11 +45,11 @@ function fetchDataset(url) {
         console.log(json?.latestUpdateTime || 'nothing')
         return data = json
       }
-      pending = false
+      // pending = false
     } catch (error) {
       console.log(error.message)
     };
-    pending = false
+    // pending = false
   }
 
   return { dataSet, pending }
@@ -235,10 +235,9 @@ async function fetchDataAndPopulateTable() {
 // Function to populate data into the table
 async function populateTable(data) {
   if (data) {
-    // console.log(data)
+    console.log(data)
     const tableBody = document.querySelector('#dataTable tbody');
     tableBody.innerHTML = ''; // Clear existing table rows
-
 
     // Check if data is not undefined before using it
     // if (data) {
@@ -371,7 +370,7 @@ async function deleteRow(id) {
   const selectedData = data.find(data => data._id === id);
 
   // Access individual properties of the selected object
-  const { title, content, _id, id: Id, images  } = selectedData;
+  const { title, content, _id, id: Id, images } = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'flex'
