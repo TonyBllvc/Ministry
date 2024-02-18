@@ -23,7 +23,7 @@ import methodOverride from 'method-override';
 import path from "path";
 import { fileURLToPath } from 'url'; // Import fileURLToPath function
 
-dotenv.config()
+// dotenv.config()
 
 const port = process.env.PORT || 4242
 
