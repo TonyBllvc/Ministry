@@ -1,4 +1,4 @@
-const api = 'http://localhost:4242/api/information'
+const api = 'https://spiritan-tonybllvc.vercel.app/api/information'
 const urlRedirect = '/spiritual/information-index.html'
 let data
 let pending = false

@@ -1,8 +1,8 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
-const api = 'http://localhost:4242/api/structure_organisation'
-// const contentApi = 'http://localhost:4242/api/structure_content'
-// const updateApi = 'http://localhost:4242/api/jpic'
+const api = 'https://spiritan-tonybllvc.vercel.app/api/structure_organisation'
+// const contentApi = 'https://spiritan-tonybllvc.vercel.app/api/structure_content'
+// const updateApi = 'https://spiritan-tonybllvc.vercel.app/api/jpic'
 let data
 let pending = false
 
@@ -269,7 +269,7 @@ async function deleteRow(id) {
     document.getElementById('idD').value = id || _id
 
     // Set the src attribute of the img element to the URL of the image
-    // const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
+    // const imageUrl = `https://spiritan-tonybllvc.vercel.app/api/image/upload/${images}`;
     // document.getElementById('imageD').src = imageUrl;
 }
 

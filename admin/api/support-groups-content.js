@@ -1,7 +1,7 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
-const api = 'http://localhost:4242/api/support'
-// const updateApi = 'http://localhost:4242/api/jpic'
+const api = 'https://spiritan-tonybllvc.vercel.app/api/support'
+// const updateApi = 'https://spiritan-tonybllvc.vercel.app/api/jpic'
 let data
 let pending = false
 

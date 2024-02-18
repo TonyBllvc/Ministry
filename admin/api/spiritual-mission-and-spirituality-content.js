@@ -1,7 +1,7 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
-const api = 'http://localhost:4242/api/spiritual_ms'
-// const updateApi = 'http://localhost:4242/api/jpic'
+const api = 'https://spiritan-tonybllvc.vercel.app/api/spiritual_ms'
+// const updateApi = 'https://spiritan-tonybllvc.vercel.app/api/jpic'
 let data
 let pending = false
 
@@ -357,7 +357,7 @@ async function editRow(id) {
   // var id = document.getElementById('id').value
   console.log(image)
   // Set the src attribute of the img element to the URL of the image
-  const imageUrl = `http://localhost:4242/api/image/upload/${images}`;
+  const imageUrl = `https://spiritan-tonybllvc.vercel.app/api/image/upload/${images}`;
   document.getElementById('imageU').src = imageUrl;
 }
 

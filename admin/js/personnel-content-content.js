@@ -1,4 +1,4 @@
-const api = 'http://localhost:4242/api/personnel'
+const api = 'https://spiritan-tonybllvc.vercel.app/api/personnel'
 let data
 let pending = false
 
