@@ -236,6 +236,7 @@ async function fetchDataAndPopulateTable() {
 async function populateTable(data) {
   if (data) {
     console.log(data)
+    alert(data)
     const tableBody = document.querySelector('#dataTable tbody');
     tableBody.innerHTML = ''; // Clear existing table rows
 
