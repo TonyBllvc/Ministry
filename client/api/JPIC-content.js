@@ -121,6 +121,9 @@ async function populateTable(data) {
       image.style.width = '100%';
       image.style.height = '400px';
       image.style.objectFit = 'contain';
+      image.style.backgroundPosition = 'center';
+      image.style.backgroundSize = 'contain';
+      image.style.backgroundRepeat = 'no-repeat';
       image.style.cursor = 'pointer';
 
       // Set the src attribute of the img element to the URL of the image

@@ -123,6 +123,9 @@ async function populateTable(data) {
       image.height = '400px';
       image.style.width = '100%';
       image.style.height = '400px';
+      image.style.backgroundPosition = 'center';
+      image.style.backgroundSize = 'contain';
+      image.style.backgroundRepeat = 'no-repeat';
       image.style.objectFit = 'contain';
       image.style.cursor = 'pointer';
 
