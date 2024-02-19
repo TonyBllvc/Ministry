@@ -108,7 +108,7 @@ async function populateTable(data) {
 
       // Another div
       const imageColumn = document.createElement('div');
-      imageColumn.classList.add('col-12', '-pt-5', 'col-lg-6', 'w-100');
+      imageColumn.classList.add('col-12', '-pt-5', 'col-lg-6', 'w-100', 'h-100');
 
       const aboutThumbnail = document.createElement('div');
       aboutThumbnail.classList.add('about-thumbnail', 'h-100', 'w-100');
