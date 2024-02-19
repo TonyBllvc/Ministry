@@ -116,10 +116,10 @@ async function populateTable(data) {
       const image = document.createElement('img');
       image.id = 'imagery';
       image.alt = 'image_item';
-      image.width = '350px';
-      image.height = '150px';
+      image.width = '100%';
+      image.height = '100%';
       image.style.width = '100%';
-      image.style.height = '350px';
+      image.style.height = '100%';
       image.style.objectFit = 'cover';
       image.style.cursor = 'pointer';
 
