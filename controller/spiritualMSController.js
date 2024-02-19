@@ -4,8 +4,8 @@ import SpiritualMS from "../model/spiritualModel.js";
 import moment from "moment";
 import { GridFSBucket, MongoClient, ObjectId } from "mongodb";
 
-const url = 'mongodb://127.0.0.1:27017/'
-const baseUrl = ' http://localhost:4242/api/image/upload/'
+const url = 'mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.net/?retryWrites=true&w=majority'
+// const baseUrl = ' http://localhost:4242/api/image/upload/'
 
 
 // @desc    Fetch Contents
