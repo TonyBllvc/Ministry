@@ -153,7 +153,7 @@ const updateWithImage = asyncHandler(async (req, res) => {
 
     // console.log('stage 3')
     try {
-        console.log(req.body.title)
+        // console.log(req.body.title)
         if (!file) {
             throw new Error('Field name "image" missing in form data');
         }
