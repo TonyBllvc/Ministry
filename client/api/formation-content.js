@@ -116,14 +116,14 @@ async function populateTable(data) {
       const image = document.createElement('img');
       image.id = 'imagery';
       image.alt = 'image_item';
-      image.width = '100%';
-      image.height = '100%';
+      image.width = '500px';
+      image.height = '550px';
       image.style.width = '100%';
-      image.style.height = '100%';
-      image.style.objectFit = 'cover';
+      image.style.height = '550px';
       image.style.backgroundPosition = 'center';
-      image.style.backgroundSize = 'contain';
+      image.style.backgroundSize = 'cover';
       image.style.backgroundRepeat = 'no-repeat';
+      image.style.objectFit = 'cover';
       image.style.cursor = 'pointer';
 
       // Set the src attribute of the img element to the URL of the image
