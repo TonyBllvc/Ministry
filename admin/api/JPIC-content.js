@@ -111,7 +111,6 @@ function updateDatasetWithImage(url) {
     const form = document.getElementById('updateCouncil');
     // form.addEventListener('submit', handleUpdate);
     form.enctype = "multipart/form-data"
-    form.method = "PUT"
     // data = null
     // const details = {
     //   id: id,
