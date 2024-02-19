@@ -1,4 +1,4 @@
-const api = 'https://spiritan-tonybllvc.vercel.app/api/personnel_table'
+const api = 'https://spiritan.vercel.app/api/personnel_table'
 const redirectUrl = "/spiritual/personnel-table-index.html"
 let data
 let pending = false

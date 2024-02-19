@@ -1,5 +1,5 @@
-const api = 'https://spiritan-tonybllvc.vercel.app/api/structure_organisation'
-// const secondApi = 'https://spiritan-tonybllvc.vercel.app/api/structure_content'
+const api = 'https://spiritan.vercel.app/api/structure_organisation'
+// const secondApi = 'https://spiritan.vercel.app/api/structure_content'
 const redirectUrl = "/spiritual/structure-organisation-index.html"
 let data
 let pending = false

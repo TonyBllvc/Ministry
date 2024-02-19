@@ -1,4 +1,4 @@
-const api = 'https://spiritan-tonybllvc.vercel.app/api/formation'
+const api = 'https://spiritan.vercel.app/api/formation'
 let data
 let pending = false
 
