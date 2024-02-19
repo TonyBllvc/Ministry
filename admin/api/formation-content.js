@@ -1,7 +1,7 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
-const api = 'https://spiritan-tonybllvc.vercel.app/api/formation'
-const Api = 'https://spiritan-tonybllvc.vercel.app/api/formation/upload'
+const api = 'https://spiritan.vercel.app/api/formation'
+const Api = 'https://spiritan.vercel.app/api/formation/upload'
 let data
 let pending = false
 
@@ -357,7 +357,7 @@ async function editRow(id) {
   // var id = document.getElementById('id').value
   console.log(image)
   // Set the src attribute of the img element to the URL of the image
-  const imageUrl = `https://spiritan-tonybllvc.vercel.app/api/image/upload/${images}`;
+  const imageUrl = `https://spiritan.vercel.app/api/image/upload/${images}`;
   document.getElementById('imageU').src = imageUrl;
 }
 
@@ -385,7 +385,7 @@ async function deleteRow(id) {
 
   console.log(document.getElementById('imageD').value)
   // Set the src attribute of the img element to the URL of the image
-  const imageUrl = `https://spiritan-tonybllvc.vercel.app/api/image/upload/${images}`;
+  const imageUrl = `https://spiritan.vercel.app/api/image/upload/${images}`;
   document.getElementById('imageD').src = imageUrl;
 }
 

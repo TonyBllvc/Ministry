@@ -1,7 +1,7 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
-const api = 'https://spiritan-tonybllvc.vercel.app/api/jpic'
-const Api = 'https://spiritan-tonybllvc.vercel.app/api/jpic/upload'
+const api = 'https://spiritan.vercel.app/api/jpic'
+const Api = 'https://spiritan.vercel.app/api/jpic/upload'
 let data
 let pending = false
 
@@ -315,12 +315,12 @@ function handleImageChange(event) {
     reader.readAsDataURL(imageInput.files[0]);
   }
 
-  const image = document.getElementById('image').files[0];
+  // const image = document.getElementById('image').files[0];
 
   // const image = document.getElementById('image').files[0];
   // const Id = document.getElementById('imageU').value
   // var id = document.getElementById('id').value
-  console.log(image)
+  // console.log(image)
   form.enctype = "multipart/form-data"
   console.log(form.enctype)
   console.log(document.getElementById('imageU').value)
@@ -356,7 +356,7 @@ async function editRow(id) {
   // var id = document.getElementById('id').value
   console.log(image)
   // Set the src attribute of the img element to the URL of the image
-  const imageUrl = `https://spiritan-tonybllvc.vercel.app/api/image/upload/${images}`;
+  const imageUrl = `https://spiritan.vercel.app/api/image/upload/${images}`;
   document.getElementById('imageU').src = imageUrl;
 }
 
@@ -384,7 +384,7 @@ async function deleteRow(id) {
   document.getElementById('idD').value = id || _id
 
   // Set the src attribute of the img element to the URL of the image
-  const imageUrl = `https://spiritan-tonybllvc.vercel.app/api/image/upload/${images}`;
+  const imageUrl = `https://spiritan.vercel.app/api/image/upload/${images}`;
   document.getElementById('imageD').src = imageUrl;
 }
 
