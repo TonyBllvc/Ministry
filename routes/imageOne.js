@@ -13,7 +13,7 @@ import { GridFSBucket, MongoClient, ObjectId } from "mongodb";
 
 const router = express.Router()
 const url = 'mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.net/?retryWrites=true&w=majority'
-const baseUrl = 'https://spiritan-tonybllvc.vercel.app/api/image/upload/'
+const baseUrl = 'https://spiritan.vercel.app/api/image/upload/'
 
 // router.route('/upload').post(store.single('image'), async (req, res) => {
 // router.route('/upload').post(uploadMiddleware, async (req, res) => {
