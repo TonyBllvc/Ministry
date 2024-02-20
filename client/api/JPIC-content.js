@@ -116,8 +116,8 @@ async function populateTable(data) {
       const image = document.createElement('img');
       image.id = item?.id;
       image.alt = 'image_item';
-      image.width = '500px';
-      image.height = '500px';
+      image.width = '400';
+      image.height = '400';
       image.style.width = '100%';
       image.style.height = '500px';
       image.style.backgroundPosition = 'center center';
