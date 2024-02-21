@@ -2,6 +2,7 @@
 
 const api = 'https://spiritan.vercel.app/api/information'
 const Api = 'https://spiritan.vercel.app/api/information/upload'
+const url = "/spiritual/information-index.html"
 // const updateApi = 'https://spiritan.vercel.app/api/jpic'
 let data
 let pending = false
@@ -147,6 +148,8 @@ function updateDatasetWithImage(url) {
         console.log(json?.table || 'nothing')
         console.log(json?.message)
         // return data = json?.content
+
+        window.location.href = "/spiritual/information-index.html"
       }
       // pending = false
     } catch (error) {
@@ -267,7 +270,7 @@ async function populateTable(data) {
     `;
 
       tableBody.appendChild(row);
-      window.location.href = "/spiritual/information-index.html"
+      // window.location.href = url
     });
   } else {
     console.log('Content is undefined.');
@@ -432,8 +435,8 @@ async function handleUpdate() {
       document.getElementById("updateCouncil").style.display = 'none'
       document.getElementById("deleteCouncil").style.display = 'none'
       document.getElementById("fetchCouncil").style.display = 'flex'
-      
-      window.location.href = "/spiritual/information-index.html"
+
+      // window.location.href = url
       return
     }
 

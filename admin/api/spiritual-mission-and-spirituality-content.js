@@ -146,6 +146,7 @@ function updateDatasetWithImage(url) {
         console.log(json?.table || 'nothing')
         console.log(json?.message)
         // return data = json?.content
+        window.location.href = "/spiritual/spiritual-mission-and-spirituality-index.html"
       }
       // pending = false
     } catch (error) {
