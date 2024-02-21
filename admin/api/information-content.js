@@ -267,6 +267,7 @@ async function populateTable(data) {
     `;
 
       tableBody.appendChild(row);
+      window.location.href = "/spiritual/information-index.html"
     });
   } else {
     console.log('Content is undefined.');
@@ -431,6 +432,8 @@ async function handleUpdate() {
       document.getElementById("updateCouncil").style.display = 'none'
       document.getElementById("deleteCouncil").style.display = 'none'
       document.getElementById("fetchCouncil").style.display = 'flex'
+      
+      window.location.href = "/spiritual/information-index.html"
       return
     }
 
