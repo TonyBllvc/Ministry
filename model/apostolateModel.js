@@ -1,4 +1,4 @@
-import mongoose, { } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const apostolateSchema = mongoose.Schema({
     title: {
