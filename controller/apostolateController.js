@@ -97,7 +97,7 @@ const createContent = asyncHandler(async (req, res) => {
             title,
             content,
             id: file.id,
-            images: file.filename
+            images: file.filename         
         })
 
         var singleContent = await createContent.save()
@@ -153,7 +153,7 @@ const updateWithImage = asyncHandler(async (req, res) => {
 
     // console.log('stage 3')
     try {
-        console.log(req.body.title)
+        // console.log(req.body.title)
         if (!file) {
             throw new Error('Field name "image" missing in form data');
         }

@@ -1,6 +1,7 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
 const api = 'https://spiritan.vercel.app/api/spiritual_ms'
+const Api = 'https://spiritan.vercel.app/api/spiritual_ms/upload'
 // const updateApi = 'https://spiritan.vercel.app/api/jpic'
 let data
 let pending = false

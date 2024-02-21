@@ -1,6 +1,7 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
 const api = 'https://spiritan.vercel.app/api/information'
+const Api = 'https://spiritan.vercel.app/api/information/upload'
 // const updateApi = 'https://spiritan.vercel.app/api/jpic'
 let data
 let pending = false
@@ -360,7 +361,6 @@ async function editRow(id) {
   const imageUrl = `https://spiritan.vercel.app/api/image/upload/${images}`;
   document.getElementById('imageU').src = imageUrl;
 }
-
 
 // Function to confirm delete data into the table
 async function deleteRow(id) {
