@@ -1,5 +1,6 @@
 import express from "express";
 import { createContent, deleteContent, getContent, getContents, updateContent, updateWithImage } from "../controller/apostolateController.js";
+import store from "../middleware/imageUpload.js";
 
 const router = express.Router()
 
