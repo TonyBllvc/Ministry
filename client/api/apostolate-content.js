@@ -77,42 +77,111 @@ async function fetchDataAndPopulateTable() {
 
 }
 
+
 // Function to populate data into the table
 async function populateTable(data) {
-
   if (data) {
     const pageContentElement = document.getElementById('pageContent');
 
-    console.log(data)
-    data.map(data => {
-      // const column = document.createElement('div');
-      pageContentElement.classList.add('col-12');
+    data.forEach((item, index) => {
+      // Determine the class based on the index
+      const className = index % 2 === 0 ? 'py-5 mb-5 row align-items-center justify-content-between' : 'py-5 mb-5 bg-gray d-flex row flex-column flex-lg-row-reverse  align-items-center justify-content-between';
 
-      const sermon = document.createElement('div');
-      sermon.classList.add('section-heading', 'text-center');
+      // Create the outer div with the determined class
+      const outerDiv = document.createElement('div');
+      outerDiv.className = className;
+
+      // One div within pageContent
+      const contentColumn = document.createElement('div');
+      contentColumn.classList.add('col-12', 'col-lg-5');
+
+      const aboutContent = document.createElement('div');
+      aboutContent.classList.add('about-content');
 
       const sermonTitle = document.createElement('h2');
-      sermonTitle.textContent = data.title; // Replace 'title' with the actual property name from your data
+      sermonTitle.textContent = item.title;
 
       const sermonContent = document.createElement('p');
-      sermonContent.textContent = data.content; // Replace 'content' with the actual property name from your data
+      sermonContent.textContent = item.content;
 
-      // Append elements to sermon container
-      // sermon.appendChild(image);
-      sermon.appendChild(sermonTitle);
-      sermon.appendChild(sermonContent);
+      aboutContent.appendChild(sermonTitle);
+      aboutContent.appendChild(sermonContent);
 
-      // Append sermon container to column
-      // column.appendChild(sermon);
+      contentColumn.appendChild(aboutContent);
 
-      // Append column to page content
-      pageContentElement.appendChild(sermon);
+      // Another div
+      const imageColumn = document.createElement('div');
+      imageColumn.classList.add('col-12', '-pt-5', 'col-lg-6', 'w-100', 'h-100');
 
+      const aboutThumbnail = document.createElement('div');
+      aboutThumbnail.classList.add('about-thumbnail', 'h-100', 'w-100');
+
+      const image = document.createElement('img');
+      image.id = item?.id;
+      image.alt = 'image_item';
+      image.width = '400';
+      image.height = '400';
+      image.style.width = '100%';
+      image.style.height = '500px';
+      image.style.backgroundPosition = 'center center';
+      image.style.backgroundSize = 'contain';
+      image.style.backgroundRepeat = 'no-repeat';
+      image.style.objectFit = 'cover';
+      image.style.cursor = 'pointer';
+
+      // Set the src attribute of the img element to the URL of the image
+      const imageUrl = `https://spiritan-tonybllvc.vercel.app/api/image/upload/${item.images}`;
+      image.src = imageUrl;
+
+      aboutThumbnail.appendChild(image);
+      imageColumn.appendChild(aboutThumbnail);
+
+      outerDiv.appendChild(contentColumn);
+      outerDiv.appendChild(imageColumn);
+
+      pageContentElement.appendChild(outerDiv);
     });
   } else {
     console.log('Content is undefined.');
   }
 }
+
+// Function to populate data into the table
+// async function populateTable(data) {
+
+//   if (data) {
+//     const pageContentElement = document.getElementById('pageContent');
+
+//     console.log(data)
+//     data.map(data => {
+//       // const column = document.createElement('div');
+//       pageContentElement.classList.add('col-12');
+
+//       const sermon = document.createElement('div');
+//       sermon.classList.add('section-heading', 'text-center');
+
+//       const sermonTitle = document.createElement('h2');
+//       sermonTitle.textContent = data.title; // Replace 'title' with the actual property name from your data
+
+//       const sermonContent = document.createElement('p');
+//       sermonContent.textContent = data.content; // Replace 'content' with the actual property name from your data
+
+//       // Append elements to sermon container
+//       // sermon.appendChild(image);
+//       sermon.appendChild(sermonTitle);
+//       sermon.appendChild(sermonContent);
+
+//       // Append sermon container to column
+//       // column.appendChild(sermon);
+
+//       // Append column to page content
+//       pageContentElement.appendChild(sermon);
+
+//     });
+//   } else {
+//     console.log('Content is undefined.');
+//   }
+// }
 
 // Call the function to populate the table
 populateTable();

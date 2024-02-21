@@ -154,7 +154,7 @@ function updateDatasetWithImage(url) {
     // pending = false
   }
 
-  return { updateDataWithImage, pending }
+  return { updateDataWithImage }
 
 }
 
