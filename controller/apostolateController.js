@@ -86,10 +86,18 @@ const sortContent = asyncHandler(async (req, res) => {
 const createContent = asyncHandler(async (req, res) => {
     const { title, content } = req.body
 
+    const { file } = req
+
     try {
+        if (!file) {
+            throw new Error('Field name "image" missing in form data');
+        }
+
         var createContent = new Apostolate({
             title,
-            content
+            content,
+            id: file.id,
+            images: file.filename
         })
 
         var singleContent = await createContent.save()
