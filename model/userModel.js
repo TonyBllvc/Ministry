@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
-    profile: {
+    lastName: {
         type: String
     },
     password: {
@@ -34,7 +34,7 @@ const userSchema = mongoose.Schema({
 
 // static signup method
 // ( while using the 'this' keyword, we can't use  the arrow function)
-userSchema.statics.signup = async function (name, email, profile, password,) {
+userSchema.statics.signup = async function (name, email, lastName, password,) {
 
     // validation
     // check if the mail and password both have values
@@ -57,7 +57,7 @@ userSchema.statics.signup = async function (name, email, profile, password,) {
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-    const user = await this.create({ name, email, role, access, profile: profile || '', password: hash })
+    const user = await this.create({ name, email, role, access, lastName: lastName || '', password: hash })
 
     return user
 }

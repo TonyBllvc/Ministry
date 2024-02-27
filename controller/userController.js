@@ -39,7 +39,7 @@ const authAdmin = asyncHandler(async (req, res) => {
             email,
             role: admin.role,
             access: admin.access,
-            profile: admin.profile,
+            lastName: admin.lastName,
             name: admin.name
         })
     } catch (error) {
@@ -105,11 +105,11 @@ const authUser = asyncHandler(async (req, res) => {
         }
         
         res.status(200).json({
-            _id: user._id,
+            // _id: user._id,
             email,
-            role: user.role,
-            access: user.access,
-            profile: user.profile,
+            // role: user.role,
+            // access: user.access,
+            // lastName: user.lastName,
             name: user.name
         })
     } catch (error) {
@@ -123,7 +123,7 @@ const authUser = asyncHandler(async (req, res) => {
 //@access   Public
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, profile, password } = req.body
+    const { name, email, lastName, password } = req.body
 
 
     let emptyFields = []
@@ -138,11 +138,11 @@ const registerUser = asyncHandler(async (req, res) => {
     }
     try {
         // pick up admin and password(with hash) 
-        const user = await User.signup(name, email, profile, password)
+        const user = await User.signup(name, email, lastName, password)
 
         // Generate OTP with a starting digit (replace 1 with your desired starting digit)
         // const initialD = 0;
-        const otp = generateOtp('0');
+        // const otp = generateOtp('0');
 
         // // Generate OTP with only digits
         // var otp = speakeasy.totp({
@@ -159,14 +159,14 @@ const registerUser = asyncHandler(async (req, res) => {
         })
 
         // create a 2mins cookie token for otp
-        generateOTPToken(res, otp)
+        // generateOTPToken(res, otp)
 
         await waiting.save()
         // // create a token
         // const token = generateToken(res, admin._id)
         // Write a redirect code here
 
-        res.status(201).json({ name, email, otp })
+        res.status(201).json({ name, email})
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -271,17 +271,17 @@ const logoutUser = asyncHandler(async (req, res) => {
 })
 
 
-// @desc    Get user profile
+// @desc    Get user lastName
 // route    GET /api/users/profike
 //@access   Private
 
-const profile = asyncHandler(async (req, res) => {
+const userProfile = asyncHandler(async (req, res) => {
     const user = {
         _id: req.user._id,
         name: req.user.name,
         email: req.user.email,
         role: req.user.role,
-        profile: req.user.profile
+        lastName: req.user.lastName
     }
 
     // console.log(req.user._id)
@@ -290,8 +290,8 @@ const profile = asyncHandler(async (req, res) => {
 })
 
 
-// @desc    Delete user profile picture
-// route    DELETE /api/users/profile
+// @desc    Delete user lastName picture
+// route    DELETE /api/users/lastName
 // @access  Private
 const deleteProfilePicture = asyncHandler(async (req, res) => {
 
@@ -305,10 +305,10 @@ const deleteProfilePicture = asyncHandler(async (req, res) => {
     }
 
     try {
-        // Perform the logic to delete the user's profile
-        // (Assuming you have a logic for deleting the user's profile, update it accordingly)
-        user.profile = ''; // Set the profile field to an empty string or null, depending on your data model
-        //   user.profile = req.body.profile || user.profile; // Set the profile field to an empty string or null, depending on your data model
+        // Perform the logic to delete the user's lastName
+        // (Assuming you have a logic for deleting the user's lastName, update it accordingly)
+        user.lastName = ''; // Set the lastName field to an empty string or null, depending on your data model
+        //   user.lastName = req.body.lastName || user.lastName; // Set the lastName field to an empty string or null, depending on your data model
 
         await user.save();
 
@@ -316,20 +316,20 @@ const deleteProfilePicture = asyncHandler(async (req, res) => {
             _id: user._id,
             email: user.email,
             role: user.role,
-            profile: user.profile,
+            lastName: user.lastName,
             name: user.name,
             access: user.access,
             // user: user,
             // message: 'Profile pricture deleted successfully'
         });
     } catch (error) {
-        console.error('Error deleting profile:', error);
+        console.error('Error deleting lastName:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
-// @desc    Update user profile
-// route    PUT /api/users/profile
+// @desc    Update user lastName
+// route    PUT /api/users/lastName
 //@access   Private
 
 const updateProfile = asyncHandler(async (req, res) => {
@@ -353,7 +353,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     if (user) {
         user.name = req.body.name || user.name
         user.email = req.body.email || user.email
-        user.profile = req.body.profile || user.profile
+        user.lastName = req.body.lastName || user.lastName
         user.access = req.body.access || user.access
 
         await user.save()
@@ -364,7 +364,7 @@ const updateProfile = asyncHandler(async (req, res) => {
             role: user.role,
             name: user.name,
             access: user.access,
-            profile: user.profile,
+            lastName: user.lastName,
             // user: user,
             // user: updated
         })
@@ -377,7 +377,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
     // find use od the account
     try {
 
-        const user = await User.find().select('-profile -password')
+        const user = await User.find().select('-lastName -password')
 
         res.status(200).json({
             users: user
@@ -400,7 +400,7 @@ const searchUsers = asyncHandler(async (req, res) => {
             ]
         }
 
-        const user = await User.find(searchQuery).select('-profile -password')
+        const user = await User.find(searchQuery).select('-lastName -password')
 
         if (user.length === 0) {
             return res.status(404).json({ error: "No such user" });
@@ -474,7 +474,7 @@ const updateAccess = asyncHandler(async (req, res) => {
         //     role: user.role,
         //     name: user.name,
         //     access: user.access,
-        //     profile: user.profile,
+        //     lastName: user.lastName,
         // })
     } else {
         res.status(404).json('User not found')
@@ -527,7 +527,7 @@ export {
     registerUser,
     verifyUser,
     logoutUser,
-    profile,
+    userProfile,
     updateProfile,
     deleteProfilePicture,
     getAllUsers,
