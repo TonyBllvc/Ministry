@@ -7,6 +7,12 @@ let pending = false
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    const btnRegen = document.getElementById('btnRegen');
+    const btnVerify = document.getElementById('btnVerify');
+    const email = sessionStorage.getItem('email');
+
+    const emailName = document.getElementById('emailName')
+
     const old = localStorage.getItem('userInfo')
 
     // console.log(!old)
@@ -19,12 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // setCountdownTimer()
-    const btnRegen = document.getElementById('btnRegen');
-    const btnVerify = document.getElementById('btnVerify');
-    const email = sessionStorage.getItem('email');
-
-    const emailName = document.getElementById('emailName')
-
     emailName.textContent = email
     emailName.style.paddingRight = '3px'
 
