@@ -155,7 +155,7 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user._id,
             email: user.email,
             pending: 'yes',
-            otpCode: otp
+            otpCode: ''
         })
 
         // create a 2mins cookie token for otp
