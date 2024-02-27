@@ -1,4 +1,4 @@
-import mongoose, { } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const supportSchema = mongoose.Schema({
     title: {
@@ -11,6 +11,14 @@ const supportSchema = mongoose.Schema({
         required: true,
         trim: true
 
+    },
+    id: {
+        type: Schema.Types.ObjectId,
+        require: true
+    },
+    images:
+    {
+        type: String
     },
 }, {
     timestamps: true,

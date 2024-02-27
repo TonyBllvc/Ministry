@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Verify New Account</title>
+    <!-- Bootstrap core CSS-->
+    <script src="auth/verify.js" defer > </script>
+
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+    <div class="container">
+        <div class="mt-5 ml-4 fw-bolder fs-5 " style="font-size: x-large; color:#e4e4e4;">
+            <a href="index.html" style="font-size: x-large; color:#d5d5d5;"><i class="fa fa-arrow-left"
+                    aria-hidden="true"></i> Back </a>
+        </div>
+        <div class="card card-login mx-auto mt-5">
+            <div class="card-header text-black-50 " style="font-weight: 700; font-size: x-large;">Verify Account</div>
+            <div class="card-body container-fluid">
+                <div class="my-3 ">
+                    <h6> You will get an OTP via your number</h6>
+                    <div
+                        style="width: 100%; display: flex; justify-content: center; flex-direction: row; align-items: center;">
+                        <div class="d-flex flex-row justify-content-around "
+                            style=" max-width: 100%; border: 1.2px #d5d5d5 solid; padding: 2px 6px;">
+                            <div id="emailName" style="max-width: 95%;">
+
+                                <!-- A dynamic text goes in here -->
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center ">
+                                <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form onsubmit="handleValOTP(event)">
+                    <div class="form-group">
+                        <input class="form-control text-black"
+                            style="border: none; background-color: #e4e4e4; outline: none !important;" id="number"
+                            type="number" aria-describedby="number" placeholder="Enter your code" maxlength="6"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6)" pattern="\d{6}" autocomplete="email" required>
+                    </div>
+                    <button class="btn btn-success  btn-block text-xxl-center "
+                        style="font-weight: 600; font-size: x-large;" type="submit" id="btnVerify">Verify</button>
+
+                </form>
+                <div id="btnRegen" class=" flex-row justify-content-center align-items-center"
+                    style="font-weight: 600; font-size: medium; display: none;"> Should I send the otp
+                    code? <button id="genn" type="button" onclick="handleGenOtp()" class=" btn btn-link  text-xxl-center"
+                        style="font-weight: 600; font-size: medium; border: none; background-color: transparent; z-index: 99;">
+                        Generate </button>
+                </div>
+                <div id="countdown" class="w-100 flex-row justify-content-center align-content-center"
+                    style="color: #717171; font-weight: bold; display: none;">
+                    <!-- The coudown runs here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+
+</html>

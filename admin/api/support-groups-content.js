@@ -1,6 +1,7 @@
 // import { fetchDataset } from '../utility/api-calls.js';
 
 const api = 'https://spiritan.vercel.app/api/support'
+const Api = 'https://spiritan.vercel.app/api/support/upload'
 // const updateApi = 'https://spiritan.vercel.app/api/jpic'
 let data
 let pending = false
@@ -103,14 +104,69 @@ function updateDataset(url) {
 
 }
 
+function updateDatasetWithImage(url) {
+
+  async function updateDataWithImage(formData) {
+
+
+    const form = document.getElementById('updateCouncil');
+    // form.addEventListener('submit', handleUpdate);
+    form.enctype = "multipart/form-data"
+    form.method = "PUT"
+    // data = null
+    // const details = {
+    //   id: id,
+    //   title: title,
+    //   content: content
+    // };
+    // console.log(data)
+    // pending = true
+    try {
+      const response = await fetch(url, {
+        method: 'PUT',
+        // headers: {
+        //   'Accept': '*/*',
+        //   'Content-Type': 'multipart/form-data',
+        // },
+        // body: JSON.stringify(details),
+        body: formData,
+      });
+
+      const json = await response.json()
+      console.log(response.status)
+
+      if (response.status === 401) {
+
+        console.log(json?.message || json?.error)
+      }
+
+      if (response.status === 400 || response.status === 404) {
+        console.log(json?.message || json?.error)
+      } else if (response.status === 201) {
+        console.log(json?.table || 'nothing')
+        console.log(json?.message)
+        // return data = json?.content
+        window.location.href = "/spiritual/spiritual-mission-and-spirituality-index.html"
+      }
+      // pending = false
+    } catch (error) {
+      console.log(error.message + "from here")
+    };
+    // pending = false
+  }
+
+  return { updateDataWithImage, pending }
+
+}
+
 function deleteDataset(url) {
 
-  async function deleteData(id, title, content) {
+  async function deleteData(id, Id) {
 
     // data = null
     const details = {
       id: id,
-      // title: title,
+      Id: Id,
       // content: content
     };
     // console.log(data)
@@ -221,6 +277,56 @@ async function populateTable(data) {
 // Call the function to populate the table
 populateTable();
 
+// Function to handle image selection and preview
+function handleImageChange(event) {
+  const imageContainer = document.getElementById('imageContainer');
+  const imageInput = event.target;
+  const form = document.getElementById('updateCouncil');
+  const MAX_FILE_SIZE = 1024 * 1024 * 1.5; // 1.5MB in bytes
+
+  if (imageInput.files && imageInput.files[0]) {
+    const file = imageInput.files[0];
+    const reader = new FileReader();
+
+    // console.log(file.size)
+    if (file.size > MAX_FILE_SIZE) {
+      alert('File size can not exceed 1.5MB. Please choose a smaller file.');
+      imageInput.value = ''; // Reset the file input
+      imagePreview.src = ''; // Clear the image preview
+      return;
+    }
+
+    reader.onload = function (e) {
+      // Create an image element
+      const imagePreview = document.getElementById('imageU')
+      // const imagePreview = document.createElement('img');
+      imagePreview.src = e.target.result;
+      // imagePreview.alt = 'Image Preview';
+      imagePreview.style.maxWidth = '100%';
+      imagePreview.style.maxHeight = '150px';
+
+      // Clear previous image previews
+      // imageContainer.style.;
+
+      // Append the new image preview to the image container
+      // imageContainer.appendChild(imagePreview);
+    };
+
+    // Read the selected image file
+    reader.readAsDataURL(imageInput.files[0]);
+  }
+
+  const image = document.getElementById('image').files[0];
+
+  // const image = document.getElementById('image').files[0];
+  // const Id = document.getElementById('imageU').value
+  // var id = document.getElementById('id').value
+  console.log(image)
+  form.enctype = "multipart/form-data"
+  console.log(form.enctype)
+  console.log(document.getElementById('imageU').value)
+}
+
 
 // Function to confirm edit data into the table
 async function editRow(id) {
@@ -232,7 +338,7 @@ async function editRow(id) {
 
 
   // Access individual properties of the selected object
-  const { title, content, _id } = selectedData;
+  const { title, content, _id, id: Id, images } = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
   document.getElementById("updateCouncil").style.display = 'flex'
@@ -241,7 +347,20 @@ async function editRow(id) {
   // pass values from api to each element
   document.getElementById('title').value = title
   document.getElementById('content').value = content
+  document.getElementById('imageU').value = Id
   document.getElementById('id').value = id || _id
+
+  console.log(document.getElementById('imageU').value)
+
+  const image = document.getElementById('image').files[0];
+
+  // const image = document.getElementById('image').files[0];
+  // const Id = document.getElementById('imageU').value
+  // var id = document.getElementById('id').value
+  console.log(image)
+  // Set the src attribute of the img element to the URL of the image
+  const imageUrl = `https://spiritan.vercel.app/api/image/upload/${images}`;
+  document.getElementById('imageU').src = imageUrl;
 
 }
 
@@ -256,7 +375,7 @@ async function deleteRow(id) {
 
 
   // Access individual properties of the selected object
-  const { title, content, _id } = selectedData;
+  const { title, content, _id, id: Id, images } = selectedData;
 
   document.getElementById("fetchCouncil").style.display = 'none'
   document.getElementById("deleteCouncil").style.display = 'flex'
@@ -265,7 +384,12 @@ async function deleteRow(id) {
   // pass values from api to each element
   document.getElementById('titleD').value = title
   document.getElementById('contentD').value = content
+  document.getElementById('imageD').value = Id
   document.getElementById('idD').value = id || _id
+
+  // Set the src attribute of the img element to the URL of the image
+  const imageUrl = `https://spiritan.vercel.app/api/image/upload/${images}`;
+  document.getElementById('imageD').src = imageUrl;
 }
 
 // Function to cancel any update/delete to the data into the table
@@ -279,18 +403,50 @@ function cancelBtn() {
 // Function to update a dataset on the table
 async function handleUpdate() {
   const { updateData } = updateDataset(api)
+  const { updateDataWithImage } = updateDatasetWithImage(Api)
 
   var title = document.getElementById('title').value
   var content = document.getElementById('content').value
+  // const image = document.getElementById('image').value
+  const image = document.getElementById('image').files[0];
+  const Id = document.getElementById('imageU').value
   var id = document.getElementById('id').value
 
-  await updateData(id, title, content)
-  // alert('Working:' + title + " " + content + " ")
-  // localStorage.setItem('jwt', JSON.stringify({ title: title }))
 
-  document.getElementById("updateCouncil").style.display = 'none'
-  document.getElementById("deleteCouncil").style.display = 'none'
-  document.getElementById("fetchCouncil").style.display = 'flex'
+  try {
+    if (image) {
+
+      const formData = new FormData();
+      formData.append('id', id);
+      formData.append('title', title);
+      formData.append('content', content);
+      formData.append('image', image);
+      formData.append('Id', Id);
+      // form.enctype = "multipart/form-data"
+      // console.log('yes image')
+      await updateDataWithImage(formData)
+      //   // // alert('Working:' + title + " " + content + " ")
+      //   // // localStorage.setItem('jwt', JSON.stringify({ title: title }))
+
+      document.getElementById("updateCouncil").style.display = 'none'
+      document.getElementById("deleteCouncil").style.display = 'none'
+      document.getElementById("fetchCouncil").style.display = 'flex'
+      return
+    }
+
+    if (!image || image == undefined) {
+      //   // console.log('no image')
+      await updateData(id, title, content)
+
+      document.getElementById("updateCouncil").style.display = 'none'
+      document.getElementById("deleteCouncil").style.display = 'none'
+      document.getElementById("fetchCouncil").style.display = 'flex'
+
+      return
+    }
+  } catch (error) {
+    console.error('Error submitting data:', error);
+  }
 }
 
 async function handleDelete() {
@@ -298,8 +454,9 @@ async function handleDelete() {
   // const title = document.getElementById('titleD').value
   // const content = document.getElementById('contentD').value
   const id = document.getElementById('idD').value
+  const Id = document.getElementById('imageD').value
 
-  await deleteData(id)
+  await deleteData(id, Id)
   // alert('Working:' + title + " " + content + " ")
 
   // After the asynchronous operation is complete, reload the page
@@ -310,8 +467,6 @@ async function handleDelete() {
   document.getElementById("deleteCouncil").style.display = 'none'
   document.getElementById("fetchCouncil").style.display = 'flex'
 }
-
-
 
 window.onload = function () {
   var textOne = document.getElementById('titleH')

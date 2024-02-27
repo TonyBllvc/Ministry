@@ -30,7 +30,7 @@ function createDataset(url) {
 
             if (response.status === 401) {
 
-                console.log(json?.message || json?.error)
+                alert(json?.message || json?.error)
             }
 
             if (response.status === 400 || response.status === 404) {
@@ -106,7 +106,7 @@ async function handleSubmit(event) {
     try {
         // await createData(title, content);
         await createData(formData);
-        window.location.href = urlRedirect
+        // window.location.href = urlRedirect
     } catch (error) {
         console.error('Error submitting data:', error);
         // Handle error, display message to the user, etc.
