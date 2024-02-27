@@ -61,7 +61,7 @@ async function fetchDataAndPopulateTable() {
 
     // if (latestTimeElement) {
     const { dataSet } = fetchDataset(api);
-    const { data, latestUpdateTime } = await dataSet();
+    const { data } = await dataSet();
 
     // console.log(data)
     // console.log(latestTimeElement)
@@ -84,43 +84,110 @@ async function fetchDataAndPopulateTable() {
 
 // Function to populate data into the table
 
+// Function to populate data into the table
 async function populateTable(data) {
   if (data) {
     const pageContentElement = document.getElementById('pageContent');
 
-    console.log(data)
-    data.forEach(item => {
-      pageContentElement.classList.add('container');
+    data.forEach((item, index) => {
+      // Determine the class based on the index
+      const className = index % 2 === 0 ? 'py-5 mb-5 row align-items-center justify-content-between' : 'py-5 mb-5 bg-gray d-flex row flex-column flex-lg-row-reverse  align-items-center justify-content-between';
 
-      const grid = document.createElement('div');
-      grid.classList.add('d-flex', 'row', 'align-items-center', 'justify-content-between');
+      // Create the outer div with the determined class
+      const outerDiv = document.createElement('div');
+      outerDiv.className = className;
 
-      const contentWrapper = document.createElement('div');
-      contentWrapper.classList.add('w-100');
+      // One div within pageContent
+      const contentColumn = document.createElement('div');
+      contentColumn.classList.add('col-12', 'col-lg-5');
 
       const aboutContent = document.createElement('div');
-      aboutContent.classList.add('section-heading');
-      // aboutContent.classList.add('about-content');
+      aboutContent.classList.add('about-content');
 
       const sermonTitle = document.createElement('h2');
-      sermonTitle.textContent = item.title; // Replace 'title' with the actual property name from your data
+      sermonTitle.textContent = item.title;
 
       const sermonContent = document.createElement('p');
-      sermonContent.textContent = item.content; // Replace 'content' with the actual property name from your data
+      sermonContent.textContent = item.content;
 
       aboutContent.appendChild(sermonTitle);
       aboutContent.appendChild(sermonContent);
 
-      contentWrapper.appendChild(aboutContent);
+      contentColumn.appendChild(aboutContent);
 
-      grid.appendChild(contentWrapper);
+      // Another div
+      const imageColumn = document.createElement('div');
+      imageColumn.classList.add('col-12', '-pt-5', 'col-lg-6', 'w-100', 'h-100');
 
-      pageContentElement.appendChild(grid);
+      const aboutThumbnail = document.createElement('div');
+      aboutThumbnail.classList.add('about-thumbnail', 'h-100', 'w-100');
+
+      const image = document.createElement('img');
+      image.id = item?.id;
+      image.alt = 'image_item';
+      image.width = '500px';
+      image.height = '500px';
+      image.style.width = '100%';
+      image.style.height = '500px';
+      image.style.backgroundPosition = 'center center';
+      image.style.backgroundSize = 'contain';
+      image.style.backgroundRepeat = 'no-repeat';
+      image.style.objectFit = 'cover';
+      image.style.cursor = 'pointer';
+
+      // Set the src attribute of the img element to the URL of the image
+      const imageUrl = `https://spiritan-tonybllvc.vercel.app/api/image/upload/${item.images}`;
+      image.src = imageUrl;
+
+      aboutThumbnail.appendChild(image);
+      imageColumn.appendChild(aboutThumbnail);
+
+      outerDiv.appendChild(contentColumn);
+      outerDiv.appendChild(imageColumn);
+
+      pageContentElement.appendChild(outerDiv);
     });
   } else {
     console.log('Content is undefined.');
   }
 }
+// async function populateTable(data) {
+//   if (data) {
+//     const pageContentElement = document.getElementById('pageContent');
+
+//     console.log(data)
+//     data.forEach(item => {
+//       pageContentElement.classList.add('container');
+
+//       const grid = document.createElement('div');
+//       grid.classList.add('d-flex', 'row', 'align-items-center', 'justify-content-between');
+
+//       const contentWrapper = document.createElement('div');
+//       contentWrapper.classList.add('w-100');
+
+//       const aboutContent = document.createElement('div');
+//       aboutContent.classList.add('section-heading');
+//       // aboutContent.classList.add('about-content');
+
+//       const sermonTitle = document.createElement('h2');
+//       sermonTitle.textContent = item.title; // Replace 'title' with the actual property name from your data
+
+//       const sermonContent = document.createElement('p');
+//       sermonContent.textContent = item.content; // Replace 'content' with the actual property name from your data
+
+//       aboutContent.appendChild(sermonTitle);
+//       aboutContent.appendChild(sermonContent);
+
+//       contentWrapper.appendChild(aboutContent);
+
+//       grid.appendChild(contentWrapper);
+
+//       pageContentElement.appendChild(grid);
+//     });
+//   } else {
+//     console.log('Content is undefined.');
+//   }
+// }
 
 
 // Call the function to populate the table

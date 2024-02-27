@@ -114,8 +114,8 @@ async function handleSubmit(event) {
 
 
 window.onload = function () {
-    var textOne = document.getElementById('titleH')
-    var textTwo = document.getElementById('contentH')
+    var textOne = document.getElementById('title')
+    var textTwo = document.getElementById('content')
   
     textOne.value = ''
     textTwo.value = ''
