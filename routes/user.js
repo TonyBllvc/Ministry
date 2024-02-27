@@ -14,7 +14,6 @@ import {
     searchUsers,
     validateOTP,
     generateOTP,
-    userProfile
 } from "../controller/userController.js";
 import { adminClearance, protect, verified } from "../middleware/authentication.js";
 const router = express.Router()
