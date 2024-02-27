@@ -61,7 +61,7 @@ app.use(cookieParser())
 
 app.use('/api/image', image)
 app.use('/api/jpic', jpic)
-// app.use('/api/users', user)
+app.use('/api/users', user)
 app.use('/api/apostolate', apostolate)
 app.use('/api/information', information)
 app.use('/api/personnel', personnel)
