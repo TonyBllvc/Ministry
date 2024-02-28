@@ -51,6 +51,7 @@ const protect = AsyncHandler(async (req, res, next) => {
 
     if (token) {
         try {
+            // add jwt secret to the vercel code later
             const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
             req.user = await User.findById(decoded._id).select('-password')

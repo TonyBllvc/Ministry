@@ -13,16 +13,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const emailName = document.getElementById('emailName')
 
-    const old = localStorage.getItem('userInfo')
+    // const old = localStorage.getItem('userInfo')
 
-    // console.log(!old)
+    // // console.log(!old)
 
-    // if (!old === true) {
-    //   window.location.href = "/spiritual/login.html"
+    // // if (!old === true) {
+    // //   window.location.href = "/spiritual/login.html"
+    // // }
+    // if (old.length > 0) {
+    //     window.location.href = redirectUrl
     // }
-    if (old.length > 0) {
-        window.location.href = redirectUrl
-    }
 
     // setCountdownTimer()
     emailName.textContent = email
