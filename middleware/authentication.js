@@ -60,7 +60,8 @@ const protect = AsyncHandler(async (req, res, next) => {
             res.status(401).json({ error: 'Invalid authorization' })
         }
     } else {
-        res.status(401).json({ error: 'Not authorized' })
+        res.redirect('/spiritual/login.html'); // Redirect to login page if not authenticated
+        // res.status(401).json({ error: 'Not authorized' })
     }
 })
 

@@ -22,6 +22,7 @@ import cors from 'cors'
 import methodOverride from 'method-override';
 import path from "path";
 import { fileURLToPath } from 'url'; // Import fileURLToPath function
+import { protect } from "./middleware/authentication.js";
 
 // dotenv.config()
 
@@ -92,7 +93,18 @@ const __dirname = path.dirname(__filename); // Extract directory name
 app.use('/ministry', express.static(path.join(__dirname, '/client')));
 
 // Serve static files from 'jpic' directory
-app.use('/spiritual', express.static(path.join(__dirname, '/admin')));
+app.use('/spiritual',(req, res, next) => {
+    // Check if the requested file needs authentication
+    const protectedFiles = ['index.html', 'formation-content.html', 'information-index.html', 'information-content.html'];
+
+    if (protectedFiles.includes(path.basename(req.url))) {
+        // File needs authentication, call the requireAuth middleware
+        protect(req, res, next);
+    } else {
+        // File does not need authentication, proceed to next middleware
+        next();
+    }
+},  express.static(path.join(__dirname, '/admin')));
 // app.use('/spiritual/pages/apostolate', express.static(path.join(__dirname, '/jpic/pages/structure-organisation/table')));
 
 
