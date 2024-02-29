@@ -9,6 +9,7 @@ let pending = false
 document.addEventListener('DOMContentLoaded', async function () {
   // Fetch dataset and populate table
   await fetchDataAndPopulateTable();
+  console.log(navigator.userAgent)
 });
 
 function fetchDataset(url) {
