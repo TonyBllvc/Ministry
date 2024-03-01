@@ -9,7 +9,7 @@ import express from "express";
 // import uploadMiddleware from "../middleware/imageOne.js";
 // import Image from "../model/image.js";
 import { GridFSBucket, MongoClient, ObjectId } from "mongodb";
-import { protect } from "../middleware/authentication";
+import { protect } from "../middleware/authentication.js";
 // import { updateStore } from "../middleware/imageTwo.js";
 
 const router = express.Router()
