@@ -8,8 +8,8 @@ import { createContent, deleteContent, getContent, getContents, updateContent } 
 
 const router = express.Router()
 
-router.use(protect)
-router.route('/').get( getContents).post( createContent).put( updateContent).delete( deleteContent)
+// router.use(protect)
+router.route('/').get( getContents).post(protect, createContent).put(protect, updateContent).delete(protect, deleteContent)
 router.route('/content').get( getContent)
 
 export default router

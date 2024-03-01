@@ -5,9 +5,8 @@ import { protect } from "../middleware/authentication.js";
 
 const router = express.Router()
 
-router.use(protect)
-router.put('/upload/', store.single('image'), updateWithImage)
-router.route('/').get( getContents).post(store.single('image'), createContent).put( updateContent).delete( deleteContent)
-router.route('/content').get( getContent)
+router.put('/upload', protect, store.single('image'), updateWithImage)
+router.route('/').get(getContents).post(protect, store.single('image'),  createContent).put(protect, updateContent).delete(protect, deleteContent)
+router.route('/content').get(getContent)
 
 export default router

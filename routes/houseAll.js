@@ -4,7 +4,7 @@ import { protect } from "../middleware/authentication.js";
 
 const router = express.Router()
 
-router.use(protect)
+// router.use(protect)
 router.route('/personnel').get( getContentsForPersonnel)
 router.route('/organisation').get( getContentsForOrg)
 

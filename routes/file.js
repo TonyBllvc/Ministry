@@ -6,7 +6,7 @@ import { protect } from "../middleware/authentication.js";
 
 const router = express.Router();
 
-router.use(protect)
+// router.use(protect)
 router.route("/upload").post(upload.single("image"), (req, res) => {
     console.log(req.file)
     if (!req.file) {
