@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken";
 import AsyncHandler from "express-async-handler";
 import User from '../model/userModel.js'
 import Waiting from "../model/waitingModel.js";
+import { JWT_SECRET } from "../env.js";
+import UserSession from "../model/userSession.js";
 
 // everything would be done inside here
 
@@ -52,10 +54,14 @@ const protect = AsyncHandler(async (req, res, next) => {
     if (token) {
         try {
             // add jwt secret to the vercel code later
-            const decoded = jwt.verify(token, process.env.JWT_SECRET)
+            const decoded = jwt.verify(token, JWT_SECRET)
+            // const decoded = jwt.verify(token, process.env.JWT_SECRET)
+            // console.log(decoded._id + " " + decoded.session)
 
+            req.session = await UserSession.findById(decoded.session)
             req.user = await User.findById(decoded._id).select('-password')
 
+            // console.log(req.session)
             next()
         } catch (error) {
             res.status(401).json({ error: 'Invalid authorization' })

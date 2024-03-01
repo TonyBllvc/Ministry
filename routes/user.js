@@ -3,7 +3,7 @@ import {
     authUser,
     registerUser,
     logoutUser,
-   userProfile,
+    userProfile,
     updateProfile,
     verifyUser,
     changePassword,
@@ -19,13 +19,13 @@ import { adminClearance, protect, verified } from "../middleware/authentication.
 const router = express.Router()
 
 router.post('/', registerUser)
-router.post('/logout', logoutUser)
+router.post('/logout', protect, logoutUser)
 router.post('/generate', generateOTP) // generate aother otp
 router.post('/validate', validateOTP) // verify using otp
 // router.use()
 router.route('/auth').post(verified, authUser)
 router.post('/verify', verifyUser) // verify if logged in
-router.route('/profile').get(protect,userProfile).put(protect, updateProfile)
+router.route('/profile').get(protect, userProfile).put(protect, updateProfile)
 router.route('/profiles').delete(protect, deleteProfilePicture)
 router.use(protect)
 router.put('/password', changePassword)

@@ -1,9 +1,10 @@
 import jwt  from "jsonwebtoken";
+import { JWT_SECRET } from "../env.js";
 
-const generateToken = (res, _id) => {
+const generateToken = (res, _id, session) => {
     const token = jwt.sign({
-        _id
-    }, process.env.JWT_SECRET, {
+        _id, session
+    }, JWT_SECRET, {
         expiresIn: '2d'
     })
 

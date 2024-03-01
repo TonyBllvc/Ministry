@@ -7,11 +7,12 @@ import Waiting from '../model/waitingModel.js';
 // import speakeasy from "speakeasy";
 import generateOTPToken from '../utils/generateOTPToken.js';
 import generateOtp from '../utils/generateOTP.js';
+import UserSession from '../model/userSession.js';
 
 // @desc    Auth admin/set token
 // route    POST /api/admin/auth
 //@access   Public
-
+// Not in use
 const authAdmin = asyncHandler(async (req, res) => {
     const { email, password } = req.body
 
@@ -103,14 +104,37 @@ const authUser = asyncHandler(async (req, res) => {
 
             await otpConfirm.save()
         }
-        
+
+        // For every user login, a session is created and saved
+        var sessh = new UserSession({
+            userId: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            access: user.access,
+            session: 'in', // A session is created because user is logged in
+            date: req.body.date,
+            device: req.body.device
+            // otpCode: otp
+        })
+
+        // create a 2mins cookie token for otp
+        // generateOTPToken(res, otp)
+
+        const userSess = await sessh.save()
+
+        generateToken(res, user._id, userSess._id)
+
         res.status(200).json({
-            // _id: user._id,
-            email,
-            // role: user.role,
-            // access: user.access,
-            // lastName: user.lastName,
-            name: user.name
+            sessionId: userSess._id,
+            active: userSess.session,
+            message: 'Logged in'
+            // // _id: user._id,
+            // email,
+            // // role: user.role,
+            // // access: user.access,
+            // // lastName: user.lastName,
+            // name: user.name
         })
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -166,7 +190,7 @@ const registerUser = asyncHandler(async (req, res) => {
         // const token = generateToken(res, admin._id)
         // Write a redirect code here
 
-        res.status(201).json({ name, email})
+        res.status(201).json({ name, email })
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -239,15 +263,36 @@ async function validateOTP(req, res) {
 // @desc    Verify user is llogged in
 // route    POST /api/users/verify
 //@access   Public
-const verifyUser = (req, res) => {
+const verifyUser = asyncHandler(async (req, res) => {
     const { cookies } = req;
 
-    const jwt = cookies.jwt;
+    try {
 
-    if (!jwt) {
-        res.status(401).json({ error: 'Unauthorized! Please, log in' })
+        let searchQuery = {
+            $and: [
+                { session: { $regex: 'in' || "#", $options: "i" } },
+                { device: { $regex: req.body.device || "#", $options: "i" } },
+            ]
+        };
+
+        const userSess = await UserSession.find(searchQuery);
+
+        // console.log(userSess)
+        const jwt = cookies.jwt;
+
+        // res.status(200).json({ device: userSess })
+
+        if (!jwt || !userSess || userSess.length == 0) {
+            return res.status(401).json({ error: 'Unauthorized! Please, log in' })
+        }
+        console.log('okayu')
+        res.status(202).json({ device: userSess })
+
+    } catch (error) {
+        res.status(401).json({ error: error.message })
+
     }
-}
+})
 
 // @desc    Logout user
 // route    POST /api/users/logout
@@ -258,16 +303,32 @@ const logoutUser = asyncHandler(async (req, res) => {
 
     const jwt = cookies.jwt;
 
-    // if (!jwt) {
-    //     return res.status(400).json({ error: "Already logged out " });
-    // }
+    const sess = await UserSession.findById(req.session._id);
 
-    res.cookie('jwt', '', {
-        httpOnly: true,
-        expires: new Date(0)
-    })
+    // console.log(req.session._id)
+    // console.log(sess.session)
 
-    res.status(202).json({ message: 'Logged out successfully' })
+    try {
+
+        if (sess) {
+            sess.session = 'out' || sess.session // Set the lastName field to an empty string or null, depending on your data model
+
+            await sess.save()
+
+            res.cookie('jwt', '', {
+                httpOnly: true,
+                expires: new Date(0)
+            })
+
+            res.status(202).json({ message: 'Logged out successfully' })
+        } else {
+            res.status(404).json('User not found')
+        }
+
+    } catch (error) {
+        res.status(401).json({ error: error.message })
+
+    }
 })
 
 

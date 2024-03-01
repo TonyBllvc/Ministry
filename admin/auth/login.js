@@ -8,26 +8,68 @@ let pending = false
 
 document.addEventListener('DOMContentLoaded', async function () {
     const old = localStorage.getItem('userInfo')
-    
-    // console.log(!old)
+    const date = document.getElementById('date')
+    const device = document.getElementById('device')
 
-    // if (!old === true) {
-    //   window.location.href = "/spiritual/login.html"
-    // }
-    if (old.length > 0) {
+    if (old) {
         window.location.href = redirectUrl
     }
+
+    // to check visits
+    if (typeof (Storage) !== "undefined") {
+        const currentDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+        // let visitData = localStorage.getItem(currentDate);
+        // console.log(currentDate)
+        // if (!visitData) {
+        // If no visit data exists for the current day, initialize it
+        visitData = {
+            visitCount: 1,
+            devices: {}
+        };
+        // } else {
+        //   // If visit data exists, parse it from JSON
+        //   visitData = JSON.parse(visitData);
+        //   // If the device has already visited today, exit
+        //   if (visitData.devices[navigator.userAgent]) {
+        //     console.log("Device already visited today.");
+        //     return;
+        //   }
+        //   // Otherwise, increment visit count
+        //   visitData.visitCount++;
+        // }
+
+        // Get device information
+        const deviceInfo = {
+            name: navigator.userAgent,
+            // You can extract more specific information about the device if needed
+            // Example: model: "iPhone X"
+            //          type: "smartphone"
+        };
+
+        // Record device information
+        visitData.devices[navigator.userAgent] = deviceInfo;
+
+        date.value = currentDate
+        device.value = deviceInfo.name
+        // Save updated visit data back to localStorage
+        // localStorage.setItem(currentDate, JSON.stringify(visitData));
+    } else {
+        console.log("Sorry! No Web Storage support..");
+    }
+
 })
 
 function handleLogin(url) {
 
-    async function login(email, password) {
+    async function login(email, password, date, device) {
         // console.log('27')
 
         // data = null
         const details = {
             email: email,
-            password: password
+            password: password,
+            date: date,
+            device: device
         };
         // console.log(data)
         // pending = true
@@ -75,9 +117,11 @@ async function handleLog(event) {
     const { login } = handleLogin(api)
     var email = document.getElementById('email').value
     var password = document.getElementById('password').value
+    const date = document.getElementById('date').value
+    const device = document.getElementById('device').value
 
     try {
-        await login(email, password);
+        await login(email, password, date, device);
         console.log('done')
         // window.location.href = redirectUrl;
     } catch (error) {

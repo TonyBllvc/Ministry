@@ -7,6 +7,17 @@ let pending = false
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    const old = localStorage.getItem('userInfo')
+
+    // console.log(!old)
+
+    // if (!old === true) {
+    //   window.location.href = "/spiritual/login.html"
+    // }
+    if (old) {
+        window.location.href = redirectUrl
+    }
+
     const btnRegen = document.getElementById('btnRegen');
     const btnVerify = document.getElementById('btnVerify');
     const email = sessionStorage.getItem('email');

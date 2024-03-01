@@ -1,6 +1,6 @@
-const api = 'https://spiritan.vercel.app/api/users/logout'
+const apiLogout = 'https://spiritan.vercel.app/api/users/logout'
 // const secondApi = 'http://localhost:4242/api/structure_content'
-const redirectUrl = "/spiritual/login.html"
+const redirectUrlLogin = "/spiritual/login.html"
 let data
 let pending = false
 
@@ -44,7 +44,7 @@ function handleLog(url) {
                     localStorage.removeItem('userInfo');
                     // return data = json?.content
                     console.log('doner')
-                    window.location.href = redirectUrl
+                    window.location.href = redirectUrlLogin
                 }
                 // pending = false
             } catch (error) {
@@ -58,12 +58,12 @@ function handleLog(url) {
     }
 
 async function handleLogout() {
-        const { logout } = handleLog(api)
+        const { logout } = handleLog(apiLogout)
 
         try {
             await logout();
             // console.log('done')
-            window.location.href = redirectUrl;
+            // window.location.href = redirectUrlLogin;
         } catch (error) {
             console.error('Error logout: ', error);
             // Handle error, display message to the user, etc.

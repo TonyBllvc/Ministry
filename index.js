@@ -95,7 +95,7 @@ app.use('/ministry', express.static(path.join(__dirname, '/client')));
 // Serve static files from 'jpic' directory
 app.use('/spiritual', (req, res, next) => {
     // Check if the requested file needs authentication
-    const protectedFiles = ['index.html', 'formation-content.html', 'information-index.html', 'information-content.html'];
+    const protectedFiles = ['index.html', 'apostolate-index.html', 'apostolate-content.html', 'formation-index.html', 'formation-content.html', 'information-index.html', 'information-content.html', 'JPIC-index.html', 'JPIC-content.html', 'personal-content-index.html','personal-content-content.html', 'personal-extra-index.html', 'personal-extra-extra.html', 'spiritual-mission-and-spirituality-index.html', 'spiritual-mission-and-spirituality-content.html', 'structure-org-province-index.html', 'structure-org-province.html', 'structure-organisation-index.html', 'structure-organisation-council.html', 'support-groups-index.html', 'support-groups-content.html'];
 
     if (protectedFiles.includes(path.basename(req.url))) {
         // File needs authentication, call the requireAuth middleware
@@ -104,7 +104,7 @@ app.use('/spiritual', (req, res, next) => {
         // File does not need authentication, proceed to next middleware
         next();
     }
-},  express.static(path.join(__dirname, '/admin')));
+}, express.static(path.join(__dirname, '/admin')));
 // app.use('/spiritual/pages/apostolate', express.static(path.join(__dirname, '/jpic/pages/structure-organisation/table')));
 
 
