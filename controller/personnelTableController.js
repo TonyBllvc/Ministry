@@ -143,8 +143,8 @@ const updateContent = asyncHandler(async (req, res) => {
 const deleteContent = asyncHandler(async (req, res) => {
     const { id } = req.body
 
-    const mongoClient = new MongoClient(url);
-    await mongoClient.connect();
+    // const mongoClient = new MongoClient(url);
+    // await mongoClient.connect();
 
     // const database = mongoClient.db('test'); // Adjust database name if needed
     // const bucket = new GridFSBucket(database, { bucketName: 'images' });

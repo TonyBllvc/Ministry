@@ -158,6 +158,60 @@ const updateContent = asyncHandler(async (req, res) => {
     }
 })
 
+// @desc    Handle Image independently
+// route    POST /api
+//@access   Public
+const updateWithImage = asyncHandler(async (req, res) => {
+    // const { title, content } = req.body
+    const { file } = req
+    // console.log(req.body.title)
+    // console.log('stage 1')
+    const mongoClient = new MongoClient(url);
+    await mongoClient.connect();
+
+    // console.log('stage 2')
+    const database = mongoClient.db('test'); // Adjust database name if needed
+    const bucket = new GridFSBucket(database, { bucketName: 'images' });
+
+    // console.log('stage 3')
+    try {
+        console.log(req.body.title)
+        if (!file) {
+            throw new Error('Field name "image" missing in form data');
+        }
+        // console.log('stage 1b')
+
+        // await bucket.delete(data.id);
+        await bucket.delete(new ObjectId(req.body.Id));
+
+        // console.log('stage 1c')
+        const contents = await StructureContent.findById(req.body.id)
+
+        // console.log('stage d')
+        if (!contents) {
+            // console.log('stage er')
+            return res.status(404).json({ error: "Content not found" });
+        }
+        // console.log('stage 2a')
+
+        contents.title = req.body.title || contents.title
+        contents.content = req.body.content || contents.content
+        contents.id = file.id
+        contents.images = file.filename
+
+        // console.log('stage 2b')
+        await contents.save()
+        // await contents.save()
+
+        // console.log('stage 3')
+        res.status(201).json({ table: contents, message: "Content created Successfully" })
+    } catch {
+        console.log("Not Done")
+        res.status(400).json({ error: error.message })
+    }
+
+});
+
 // @desc    Create content
 // route    DELETE /api/content/:id
 //@access   Public
@@ -203,5 +257,6 @@ export {
     sortContent,
     createContent,
     updateContent,
+    updateWithImage,
     deleteContent,
 }
