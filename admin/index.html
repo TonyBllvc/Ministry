@@ -147,46 +147,55 @@
         <li class="breadcrumb-item active">My Dashboard</li>
       </ol>
       <!-- Icon Cards-->
-      <div class="row">
+      <div class="row ">
         <div class="col-xl-3 col-sm-6 mb-3">
           <div class="card text-white bg-primary o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-                <i class="fa fa-fw fa-comments"></i>
+                <i class="fa fa-fw fa-user-circle"></i>
               </div>
-              <div class="mr-5">26 New Messages!</div>
+              <div id="adminUsers" class="mr-5">
+                <!--Content containing Admins that Logged in today -->
+              </div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <div id="adminChannel" onclick="adminChannel()" class="card-footer text-white clearfix small z-1"
+              style=" border: none; border-top: 1px solid rgb(209, 209, 209)">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
               </span>
-            </a>
+            </div>
           </div>
         </div>
+
         <div class="col-xl-3 col-sm-6 mb-3">
           <div class="card text-white bg-warning o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-                <i class="fa fa-fw fa-list"></i>
+                <i class="fa fa-users"></i>
               </div>
-              <div class="mr-5">11 New Tasks!</div>
+              <div id="clientUsers" class="mr-5">
+                <!-- Content containing Users that Visted Today -->
+              </div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <div id="clientChannel" onclick="clientChannel()" class="card-footer text-white clearfix small z-1"
+              style=" border: none; border-top: 1px solid rgb(209, 209, 209)">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
               </span>
-            </a>
+            </div>
           </div>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-3">
+
+        <!-- div -->
+        <!-- <div class="col-xl-3 col-sm-6 mb-3">
           <div class="card text-white bg-success o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-                <i class="fa fa-fw fa-shopping-cart"></i>
+                <i class="fa fa-users"></i>
               </div>
-              <div class="mr-5">123 New Orders!</div>
+              <div class="mr-5">11 New Users Visted This Week</div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="#">
               <span class="float-left">View Details</span>
@@ -195,14 +204,15 @@
               </span>
             </a>
           </div>
-        </div>
+        </div> -->
+        <!-- 
         <div class="col-xl-3 col-sm-6 mb-3">
           <div class="card text-white bg-danger o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-                <i class="fa fa-fw fa-support"></i>
+                <i class="fa fa-users"></i>
               </div>
-              <div class="mr-5">13 New Tickets!</div>
+              <div class="mr-5">11 New Users Visted Month</div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="#">
               <span class="float-left">View Details</span>
@@ -210,6 +220,165 @@
                 <i class="fa fa-angle-right"></i>
               </span>
             </a>
+          </div>
+        </div> -->
+
+      </div>
+
+      <!-- For more content -->
+      <div class="container-fluid  d-none">
+        <div class="my-lg-4 my-4">
+          <div class="row ml-3 d-flex justify-content-start align-items-center w-100">
+            <h3> A month ago </h3>
+            <span class="bg-info w-50 ml-4 border-bottom border-4 border-opacity-50  " style="border-bottom: 2px;">
+            </span>
+          </div>
+          <div class="mt-3 py-3 row ">
+
+            <!-- Card row -->
+            <div class="col-12 col-md-6 my-3 d-flex justify-content-center my-2">
+              <div class="card" style="width: 90%;">
+                <div class="card-body ">
+                  <h5 class="card-title ">
+                    card Title
+                  </h5>
+                  <p class="card-text">
+                    ninkn
+                  </p>
+                  <h6 class="card-subtitle d-flex  justify-content-between mt-1 text-muted">
+                    <span>
+                      2:30pm
+                    </span>
+                    <span>
+                      16th Thursday, 2024
+                    </span>
+                  </h6>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-12 col-md-6 my-3 d-flex justify-content-center my-2">
+              <div class="card" style="width: 90%;">
+                <div class="card-body ">
+                  <h5 class="card-title ">
+                    card Title
+                  </h5>
+                  <p class="card-text">
+                    ninkn
+                  </p>
+                  <h6 class="card-subtitle d-flex  justify-content-between mt-1 text-muted">
+                    <span>
+                      2:30pm
+                    </span>
+                    <span>
+                      16th Thursday, 2024
+                    </span>
+                  </h6>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-12 col-md-6 my-3 d-flex justify-content-center my-2">
+              <div class="card" style="width: 90%;">
+                <div class="card-body ">
+                  <h5 class="card-title ">
+                    card Title
+                  </h5>
+                  <p class="card-text">
+                    ninkn
+                  </p>
+                  <h6 class="card-subtitle d-flex  justify-content-between mt-1 text-muted">
+                    <span>
+                      2:30pm
+                    </span>
+                    <span>
+                      16th Thursday, 2024
+                    </span>
+                  </h6>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="my-lg-4 my-4">
+          <div class="row ml-3 d-flex justify-content-start align-items-center w-100">
+            <h3> Yesterday </h3>
+            <span class="bg-info w-50 ml-4 border-bottom border-4 border-opacity-50  " style="border-bottom: 2px;">
+            </span>
+          </div>
+          <div class="mt-3 py-3 row  ">
+
+            <!-- Card row -->
+            <div class="col-12 col-md-6 my-3 d-flex justify-content-center my-2">
+              <div class="card" style="width: 90%;">
+                <div class="card-body ">
+                  <h5 class="card-title ">
+                    card Title
+                  </h5>
+                  <p class="card-text">
+                    ninkn
+                  </p>
+                  <h6 class="card-subtitle d-flex  justify-content-between mt-1 text-muted">
+                    <span>
+                      2:30pm
+                    </span>
+                    <span>
+                      16th Thursday, 2024
+                    </span>
+                  </h6>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-12 col-md-6 my-3 d-flex justify-content-center my-2">
+              <div class="card" style="width: 90%;">
+                <div class="card-body ">
+                  <h5 class="card-title ">
+                    card Title
+                  </h5>
+                  <p class="card-text">
+                    ninkn
+                  </p>
+                  <h6 class="card-subtitle d-flex  justify-content-between mt-1 text-muted">
+                    <span>
+                      2:30pm
+                    </span>
+                    <span>
+                      16th Thursday, 2024
+                    </span>
+                  </h6>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-12 col-md-6 my-3 d-flex justify-content-center my-2">
+              <div class="card" style="width: 90%;">
+                <div class="card-body ">
+                  <h5 class="card-title ">
+                    card Title
+                  </h5>
+                  <p class="card-text">
+                    ninkn
+                  </p>
+                  <h6 class="card-subtitle d-flex  justify-content-between mt-1 text-muted">
+                    <span>
+                      2:30pm
+                    </span>
+                    <span>
+                      16th Thursday, 2024
+                    </span>
+                  </h6>
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
       </div>

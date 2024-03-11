@@ -15,8 +15,8 @@ const getContentsForPersonnel = asyncHandler(async (req, res) => {
 
     try {
         let content = await Personnel.find()
-        let contentTwo =  await PersonnelTable.find()
-        let contentThree =await PersonnelExtra.find()
+        let contentTwo = await PersonnelTable.find()
+        let contentThree = await PersonnelExtra.find()
 
         if (content.length === 0 && contentTwo.length === 0 && contentThree.length === 0) {
             return res.status(404).json({ error: "No content found" });
@@ -36,7 +36,25 @@ const getContentsForOrg = asyncHandler(async (req, res) => {
         let content = await Structure.find()
         let contentTwo = await StructureProvince.find()
 
-        if (content.length === 0 && contentTwo.length === 0 ) {
+        if (content.length === 0 && contentTwo.length === 0) {
+            return res.status(404).json({ error: "No content found" });
+        }
+
+        res.status(200).json({ data: content, dataTwo: contentTwo });
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+
+})
+
+const getContentsForVists = asyncHandler(async (req, res) => {
+
+    try {
+
+        let content = await UserSession.find()
+        let contentTwo = await Visit.find()
+
+        if (content.length === 0 && contentTwo.length === 0) {
             return res.status(404).json({ error: "No content found" });
         }
 
@@ -49,5 +67,6 @@ const getContentsForOrg = asyncHandler(async (req, res) => {
 
 export {
     getContentsForPersonnel,
-    getContentsForOrg
+    getContentsForOrg,
+    getContentsForVists
 }
