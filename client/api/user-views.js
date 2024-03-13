@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Extract the match using regex
     const match = inputString.match(regexPattern);
-    console.log(inputString.match(regexPattern))
+    // console.log(inputString.match(regexPattern))
     // Get device information
     // const deviceInfo = {
     //     name: navigator.userAgent,
@@ -141,7 +141,7 @@ function handleLogVisit(url) {
             console.log(response.status)
 
             if (response.status === 401) {
-                await handleLogout(apiLogoutCheck).logout()
+                // await handleLogout(apiLogoutCheck).logout()
                 // window.location.href = redirectUrlBack
                 // console.log(json?.message || json?.error)
             }

@@ -14,6 +14,7 @@ import spiritualM from './routes/spiritualM.js'
 import structureOrgProvince from './routes/structureOrgProvince.js'
 import support from './routes/support.js'
 import formation from './routes/formation.js'
+import visit from './routes/visit.js'
 import image from './routes/imageOne.js'
 import structureContent from './routes/structureContent.js'
 import { notFound, errorHandler } from "./middleware/errorMiddelware.js";
@@ -61,6 +62,7 @@ app.use(methodOverride('_method'));
 app.use(cookieParser())
 
 app.use('/api/image', image)
+app.use('/api/visit', visit)
 app.use('/api/jpic', jpic)
 app.use('/api/users', user)
 app.use('/api/apostolate', apostolate)

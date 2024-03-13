@@ -4,8 +4,8 @@ import { protect } from "../middleware/authentication.js";
 
 const router = express.Router()
 
-router.route('/personnel').get(getContentsForVists)
-router.route('/personnel').get( getContentsForPersonnel)
-router.route('/organisation').get( getContentsForOrg)
+router.route('/personnel').get(getContentsForPersonnel)
+router.route('/organisation').get(getContentsForOrg)
+router.route('/visits').get(protect, getContentsForVists)
 
 export default router
