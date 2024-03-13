@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     console.log(data.length)
     
-    adminUseage.textContent = data.length + " New Admin Visted Today"
+    adminUseage.textContent = data.length + " Admin Visted Today"
     clientUseage.textContent = dataTwo.length + " New Users Visted Today"
 
   }
