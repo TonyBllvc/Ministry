@@ -44,18 +44,18 @@ const getVisit = asyncHandler(async (req, res) => {
         // if (content.length === 0 || !content) {
         //     return res.status(404).json({ error: "No content found" });
         // }
-        
+
         // Find the latest update time by comparing createdAt and updatedAt
-        let latestUpdateTime = content.reduce((latest, item) => {
-            const itemUpdateTime = item.updatedAt > item.createdAt ? item.updatedAt : item.createdAt;
-            return itemUpdateTime > latest ? itemUpdateTime : latest;
-        }, content[0].createdAt); // Initialize with the first item's createdAt timestamp
+        // let latestUpdateTime = content.reduce((latest, item) => {
+        //     const itemUpdateTime = item?.updatedAt > item?.createdAt ? item?.updatedAt : item?.createdAt;
+        //     return itemUpdateTime > latest ? itemUpdateTime : latest;
+        // }, content[0]?.createdAt); // Initialize with the first item's createdAt timestamp
 
-        // Format the latest update time as desired (e.g., using Moment.js)    
-        // Format the latest update time as how long ago it was edited using Moment.js
-        latestUpdateTime = moment(latestUpdateTime).fromNow(); // Example format: "a few seconds ago", "2 days ago", etc.
+        // // Format the latest update time as desired (e.g., using Moment.js)    
+        // // Format the latest update time as how long ago it was edited using Moment.js
+        // latestUpdateTime = moment(latestUpdateTime).fromNow(); // Example format: "a few seconds ago", "2 days ago", etc.
 
-        res.status(200).json({ data: content, latestUpdateTime });
+        res.status(200).json({ data: content });
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
