@@ -6,6 +6,6 @@ const router = express.Router()
 
 router.route('/personnel').get(getContentsForPersonnel)
 router.route('/organisation').get(getContentsForOrg)
-router.route('/visits').get(protect, getContentsForVists)
+router.route('/visits').get( getContentsForVists)
 
 export default router
