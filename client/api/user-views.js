@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const { fetchNote } = handleLogVisit(apiii)
     
-    const currentDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    var currentDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
     const { data } = await fetchNote()
     
     console.log(data)
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // const regexPattern = /\((.*?)\)/;
 
     // Extract the match using regex
-    const match = inputString.match(regexPattern);
+    var match = inputString.match(regexPattern);
     // console.log(inputString.match(regexPattern))
     // Get device information
     // const deviceInfo = {

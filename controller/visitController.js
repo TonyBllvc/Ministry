@@ -41,9 +41,9 @@ const getVisit = asyncHandler(async (req, res) => {
     try {
         let content = await Visit.find()
 
-        if (content.length === 0 || !content) {
-            return res.status(404).json({ error: "No content found" });
-        }
+        // if (content.length === 0 || !content) {
+        //     return res.status(404).json({ error: "No content found" });
+        // }
         
         // Find the latest update time by comparing createdAt and updatedAt
         let latestUpdateTime = content.reduce((latest, item) => {
