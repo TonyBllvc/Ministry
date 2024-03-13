@@ -6,6 +6,7 @@ import PersonnelExtra from "../model/personnelExtraModel.js";
 import PersonnelTable from "../model/personnelTableModel.js";
 import Structure from "../model/structureModel.js";
 import StructureProvince from "../model/structureProvinceModel.js";
+import UserSession from "../model/userSession.js";
 
 
 // @desc    Fetch Contents
